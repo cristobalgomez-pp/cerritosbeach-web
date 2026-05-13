@@ -8,12 +8,31 @@ import {
   type ContactInput,
 } from "./schemas";
 
-export async function subscribeToNewsletter(input: SubscribeInput) {
+export type FormFieldErrors = {
+  _form?: string[];
+  email?: string[];
+  name?: string[];
+  phone?: string[];
+  message?: string[];
+  locale?: string[];
+};
+
+type SubscribeResult =
+  | { ok: true; alreadySubscribed: boolean }
+  | { ok: false; error: FormFieldErrors };
+
+type ContactResult =
+  | { ok: true; duplicate: boolean }
+  | { ok: false; error: FormFieldErrors };
+
+export async function subscribeToNewsletter(
+  input: SubscribeInput
+): Promise<SubscribeResult> {
   const parsed = subscribeSchema.safeParse(input);
   if (!parsed.success) {
     return {
-      ok: false as const,
-      error: parsed.error.flatten().fieldErrors,
+      ok: false,
+      error: parsed.error.flatten().fieldErrors as FormFieldErrors,
     };
   }
 
@@ -27,26 +46,27 @@ export async function subscribeToNewsletter(input: SubscribeInput) {
   });
 
   if (error) {
-    // unique constraint violation = ya estaba suscrito, lo tratamos como éxito silencioso
     if (error.code === "23505") {
-      return { ok: true as const, alreadySubscribed: true };
+      return { ok: true, alreadySubscribed: true };
     }
     console.error("[newsletter] insert error:", error);
     return {
-      ok: false as const,
+      ok: false,
       error: { _form: ["No pudimos suscribirte. Intenta de nuevo."] },
     };
   }
 
-  return { ok: true as const, alreadySubscribed: false };
+  return { ok: true, alreadySubscribed: false };
 }
 
-export async function submitContactForm(input: ContactInput) {
+export async function submitContactForm(
+  input: ContactInput
+): Promise<ContactResult> {
   const parsed = contactSchema.safeParse(input);
   if (!parsed.success) {
     return {
-      ok: false as const,
-      error: parsed.error.flatten().fieldErrors,
+      ok: false,
+      error: parsed.error.flatten().fieldErrors as FormFieldErrors,
     };
   }
 
@@ -63,14 +83,14 @@ export async function submitContactForm(input: ContactInput) {
 
   if (error) {
     if (error.code === "23505") {
-      return { ok: true as const, duplicate: true };
+      return { ok: true, duplicate: true };
     }
     console.error("[contact] insert error:", error);
     return {
-      ok: false as const,
+      ok: false,
       error: { _form: ["No pudimos enviar tu mensaje. Intenta de nuevo."] },
     };
   }
 
-  return { ok: true as const, duplicate: false };
+  return { ok: true, duplicate: false };
 }
