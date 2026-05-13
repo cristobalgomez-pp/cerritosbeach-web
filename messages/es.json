@@ -1,0 +1,169 @@
+{
+  "common": {
+    "loading": "Cargando…",
+    "error": "Ocurrió un error",
+    "retry": "Reintentar",
+    "back": "Volver",
+    "more": "Ver más"
+  },
+  "nav": {
+    "hotels": "Hoteles",
+    "surf": "Surf",
+    "food": "Comida",
+    "news": "Novedades",
+    "community": "Comunidad",
+    "realestate": "Real estate",
+    "contact": "Contacto"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Baja California Sur · México",
+      "title": "Cerritos Beach, donde el Pacífico se queda quieto.",
+      "subtitle": "Olas constantes, atardeceres largos y una comunidad pequeña. La guía oficial para visitar, surfear, vivir y descubrir Cerritos.",
+      "cta_primary": "Ver hoteles",
+      "cta_secondary": "Condiciones de surf"
+    },
+    "sections": {
+      "explore": {
+        "eyebrow": "Explora",
+        "title": "Todo lo que necesitas saber"
+      }
+    },
+    "cards": {
+      "hotels": {
+        "badge": "Dónde dormir",
+        "title": "Hoteles",
+        "description": "Desde hostales económicos hasta haciendas frente al mar. Filtra por ubicación, precio y amenidades."
+      },
+      "surf": {
+        "badge": "Condiciones en vivo",
+        "title": "Surf",
+        "description": "Altura de ola, periodo, viento y marea. Clases y renta de tablas."
+      },
+      "food": {
+        "badge": "Dónde comer",
+        "title": "Comida",
+        "description": "Restaurantes, food trucks y mercados. Desde tacos de pescado hasta cocina de autor."
+      },
+      "news": {
+        "badge": "Novedades",
+        "title": "Qué está pasando",
+        "description": "Eventos, noticias locales, alertas de la playa y newsletter mensual."
+      },
+      "community": {
+        "badge": "Conéctate",
+        "title": "Comunidad",
+        "description": "Conoce a quienes viven y visitan Cerritos. Posts, eventos y contactos de emergencia."
+      },
+      "realestate": {
+        "badge": "Invierte",
+        "title": "Real estate",
+        "description": "Propiedades en venta y renta. De condos a terrenos frente al mar."
+      }
+    },
+    "newsletter": {
+      "eyebrow": "Mantente cerca",
+      "title": "Lo que pasa en Cerritos, en tu inbox.",
+      "subtitle": "Un correo al mes con condiciones de swell, eventos comunitarios, nuevos hoteles y oportunidades de real estate. Sin spam, sin marketing agresivo."
+    }
+  },
+  "hotels": {
+    "eyebrow": "Dónde dormir",
+    "title": "Hoteles en Cerritos",
+    "subtitle": "Una selección curada de las mejores opciones para hospedarse, desde hostales hasta villas privadas."
+  },
+  "surf": {
+    "eyebrow": "Condiciones en vivo",
+    "title": "Surf en Cerritos",
+    "subtitle": "Olas todo el año. Mejor en otoño e invierno cuando llegan los swells del norte.",
+    "shops": {
+      "title": "Escuelas y renta de tablas",
+      "subtitle": "Los locales que conocen el spot mejor que nadie."
+    },
+    "services": {
+      "rentals": "Renta",
+      "lessons": "Clases",
+      "repairs": "Reparación",
+      "shop": "Tienda"
+    }
+  },
+  "food": {
+    "eyebrow": "Dónde comer",
+    "title": "Comida en Cerritos",
+    "subtitle": "De tacos de pescado a la orilla del camino hasta cocina de autor con vista al mar."
+  },
+  "news": {
+    "eyebrow": "Novedades",
+    "title": "Qué está pasando en Cerritos",
+    "subtitle": "Eventos, noticias locales, alertas de la playa y artículos del equipo."
+  },
+  "community": {
+    "eyebrow": "Conéctate",
+    "title": "Comunidad de Cerritos",
+    "subtitle": "Conoce a quienes viven y visitan la playa, comparte experiencias y accede a recursos esenciales.",
+    "waitlist": {
+      "eyebrow": "Próximamente",
+      "title": "Estamos construyendo la comunidad",
+      "subtitle": "Foros, eventos, perfiles y directorio de miembros llegan pronto. Déjanos tu email para avisarte cuando lancemos."
+    },
+    "emergency": {
+      "eyebrow": "Importante",
+      "title": "Contactos de emergencia"
+    }
+  },
+  "realestate": {
+    "eyebrow": "Invierte",
+    "title": "Real estate en Cerritos",
+    "subtitle": "Propiedades cuidadosamente seleccionadas de los principales brókers de la zona.",
+    "disclaimer": "Los precios y disponibilidad son aproximados. Confirma con el broker correspondiente."
+  },
+  "contact": {
+    "eyebrow": "Hablemos",
+    "title": "Contáctanos",
+    "subtitle": "¿Tienes dudas, sugerencias, o quieres aparecer en Cerritos Beach? Escríbenos.",
+    "form": {
+      "name": {
+        "label": "Nombre",
+        "placeholder": "Tu nombre completo"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "tucorreo@ejemplo.com"
+      },
+      "phone": {
+        "label": "Teléfono",
+        "placeholder": "+52 612 …"
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntanos en qué te podemos ayudar"
+      },
+      "submit": "Enviar mensaje",
+      "sending": "Enviando…",
+      "success": {
+        "title": "Mensaje enviado",
+        "message": "Gracias por escribirnos. Te respondemos en menos de 48 horas."
+      }
+    },
+    "info": {
+      "email_label": "Email",
+      "location_label": "Ubicación",
+      "response_label": "Tiempo de respuesta",
+      "response_time": "Respondemos en menos de 48 horas hábiles."
+    }
+  },
+  "newsletter": {
+    "eyebrow": "Newsletter mensual",
+    "title": "Recibe lo mejor de Cerritos",
+    "subtitle": "Un correo al mes con condiciones de surf, eventos y novedades. Cancela cuando quieras.",
+    "placeholder": "tucorreo@ejemplo.com",
+    "submit": "Suscribirme",
+    "sending": "Enviando…",
+    "success": "¡Listo! Te suscribimos al newsletter.",
+    "error": "No pudimos suscribirte. Intenta de nuevo."
+  },
+  "footer": {
+    "tagline": "La guía oficial de Cerritos Beach.",
+    "copyright": "© {year} Cerritos Beach"
+  }
+}

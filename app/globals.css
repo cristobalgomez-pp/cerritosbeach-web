@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ocean: #0F6478;
+  --color-ocean-dark: #0A4D5E;
+  --color-ocean-light: #1B7B92;
+
+  --color-peach: #F4A968;
+  --color-peach-dark: #E89548;
+  --color-peach-light: #F8C08A;
+
+  --color-cream: #FCF1E5;
+  --color-foam: #FFFFFF;
+
+  --color-ink: #0A3B40;
+  --color-ink-muted: #1F4E54;
+  --color-mist: #8B7E72;
+
+  --color-border: #EFE2D1;
+  --color-border-strong: #D9C8B0;
+  --color-surface-warm: #F7E9D5;
+
+  --color-success: #0F766E;
+  --color-success-bg: #D1FAE5;
+  --color-warning: #D97706;
+  --color-warning-bg: #FEF3C7;
+  --color-danger: #B91C1C;
+  --color-danger-bg: #FEE2E2;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-soft: 0 1px 2px 0 rgb(10 59 64 / 0.04), 0 4px 8px -2px rgb(10 59 64 / 0.04);
+  --shadow-soft-lg: 0 4px 12px -2px rgb(10 59 64 / 0.06), 0 8px 24px -4px rgb(10 59 64 / 0.06);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-peach);
+    color: var(--color-ink);
+  }
 }

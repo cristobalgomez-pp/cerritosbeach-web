@@ -1,0 +1,38 @@
+import { defineRouting } from "next-intl/routing";
+import { createNavigation } from "next-intl/navigation";
+
+export const routing = defineRouting({
+  locales: ["es", "en"],
+  defaultLocale: "es",
+  localePrefix: "as-needed",
+  pathnames: {
+    "/": "/",
+    "/hoteles": {
+      es: "/hoteles",
+      en: "/hotels",
+    },
+    "/surf": "/surf",
+    "/comida": {
+      es: "/comida",
+      en: "/food",
+    },
+    "/novedades": {
+      es: "/novedades",
+      en: "/news",
+    },
+    "/comunidad": {
+      es: "/comunidad",
+      en: "/community",
+    },
+    "/real-estate": "/real-estate",
+    "/contacto": {
+      es: "/contacto",
+      en: "/contact",
+    },
+  },
+});
+
+export type Locale = (typeof routing.locales)[number];
+
+export const { Link, redirect, usePathname, useRouter, getPathname } =
+  createNavigation(routing);
