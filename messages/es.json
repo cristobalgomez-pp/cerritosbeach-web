@@ -118,7 +118,10 @@
       "loginSubtitle": "Te mandamos un magic link a tu correo. Sin contraseñas.",
       "emailLabel": "Tu correo",
       "sendButton": "Enviar magic link",
-      "backToCommunity": "← Volver a comunidad"
+      "backToCommunity": "← Volver a comunidad",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "errorTitle": "Algo salió mal",
+      "errorSupabase": "No pudimos enviar el magic link. Intenta de nuevo en unos segundos."
     },
     "onboarding": {
       "title": "Completa tu perfil",

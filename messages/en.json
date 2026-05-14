@@ -118,7 +118,10 @@
       "loginSubtitle": "We send you a magic link to your email. No passwords.",
       "emailLabel": "Your email",
       "sendButton": "Send magic link",
-      "backToCommunity": "← Back to community"
+      "backToCommunity": "← Back to community",
+      "emailPlaceholder": "your@email.com",
+      "errorTitle": "Something went wrong",
+      "errorSupabase": "We couldn't send the magic link. Please try again in a few seconds."
     },
     "onboarding": {
       "title": "Complete your profile",
