@@ -7,6 +7,26 @@ import { createClient } from '@/lib/supabase/server';
 import { magicLinkSchema, onboardingSchema } from './schemas';
 
 // ───────────────────────────────────────
+// Helpers
+// ───────────────────────────────────────
+
+async function getOrigin() {
+  const headersList = await headers();
+  const host = headersList.get('host');
+  const proto = headersList.get('x-forwarded-proto') ?? (host?.includes('localhost') ? 'http' : 'https');
+  return headersList.get('origin') ?? (host ? `${proto}://${host}` : 'http://localhost:3000');
+}
+
+function buildRedirectTo(origin: string, locale: 'es' | 'en') {
+  const localePrefix = locale === 'es' ? '' : `/${locale}`;
+  const next = `${localePrefix}/comunidad`;
+  return {
+    callbackUrl: `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(next)}`,
+    localePrefix,
+  };
+}
+
+// ───────────────────────────────────────
 // Magic Link
 // ───────────────────────────────────────
 
@@ -25,18 +45,13 @@ export async function sendMagicLink(formData: FormData): Promise<MagicLinkResult
   }
 
   const supabase = await createClient();
-  const headersList = await headers();
-  const host = headersList.get('host');
-  const origin = headersList.get('origin') ?? (host ? `http://${host}` : 'http://localhost:3000');
-
+  const origin = await getOrigin();
   const { email, locale } = parsed.data;
-  const localePrefix = locale === 'es' ? '' : `/${locale}`;
-  const next = `${localePrefix}/comunidad`;
-  const emailRedirectTo = `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(next)}`;
+  const { callbackUrl } = buildRedirectTo(origin, locale);
 
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo },
+    options: { emailRedirectTo: callbackUrl },
   });
 
   if (error) {
@@ -44,6 +59,30 @@ export async function sendMagicLink(formData: FormData): Promise<MagicLinkResult
   }
 
   return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Google OAuth
+// ───────────────────────────────────────
+
+export async function signInWithGoogle(locale: 'es' | 'en' = 'es') {
+  const supabase = await createClient();
+  const origin = await getOrigin();
+  const { callbackUrl, localePrefix } = buildRedirectTo(origin, locale);
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: callbackUrl,
+    },
+  });
+
+  if (error || !data?.url) {
+    redirect(`${localePrefix}/comunidad/login?error=oauth_error`);
+  }
+
+  // Redirige al consent screen de Google.
+  redirect(data.url);
 }
 
 // ───────────────────────────────────────

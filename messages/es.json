@@ -128,7 +128,11 @@
       "errorInvalidInput": "Necesitamos un correo válido.",
       "errorMissingCode": "El link parece inválido o expiró. Pide uno nuevo.",
       "errorInvalidCode": "El link no es válido. Pide uno nuevo.",
-      "sendingButton": "Enviando…"
+      "sendingButton": "Enviando…",
+      "continueWithGoogle": "Continuar con Google",
+      "redirectingToGoogle": "Conectando con Google…",
+      "orWithEmail": "o entra con tu correo",
+      "errorOauth": "No pudimos conectarte con Google. Intenta de nuevo."
     },
     "onboarding": {
       "title": "Completa tu perfil",
