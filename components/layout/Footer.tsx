@@ -40,6 +40,7 @@ export async function Footer() {
             </p>
             <ul className="space-y-2 text-sm">
               <li><Link href="/contacto" className="hover:text-peach transition-colors">{tNav("contact")}</Link></li>
+              <li><Link href="/emergencias" className="hover:text-peach transition-colors">{tNav("emergency")}</Link></li>
               <li><a href="mailto:hola@cerritosbeach.com" className="hover:text-peach transition-colors">hola@cerritosbeach.com</a></li>
             </ul>
           </div>

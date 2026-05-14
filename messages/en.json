@@ -13,7 +13,8 @@
     "news": "News",
     "community": "Community",
     "realestate": "Real estate",
-    "contact": "Contact"
+    "contact": "Contact",
+    "emergency": "Emergency"
   },
   "home": {
     "hero": {
@@ -105,10 +106,6 @@
       "eyebrow": "Coming soon",
       "title": "We're building the community",
       "subtitle": "Forums, events, profiles, and member directory coming soon. Leave us your email to be notified when we launch."
-    },
-    "emergency": {
-      "eyebrow": "Important",
-      "title": "Emergency contacts"
     },
     "auth": {
       "signIn": "Sign in",
@@ -226,5 +223,10 @@
     "terms": "Terms",
     "exploreHeading": "Explore",
     "contactHeading": "Contact"
+  },
+  "emergency": {
+    "eyebrow": "Important",
+    "title": "Emergency contacts",
+    "subtitle": "Calls and useful services for emergencies in Cerritos, Pescadero and Todos Santos."
   }
 }
