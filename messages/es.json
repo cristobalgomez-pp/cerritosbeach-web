@@ -101,11 +101,11 @@
   "community": {
     "eyebrow": "Conéctate",
     "title": "Comunidad de Cerritos",
-    "subtitle": "Conoce a quienes viven y visitan la playa, comparte experiencias y accede a recursos esenciales.",
+    "subtitle": "Conecta con quienes viven, trabajan y visitan Cerritos. Foros locales para encontrar, ofrecer y enterarte de lo que pasa.",
     "waitlist": {
-      "eyebrow": "Próximamente",
-      "title": "Estamos construyendo la comunidad",
-      "subtitle": "Foros, eventos, perfiles y directorio de miembros llegan pronto. Déjanos tu email para avisarte cuando lancemos."
+      "eyebrow": "Más foros pronto",
+      "title": "Mantente al tanto",
+      "subtitle": "Te avisamos cuando habilitemos eventos, objetos perdidos o reportes. Sin spam."
     },
     "auth": {
       "signIn": "Iniciar sesión",
@@ -161,8 +161,62 @@
     },
     "cta": {
       "eyebrow": "Únete a la comunidad",
-      "title": "Sé parte de Cerritos",
-      "subtitle": "Conecta con residentes y visitantes. Comparte tips y eventos locales."
+      "title": "Crea tu cuenta para entrar",
+      "subtitle": "Entra a los foros locales y conecta con la comunidad de Cerritos.",
+      "button": "Crear cuenta",
+      "microcopy": "Gratis y sin contraseñas. Aprobación en menos de 24h."
+    },
+    "whyJoin": {
+      "eyebrow": "Conecta",
+      "title": "Sé parte de la comunidad",
+      "items": {
+        "events": {
+          "title": "Eventos y juntas",
+          "description": "Enterate de lo que se mueve cerca de Cerritos: eventos locales, juntas y planes con la comunidad."
+        },
+        "services": {
+          "title": "Trabajos y servicios",
+          "description": "Encuentra o recomienda a quien sabe: jardinería, mantenimiento, limpieza y oficios locales."
+        },
+        "reports": {
+          "title": "Reportes y objetos perdidos",
+          "description": "Recupera lo que se perdió y reporta lo que necesita arreglarse en la playa."
+        }
+      }
+    },
+    "forums": {
+      "eyebrow": "Foros",
+      "title": "Temas de la comunidad",
+      "subtitle": "Empezamos con trabajos. Los demás abren conforme vayamos creciendo.",
+      "badgeActive": "Activo",
+      "badgeSoon": "Próximamente",
+      "stubTitle": "Foro en desarrollo",
+      "stubBody": "Pronto podrás postear y conectar con otros miembros aquí. Mientras tanto, suscríbete al newsletter para enterarte cuando esté listo.",
+      "backToCommunity": "← Volver a comunidad",
+      "items": {
+        "trabajos": {
+          "title": "Trabajos",
+          "description": "Recomendaciones, ofertas y demanda de servicios locales."
+        },
+        "objetos-perdidos": {
+          "title": "Objetos perdidos",
+          "description": "Reúne a quien encontró algo con quien lo busca."
+        },
+        "eventos": {
+          "title": "Eventos y juntas",
+          "description": "Lo que se organiza en Cerritos y alrededores."
+        },
+        "reportes": {
+          "title": "Reportes y mejoras",
+          "description": "Basura, fugas, propuestas para cuidar la playa."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Listo para entrar",
+      "title": "Crea tu cuenta y entra a los foros",
+      "subtitle": "Es gratis y solo necesitas tu correo. Te aprobamos rápido para que empieces a conectar.",
+      "button": "Crear cuenta"
     }
   },
   "realestate": {

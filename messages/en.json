@@ -101,11 +101,11 @@
   "community": {
     "eyebrow": "Connect",
     "title": "Cerritos community",
-    "subtitle": "Meet who lives and visits the beach, share experiences, and access essential resources.",
+    "subtitle": "Connect with who lives, works and visits Cerritos. Local forums to find, offer and stay in the loop.",
     "waitlist": {
-      "eyebrow": "Coming soon",
-      "title": "We're building the community",
-      "subtitle": "Forums, events, profiles, and member directory coming soon. Leave us your email to be notified when we launch."
+      "eyebrow": "More forums soon",
+      "title": "Stay in the loop",
+      "subtitle": "We'll let you know when we enable events, lost & found or reports. No spam."
     },
     "auth": {
       "signIn": "Sign in",
@@ -161,8 +161,62 @@
     },
     "cta": {
       "eyebrow": "Join the community",
-      "title": "Be part of Cerritos",
-      "subtitle": "Connect with residents and visitors. Share local tips and events."
+      "title": "Create your account to join",
+      "subtitle": "Enter the local forums and connect with the Cerritos community.",
+      "button": "Create account",
+      "microcopy": "Free and no passwords. Approval in under 24h."
+    },
+    "whyJoin": {
+      "eyebrow": "Connect",
+      "title": "Be part of the community",
+      "items": {
+        "events": {
+          "title": "Events & meetings",
+          "description": "See what's happening around Cerritos: local events, community meetings and plans."
+        },
+        "services": {
+          "title": "Jobs & services",
+          "description": "Find or recommend who's good: gardening, maintenance, cleaning and local trades."
+        },
+        "reports": {
+          "title": "Reports & lost items",
+          "description": "Recover what's lost and report what needs fixing on the beach."
+        }
+      }
+    },
+    "forums": {
+      "eyebrow": "Forums",
+      "title": "Community topics",
+      "subtitle": "We're starting with jobs. The rest will open as we grow.",
+      "badgeActive": "Active",
+      "badgeSoon": "Coming soon",
+      "stubTitle": "Forum under construction",
+      "stubBody": "You'll be able to post and connect with other members here soon. In the meantime, subscribe to the newsletter to know when it's ready.",
+      "backToCommunity": "← Back to community",
+      "items": {
+        "trabajos": {
+          "title": "Jobs",
+          "description": "Recommendations, offers and requests for local services."
+        },
+        "objetos-perdidos": {
+          "title": "Lost & Found",
+          "description": "Connect finders with whoever's looking."
+        },
+        "eventos": {
+          "title": "Events & meetings",
+          "description": "What's being organized in Cerritos and around."
+        },
+        "reportes": {
+          "title": "Reports & improvements",
+          "description": "Trash, leaks, ideas to take care of the beach."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Ready to join",
+      "title": "Create your account and enter the forums",
+      "subtitle": "It's free and you only need your email. We approve quickly so you can start connecting.",
+      "button": "Create account"
     }
   },
   "realestate": {
