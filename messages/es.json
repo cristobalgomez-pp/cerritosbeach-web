@@ -121,7 +121,14 @@
       "backToCommunity": "← Volver a comunidad",
       "emailPlaceholder": "tucorreo@ejemplo.com",
       "errorTitle": "Algo salió mal",
-      "errorSupabase": "No pudimos enviar el magic link. Intenta de nuevo en unos segundos."
+      "errorSupabase": "No pudimos enviar el magic link. Intenta de nuevo en unos segundos.",
+      "emailSentTitle": "Revisa tu correo",
+      "emailSentBody": "Te mandamos un magic link a {email}. Click en el link para entrar.",
+      "emailSentTip": "Si no lo ves, revisa spam o promociones. El link expira en 1 hora.",
+      "errorInvalidInput": "Necesitamos un correo válido.",
+      "errorMissingCode": "El link parece inválido o expiró. Pide uno nuevo.",
+      "errorInvalidCode": "El link no es válido. Pide uno nuevo.",
+      "sendingButton": "Enviando…"
     },
     "onboarding": {
       "title": "Completa tu perfil",

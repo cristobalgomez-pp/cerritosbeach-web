@@ -121,7 +121,14 @@
       "backToCommunity": "← Back to community",
       "emailPlaceholder": "your@email.com",
       "errorTitle": "Something went wrong",
-      "errorSupabase": "We couldn't send the magic link. Please try again in a few seconds."
+      "errorSupabase": "We couldn't send the magic link. Please try again in a few seconds.",
+      "emailSentTitle": "Check your inbox",
+      "emailSentBody": "We sent a magic link to {email}. Click the link to sign in.",
+      "emailSentTip": "If you do not see it, check spam or promotions. The link expires in 1 hour.",
+      "errorInvalidInput": "Please enter a valid email address.",
+      "errorMissingCode": "The link appears invalid or expired. Request a new one.",
+      "errorInvalidCode": "Invalid link. Request a new one.",
+      "sendingButton": "Sending…"
     },
     "onboarding": {
       "title": "Complete your profile",
