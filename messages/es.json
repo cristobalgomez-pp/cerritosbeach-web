@@ -113,7 +113,12 @@
     "auth": {
       "signIn": "Iniciar sesión",
       "signOut": "Cerrar sesión",
-      "signingOut": "Saliendo…"
+      "signingOut": "Saliendo…",
+      "loginTitle": "Iniciar sesión",
+      "loginSubtitle": "Te mandamos un magic link a tu correo. Sin contraseñas.",
+      "emailLabel": "Tu correo",
+      "sendButton": "Enviar magic link",
+      "backToCommunity": "← Volver a comunidad"
     },
     "onboarding": {
       "title": "Completa tu perfil",

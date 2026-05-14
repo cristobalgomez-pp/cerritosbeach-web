@@ -113,7 +113,12 @@
     "auth": {
       "signIn": "Sign in",
       "signOut": "Sign out",
-      "signingOut": "Signing out…"
+      "signingOut": "Signing out…",
+      "loginTitle": "Sign in",
+      "loginSubtitle": "We send you a magic link to your email. No passwords.",
+      "emailLabel": "Your email",
+      "sendButton": "Send magic link",
+      "backToCommunity": "← Back to community"
     },
     "onboarding": {
       "title": "Complete your profile",
