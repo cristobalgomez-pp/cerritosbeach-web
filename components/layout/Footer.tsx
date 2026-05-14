@@ -22,7 +22,7 @@ export async function Footer() {
 
           <div>
             <p className="text-[10px] uppercase tracking-[0.08em] text-cream/40 mb-4">
-              Explora
+              {t("exploreHeading")}
             </p>
             <ul className="space-y-2 text-sm">
               <li><Link href="/hoteles" className="hover:text-peach transition-colors">{tNav("hotels")}</Link></li>
@@ -36,7 +36,7 @@ export async function Footer() {
 
           <div>
             <p className="text-[10px] uppercase tracking-[0.08em] text-cream/40 mb-4">
-              Contacto
+              {t("contactHeading")}
             </p>
             <ul className="space-y-2 text-sm">
               <li><Link href="/contacto" className="hover:text-peach transition-colors">{tNav("contact")}</Link></li>
@@ -47,7 +47,11 @@ export async function Footer() {
 
         <div className="border-t border-cream/10 mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <p className="text-xs text-cream/50">{t("copyright", { year })}</p>
-          <p className="text-xs text-cream/50">Baja California Sur · México</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-cream/50">
+            <Link href="/privacidad" className="hover:text-peach transition-colors">{t("privacy")}</Link>
+            <Link href="/terminos" className="hover:text-peach transition-colors">{t("terms")}</Link>
+            <span>Baja California Sur · México</span>
+          </div>
         </div>
       </Container>
     </footer>

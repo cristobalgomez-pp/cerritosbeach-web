@@ -216,6 +216,10 @@
   },
   "footer": {
     "tagline": "The official guide to Cerritos Beach.",
-    "copyright": "© {year} Cerritos Beach"
+    "copyright": "© {year} Cerritos Beach",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "exploreHeading": "Explore",
+    "contactHeading": "Contact"
   }
 }
