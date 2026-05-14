@@ -161,6 +161,11 @@
       "bodyP1": "Para mantener una comunidad segura, cada perfil nuevo se revisa manualmente antes de tener acceso al foro.",
       "bodyP2": "Te avisaremos por correo cuando estés aprobado. Generalmente toma menos de 24 horas.",
       "signOutButton": "Cerrar sesión"
+    },
+    "cta": {
+      "eyebrow": "Únete a la comunidad",
+      "title": "Sé parte de Cerritos",
+      "subtitle": "Conecta con residentes y visitantes. Comparte tips y eventos locales."
     }
   },
   "realestate": {

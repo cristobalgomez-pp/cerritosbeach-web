@@ -161,6 +161,11 @@
       "bodyP1": "To keep the community safe, each new profile is manually reviewed before getting access to the forum.",
       "bodyP2": "We'll email you when approved. Usually takes less than 24 hours.",
       "signOutButton": "Sign out"
+    },
+    "cta": {
+      "eyebrow": "Join the community",
+      "title": "Be part of Cerritos",
+      "subtitle": "Connect with residents and visitors. Share local tips and events."
     }
   },
   "realestate": {
