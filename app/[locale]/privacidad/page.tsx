@@ -42,7 +42,7 @@ function PrivacyES() {
 
       <SectionHeading>1. Responsable</SectionHeading>
       <p>
-        Cerritos Beach es operado por Cristobal Gomez (&quot;nosotros&quot;), con domicilio en
+        Cerritos Beach (&quot;nosotros&quot;) opera desde
         Baja California Sur, México, y contacto a través de hola@cerritosbeach.com.
       </p>
 
@@ -130,7 +130,7 @@ function PrivacyEN() {
 
       <SectionHeading>1. Who we are</SectionHeading>
       <p>
-        Cerritos Beach is operated by Cristobal Gomez (&quot;we&quot;), based in Baja California
+        Cerritos Beach (&quot;we&quot;) operates from Baja California
         Sur, Mexico. You can reach us at hola@cerritosbeach.com.
       </p>
 

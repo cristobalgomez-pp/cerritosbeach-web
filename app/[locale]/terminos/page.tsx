@@ -87,7 +87,7 @@ function TermsES() {
       <SectionHeading>7. Nuestro contenido</SectionHeading>
       <p>
         El diseño, textos, código, logos y materiales originales del sitio son propiedad de
-        Cerritos Beach (Cristobal Gomez) y están protegidos por derechos de autor.
+        Cerritos Beach y están protegidos por derechos de autor.
       </p>
 
       <SectionHeading>8. Suspensión y cierre</SectionHeading>
@@ -186,7 +186,7 @@ function TermsEN() {
       <SectionHeading>7. Our content</SectionHeading>
       <p>
         The design, text, code, logos and original materials of the site are property of
-        Cerritos Beach (Cristobal Gomez) and protected by copyright.
+        Cerritos Beach and protected by copyright.
       </p>
 
       <SectionHeading>8. Suspension and termination</SectionHeading>
