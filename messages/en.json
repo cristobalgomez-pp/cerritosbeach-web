@@ -109,6 +109,39 @@
     "emergency": {
       "eyebrow": "Important",
       "title": "Emergency contacts"
+    },
+    "auth": {
+      "signIn": "Sign in",
+      "signOut": "Sign out",
+      "signingOut": "Signing out…"
+    },
+    "onboarding": {
+      "title": "Complete your profile",
+      "subtitle": "Tell us a bit about yourself before entering the community.",
+      "usernameLabel": "Username",
+      "usernameHint": "Lowercase letters, numbers and underscores only. Between 3 and 20 characters.",
+      "usernamePlaceholder": "e.g. cristobal_g",
+      "displayNameLabel": "Display name",
+      "displayNameHint": "How other forum members will see you.",
+      "displayNamePlaceholder": "e.g. Cristobal G.",
+      "memberTypeLabel": "Your relationship with Cerritos",
+      "memberTypeVisitor": "Visitor — I come on vacation",
+      "memberTypeResident": "Resident — I live here part of the year",
+      "memberTypeLocal": "Local — I live here year-round",
+      "localeLabel": "Preferred language",
+      "localeEs": "Español",
+      "localeEn": "English",
+      "submitButton": "Continue",
+      "submittingButton": "Saving…",
+      "errorUsernameTaken": "That username is already taken. Choose another.",
+      "errorUsernameInvalid": "Lowercase letters, numbers and underscores only. Between 3 and 20 characters.",
+      "errorGeneric": "We couldn't save your data. Try again."
+    },
+    "pending": {
+      "title": "We're reviewing your profile",
+      "bodyP1": "To keep the community safe, each new profile is manually reviewed before getting access to the forum.",
+      "bodyP2": "We'll email you when approved. Usually takes less than 24 hours.",
+      "signOutButton": "Sign out"
     }
   },
   "realestate": {

@@ -1,11 +1,15 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Link } from "@/i18n/routing";
 import { LocaleSwitch } from "./LocaleSwitch";
 import { MobileMenu } from "./MobileMenu";
+import { AuthIndicator } from "@/features/auth/components/AuthIndicator";
+import { getCurrentUserState } from "@/features/auth/lib/server";
 
 export async function Navbar() {
   const t = await getTranslations("nav");
+  const locale = (await getLocale()) as "es" | "en";
+  const { user, profile } = await getCurrentUserState();
 
   const links = [
     { href: "/hoteles" as const, label: t("hotels") },
@@ -37,6 +41,15 @@ export async function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
+          <AuthIndicator
+            user={user ? { email: user.email } : null}
+            profile={
+              profile
+                ? { display_name: profile.display_name, username: profile.username }
+                : null
+            }
+            locale={locale}
+          />
           <LocaleSwitch />
           <MobileMenu links={links} />
         </div>

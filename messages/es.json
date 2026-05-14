@@ -109,6 +109,39 @@
     "emergency": {
       "eyebrow": "Importante",
       "title": "Contactos de emergencia"
+    },
+    "auth": {
+      "signIn": "Iniciar sesión",
+      "signOut": "Cerrar sesión",
+      "signingOut": "Saliendo…"
+    },
+    "onboarding": {
+      "title": "Completa tu perfil",
+      "subtitle": "Cuéntanos un poco de ti para entrar a la comunidad.",
+      "usernameLabel": "Nombre de usuario",
+      "usernameHint": "Solo letras, números y guiones bajos. Entre 3 y 20 caracteres.",
+      "usernamePlaceholder": "ej. cristobal_g",
+      "displayNameLabel": "Nombre para mostrar",
+      "displayNameHint": "Cómo te verán otros miembros del foro.",
+      "displayNamePlaceholder": "ej. Cristóbal G.",
+      "memberTypeLabel": "Tu relación con Cerritos",
+      "memberTypeVisitor": "Visitante — Vengo de vacaciones",
+      "memberTypeResident": "Residente — Vivo aquí parte del año",
+      "memberTypeLocal": "Local — Vivo aquí todo el año",
+      "localeLabel": "Idioma preferido",
+      "localeEs": "Español",
+      "localeEn": "English",
+      "submitButton": "Continuar",
+      "submittingButton": "Guardando…",
+      "errorUsernameTaken": "Ese nombre de usuario ya está en uso. Elige otro.",
+      "errorUsernameInvalid": "Solo letras, números y guiones bajos. Entre 3 y 20 caracteres.",
+      "errorGeneric": "No pudimos guardar tus datos. Intenta de nuevo."
+    },
+    "pending": {
+      "title": "Estamos revisando tu perfil",
+      "bodyP1": "Para mantener una comunidad segura, cada perfil nuevo se revisa manualmente antes de tener acceso al foro.",
+      "bodyP2": "Te avisaremos por correo cuando estés aprobado. Generalmente toma menos de 24 horas.",
+      "signOutButton": "Cerrar sesión"
     }
   },
   "realestate": {
