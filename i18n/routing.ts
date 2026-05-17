@@ -44,6 +44,11 @@ export const routing = defineRouting({
       es: "/terminos",
       en: "/terms",
     },
+    "/admin": "/admin",
+    "/admin/hoteles": "/admin/hoteles",
+    "/admin/restaurantes": "/admin/restaurantes",
+    "/admin/surf-shops": "/admin/surf-shops",
+    "/admin/novedades": "/admin/novedades",
   },
 });
 

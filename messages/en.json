@@ -287,5 +287,16 @@
     "title": "How to Get There",
     "mapTitle": "Playa Cerritos Map",
     "directions": "From Todos Santos, take federal highway 19 south for 12 km. Turn at the Playa Cerritos sign. About 15 minutes by car."
+  },
+  "admin": {
+    "nav": {
+      "hoteles": "Hotels",
+      "restaurantes": "Restaurants",
+      "surf_shops": "Surf Shops",
+      "novedades": "News"
+    },
+    "dashboard": {
+      "title": "Admin panel"
+    }
   }
 }

@@ -287,5 +287,16 @@
     "title": "Cómo llegar",
     "mapTitle": "Mapa de Playa Cerritos",
     "directions": "Desde Todos Santos toma la carretera federal 19 hacia el sur por 12 km. Gira en el letrero de Playa Cerritos. Aproximadamente 15 minutos en auto."
+  },
+  "admin": {
+    "nav": {
+      "hoteles": "Hoteles",
+      "restaurantes": "Restaurantes",
+      "surf_shops": "Surf Shops",
+      "novedades": "Novedades"
+    },
+    "dashboard": {
+      "title": "Panel de administración"
+    }
   }
 }
