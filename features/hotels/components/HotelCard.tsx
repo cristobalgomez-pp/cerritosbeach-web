@@ -1,60 +1,72 @@
-import { useLocale } from "next-intl";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
-import { formatPrice } from "@/lib/utils";
-import type { Hotel } from "@/lib/mock/hotels";
+import type { Hotel } from "@/features/hotels/types";
 
-export function HotelCard({ hotel, locale }: { hotel: Hotel; locale: "es" | "en" }) {
-  const distanceLabel =
-    locale === "es"
-      ? hotel.distanceToBeach === 0
-        ? "Frente a la playa"
-        : `${hotel.distanceToBeach} m de la playa`
-      : hotel.distanceToBeach === 0
-        ? "Beachfront"
-        : `${hotel.distanceToBeach} m from the beach`;
+interface Props {
+  hotel: Hotel;
+  locale: "es" | "en";
+  supabaseUrl: string;
+}
 
-  const nightLabel = locale === "es" ? "/noche" : "/night";
-  const fromLabel = locale === "es" ? "Desde" : "From";
+export function HotelCard({ hotel, locale, supabaseUrl }: Props) {
+  const name = locale === "es" ? hotel.name_es : hotel.name_en;
+  const description = locale === "es" ? hotel.description_es : hotel.description_en;
+
+  const coverUrl = hotel.cover_image_path
+    ? `${supabaseUrl}/storage/v1/object/public/content-images/${hotel.cover_image_path}`
+    : null;
 
   return (
     <Card className="h-full flex flex-col group hover:border-border-strong hover:shadow-soft transition-all duration-200">
       <div className="bg-ocean h-44 flex items-end justify-between p-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-tr from-ocean-dark/30 to-transparent" />
-        <div className="flex flex-wrap gap-2 relative z-10">
-          {hotel.badges.map((badge, idx) => (
-            <Badge key={idx} variant={badge.tone}>
-              {badge[locale]}
-            </Badge>
-          ))}
-        </div>
-      </div>
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-display text-2xl font-medium text-ink mb-1">
-          {hotel.name}
-        </h3>
-        <p className="text-xs text-mist mb-3">
-          {hotel.location} · {distanceLabel}
-        </p>
-        <p className="text-sm text-ink-muted leading-relaxed mb-4 flex-1">
-          {hotel.description[locale]}
-        </p>
-        <div className="flex items-end justify-between border-t border-border pt-4">
-          <div>
-            <p className="text-[10px] uppercase tracking-wider text-mist">
-              {fromLabel}
-            </p>
-            <p className="font-display text-xl font-medium text-ink">
-              {formatPrice(hotel.priceFrom, hotel.currency, locale)}
-              <span className="text-xs text-mist font-sans font-normal ml-1">
-                {nightLabel}
-              </span>
-            </p>
+        {coverUrl ? (
+          <img
+            src={coverUrl}
+            alt={name}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-tr from-ocean-dark/30 to-transparent" />
+        )}
+        {hotel.category && (
+          <div className="relative z-10">
+            <Badge variant="ocean">{hotel.category}</Badge>
           </div>
-          <p className="text-sm text-ink">
-            ★ <span className="font-medium">{hotel.rating}</span>
-          </p>
-        </div>
+        )}
+        {hotel.featured && (
+          <div className="relative z-10 ml-auto">
+            <Badge variant="peach">★</Badge>
+          </div>
+        )}
+      </div>
+
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="font-display text-2xl font-medium text-ink mb-1">{name}</h3>
+        {hotel.address && (
+          <p className="text-xs text-mist mb-3">{hotel.address}</p>
+        )}
+        {description && (
+          <p className="text-sm text-ink-muted leading-relaxed flex-1">{description}</p>
+        )}
+        {(hotel.phone || hotel.website) && (
+          <div className="flex gap-4 mt-4 pt-4 border-t border-border text-sm">
+            {hotel.phone && (
+              <a href={`tel:${hotel.phone}`} className="text-ocean hover:underline">
+                {hotel.phone}
+              </a>
+            )}
+            {hotel.website && (
+              <a
+                href={hotel.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ocean hover:underline"
+              >
+                sitio web
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </Card>
   );

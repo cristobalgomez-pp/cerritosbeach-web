@@ -2,7 +2,9 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { HotelCard } from "@/features/hotels/components/HotelCard";
-import { getHotels } from "@/lib/mock/hotels";
+import { getHotels } from "@/features/hotels/lib/queries";
+
+export const revalidate = 3600;
 
 export default async function HotelesPage({
   params,
@@ -12,7 +14,8 @@ export default async function HotelesPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("hotels");
-  const hotels = getHotels();
+  const hotels = await getHotels();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
   return (
     <>
@@ -30,6 +33,7 @@ export default async function HotelesPage({
                 key={hotel.id}
                 hotel={hotel}
                 locale={locale as "es" | "en"}
+                supabaseUrl={supabaseUrl}
               />
             ))}
           </div>
