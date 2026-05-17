@@ -245,6 +245,33 @@
       "errorOauth": "No pudimos conectarte con Google. Intenta de nuevo.",
       "errorMissingCode": "El link parece inválido o expiró. Intenta de nuevo.",
       "errorInvalidCode": "El link no es válido. Intenta de nuevo."
+    },
+    "registro": {
+      "title": "Crear cuenta",
+      "subtitle": "Regístrate con tu correo y contraseña o con Google.",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "confirmPasswordLabel": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Repite tu contraseña",
+      "submitButton": "Crear cuenta",
+      "submittingButton": "Creando cuenta…",
+      "continueWithGoogle": "Continuar con Google",
+      "redirectingToGoogle": "Conectando con Google…",
+      "orWithEmail": "o regístrate con tu correo",
+      "alreadyAccount": "¿Ya tienes cuenta?",
+      "loginLink": "Iniciar sesión",
+      "backToCommunity": "← Volver a comunidad",
+      "errorTitle": "Algo salió mal",
+      "errorPasswordMismatch": "Las contraseñas no coinciden.",
+      "errorInvalidInput": "Revisa los campos e inténtalo de nuevo.",
+      "errorEmailInUse": "Este correo ya está registrado. Intenta iniciar sesión.",
+      "errorSupabase": "No pudimos crear la cuenta. Intenta de nuevo.",
+      "errorOauth": "No pudimos conectarte con Google. Intenta de nuevo.",
+      "confirmTitle": "¡Casi listo! Revisa tu correo",
+      "confirmBody": "Te enviamos un email a {email}. Haz clic en el link para confirmar tu cuenta.",
+      "confirmTip": "Si no ves el correo, revisa tu carpeta de spam."
     }
   },
   "realestate": {

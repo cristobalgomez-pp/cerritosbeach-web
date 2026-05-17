@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { magicLinkSchema, onboardingSchema, loginSchema } from './schemas';
+import { magicLinkSchema, onboardingSchema, loginSchema, registerSchema } from './schemas';
 
 // ───────────────────────────────────────
 // Helpers
@@ -138,6 +138,53 @@ export async function loginWithEmail(formData: FormData): Promise<LoginWithEmail
   if (profile?.is_banned) {
     await supabase.auth.signOut();
     return { status: 'error', code: 'ACCOUNT_SUSPENDED' };
+  }
+
+  return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Email + Password Register
+// ───────────────────────────────────────
+
+export type RegisterWithEmailResult =
+  | { status: 'success' }
+  | {
+      status: 'error';
+      code: 'INVALID_INPUT' | 'PASSWORDS_MISMATCH' | 'EMAIL_IN_USE' | 'SUPABASE_ERROR';
+      message?: string;
+    };
+
+export async function registerWithEmail(formData: FormData): Promise<RegisterWithEmailResult> {
+  const parsed = registerSchema.safeParse({
+    email: formData.get('email')?.toString().toLowerCase().trim(),
+    password: formData.get('password')?.toString(),
+    confirmPassword: formData.get('confirmPassword')?.toString(),
+    locale: formData.get('locale'),
+  });
+
+  if (!parsed.success) {
+    const hasMismatch = parsed.error.issues.some((i) => i.path.includes('confirmPassword'));
+    if (hasMismatch) return { status: 'error', code: 'PASSWORDS_MISMATCH' };
+    return { status: 'error', code: 'INVALID_INPUT' };
+  }
+
+  const supabase = await createClient();
+  const origin = await getOrigin();
+  const { callbackUrl } = buildRedirectTo(origin, parsed.data.locale);
+
+  const { error } = await supabase.auth.signUp({
+    email: parsed.data.email,
+    password: parsed.data.password,
+    options: { emailRedirectTo: callbackUrl },
+  });
+
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes('user already registered') || msg.includes('already registered')) {
+      return { status: 'error', code: 'EMAIL_IN_USE' };
+    }
+    return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
   }
 
   return { status: 'success' };
