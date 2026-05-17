@@ -70,7 +70,7 @@ export async function ForumPreviewGrid({ seededSlugs, isLoggedIn }: Props) {
 
             if (isActive) {
               return (
-                <Link key={key} href={href} className={cardClass}>
+                <Link key={key} href={href as never} className={cardClass}>
                   {body}
                 </Link>
               );

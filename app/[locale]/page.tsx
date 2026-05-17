@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
+import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
 
 export default async function HomePage({
   params,
@@ -92,6 +93,8 @@ export default async function HomePage({
           </div>
         </Container>
       </section>
+
+      <ComoLlegarSection />
 
       <section className="bg-surface-warm">
         <Container className="py-16 md:py-24">

@@ -282,5 +282,10 @@
     "eyebrow": "Important",
     "title": "Emergency contacts",
     "subtitle": "Calls and useful services for emergencies in Cerritos, Pescadero and Todos Santos."
+  },
+  "location": {
+    "title": "How to Get There",
+    "mapTitle": "Playa Cerritos Map",
+    "directions": "From Todos Santos, take federal highway 19 south for 12 km. Turn at the Playa Cerritos sign. About 15 minutes by car."
   }
 }
