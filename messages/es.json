@@ -219,6 +219,34 @@
       "button": "Crear cuenta"
     }
   },
+  "cuenta": {
+    "login": {
+      "title": "Entra a tu cuenta",
+      "subtitle": "Accede con tu correo y contraseña o con Google.",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "passwordLabel": "Contraseña",
+      "passwordPlaceholder": "Tu contraseña",
+      "submitButton": "Entrar",
+      "submittingButton": "Entrando…",
+      "continueWithGoogle": "Continuar con Google",
+      "redirectingToGoogle": "Conectando con Google…",
+      "orWithEmail": "o entra con tu correo",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes cuenta?",
+      "registerLink": "Crear cuenta",
+      "backToCommunity": "← Volver a comunidad",
+      "errorTitle": "Algo salió mal",
+      "errorInvalidInput": "Correo o contraseña inválidos.",
+      "errorInvalidCredentials": "Correo o contraseña incorrectos. Intenta de nuevo.",
+      "errorEmailNotConfirmed": "Confirma tu correo primero. Revisa tu bandeja de entrada.",
+      "errorAccountSuspended": "Tu cuenta ha sido suspendida. Contáctanos para más información.",
+      "errorSupabase": "No pudimos iniciar sesión. Intenta de nuevo en unos segundos.",
+      "errorOauth": "No pudimos conectarte con Google. Intenta de nuevo.",
+      "errorMissingCode": "El link parece inválido o expiró. Intenta de nuevo.",
+      "errorInvalidCode": "El link no es válido. Intenta de nuevo."
+    }
+  },
   "realestate": {
     "eyebrow": "Invierte",
     "title": "Real estate en Cerritos",

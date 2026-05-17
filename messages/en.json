@@ -219,6 +219,34 @@
       "button": "Create account"
     }
   },
+  "cuenta": {
+    "login": {
+      "title": "Sign in to your account",
+      "subtitle": "Sign in with your email and password or with Google.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Your password",
+      "submitButton": "Sign in",
+      "submittingButton": "Signing in…",
+      "continueWithGoogle": "Continue with Google",
+      "redirectingToGoogle": "Connecting to Google…",
+      "orWithEmail": "or sign in with email",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Create account",
+      "backToCommunity": "← Back to community",
+      "errorTitle": "Something went wrong",
+      "errorInvalidInput": "Invalid email or password.",
+      "errorInvalidCredentials": "Incorrect email or password. Please try again.",
+      "errorEmailNotConfirmed": "Please confirm your email first. Check your inbox.",
+      "errorAccountSuspended": "Your account has been suspended. Contact us for more information.",
+      "errorSupabase": "We couldn't sign you in. Please try again in a few seconds.",
+      "errorOauth": "We couldn't connect with Google. Please try again.",
+      "errorMissingCode": "The link appears invalid or expired. Please try again.",
+      "errorInvalidCode": "Invalid link. Please try again."
+    }
+  },
   "realestate": {
     "eyebrow": "Invest",
     "title": "Real estate in Cerritos",

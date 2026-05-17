@@ -27,6 +27,7 @@ export const routing = defineRouting({
     "/comunidad/login": "/comunidad/login",
     "/comunidad/onboarding": "/comunidad/onboarding",
     "/comunidad/pendiente": "/comunidad/pendiente",
+    "/cuenta/login": "/cuenta/login",
     "/real-estate": "/real-estate",
     "/emergencias": {
       es: "/emergencias",
