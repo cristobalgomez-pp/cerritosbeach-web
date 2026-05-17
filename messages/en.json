@@ -245,6 +245,33 @@
       "errorOauth": "We couldn't connect with Google. Please try again.",
       "errorMissingCode": "The link appears invalid or expired. Please try again.",
       "errorInvalidCode": "Invalid link. Please try again."
+    },
+    "registro": {
+      "title": "Create account",
+      "subtitle": "Sign up with your email and password or with Google.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm password",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "submitButton": "Create account",
+      "submittingButton": "Creating account…",
+      "continueWithGoogle": "Continue with Google",
+      "redirectingToGoogle": "Connecting to Google…",
+      "orWithEmail": "or sign up with email",
+      "alreadyAccount": "Already have an account?",
+      "loginLink": "Sign in",
+      "backToCommunity": "← Back to community",
+      "errorTitle": "Something went wrong",
+      "errorPasswordMismatch": "Passwords do not match.",
+      "errorInvalidInput": "Please check the fields and try again.",
+      "errorEmailInUse": "This email is already registered. Try signing in.",
+      "errorSupabase": "We couldn't create your account. Please try again.",
+      "errorOauth": "We couldn't connect with Google. Please try again.",
+      "confirmTitle": "Almost there! Check your email",
+      "confirmBody": "We sent an email to {email}. Click the link to confirm your account.",
+      "confirmTip": "If you don't see the email, check your spam folder."
     }
   },
   "realestate": {
