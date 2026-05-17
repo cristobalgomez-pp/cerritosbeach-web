@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { needsOnboarding } from "@/features/auth/lib/server";
 
 export async function GET(
   request: NextRequest,
@@ -25,7 +26,9 @@ export async function GET(
     );
   }
 
-  // Sesión creada. Redirige al destino.
-  // (La lógica de "perfil incompleto → onboarding" la agregamos después.)
+  if (await needsOnboarding()) {
+    return NextResponse.redirect(`${origin}/${locale}/cuenta/onboarding`);
+  }
+
   return NextResponse.redirect(`${origin}${next}`);
 }

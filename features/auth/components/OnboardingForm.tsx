@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { completeOnboarding } from '@/features/auth/lib/actions';
@@ -10,17 +11,13 @@ type Locale = 'es' | 'en';
 type Props = {
   locale: Locale;
   defaultDisplayName: string;
-  defaultLocale: Locale;
+  avatarUrl: string | null;
 };
 
 type ErrorKey = 'errorUsernameTaken' | 'errorUsernameInvalid' | 'errorGeneric';
 
-export function OnboardingForm({
-  locale,
-  defaultDisplayName,
-  defaultLocale,
-}: Props) {
-  const t = useTranslations('community.onboarding');
+export function OnboardingForm({ locale, defaultDisplayName, avatarUrl }: Props) {
+  const t = useTranslations('cuenta.onboarding');
   const router = useRouter();
   const [errorKey, setErrorKey] = useState<ErrorKey | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -51,6 +48,15 @@ export function OnboardingForm({
   return (
     <form action={handleAction} className="space-y-6">
       <header>
+        {avatarUrl && (
+          <Image
+            src={avatarUrl}
+            alt=""
+            width={64}
+            height={64}
+            className="mb-4 rounded-full"
+          />
+        )}
         <h1 className="font-display text-3xl text-ink">{t('title')}</h1>
         <p className="mt-2 text-mist">{t('subtitle')}</p>
       </header>
@@ -92,30 +98,6 @@ export function OnboardingForm({
         />
         <p className="text-xs text-mist">{t('displayNameHint')}</p>
       </div>
-
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-ink">{t('localeLabel')}</legend>
-        <div className="flex gap-3">
-          {(['es', 'en'] as const).map((value) => (
-            <label
-              key={value}
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-ink/15 bg-cream px-4 py-3 hover:border-ocean/40 has-[:checked]:border-ocean has-[:checked]:bg-foam"
-            >
-              <input
-                type="radio"
-                name="locale"
-                value={value}
-                defaultChecked={value === defaultLocale}
-                required
-                className="accent-ocean"
-              />
-              <span className="text-sm text-ink">
-                {value === 'es' ? t('localeEs') : t('localeEn')}
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
 
       {errorKey && (
         <div className="rounded-xl border border-danger/40 bg-danger/5 px-4 py-3 text-sm text-danger">

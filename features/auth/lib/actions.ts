@@ -206,7 +206,6 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
   const parsed = onboardingSchema.safeParse({
     username: formData.get('username')?.toString().toLowerCase().trim(),
     displayName: formData.get('displayName')?.toString().trim(),
-    locale: formData.get('locale'),
   });
 
   if (!parsed.success) {
@@ -238,7 +237,6 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
     .update({
       username: parsed.data.username,
       display_name: parsed.data.displayName,
-      locale: parsed.data.locale,
     })
     .eq('id', user.id);
 
@@ -246,7 +244,7 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
     return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
   }
 
-  revalidatePath('/comunidad', 'layout');
+  revalidatePath('/cuenta/onboarding', 'layout');
   return { status: 'success' };
 }
 

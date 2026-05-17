@@ -140,13 +140,6 @@
       "displayNameLabel": "Nombre para mostrar",
       "displayNameHint": "Cómo te verán otros miembros del foro.",
       "displayNamePlaceholder": "ej. Cristóbal G.",
-      "memberTypeLabel": "Tu relación con Cerritos",
-      "memberTypeVisitor": "Visitante — Vengo de vacaciones",
-      "memberTypeResident": "Residente — Vivo aquí parte del año",
-      "memberTypeLocal": "Local — Vivo aquí todo el año",
-      "localeLabel": "Idioma preferido",
-      "localeEs": "Español",
-      "localeEn": "English",
       "submitButton": "Continuar",
       "submittingButton": "Guardando…",
       "errorUsernameTaken": "Ese nombre de usuario ya está en uso. Elige otro.",
@@ -300,6 +293,21 @@
       "errorPasswordMismatch": "Las contraseñas no coinciden.",
       "errorNotAuthenticated": "El link expiró o ya fue usado. Solicita uno nuevo.",
       "errorSupabase": "No pudimos actualizar tu contraseña. Intenta de nuevo."
+    },
+    "onboarding": {
+      "title": "Completa tu perfil",
+      "subtitle": "Cuéntanos cómo llamarte para entrar a la comunidad.",
+      "usernameLabel": "Nombre de usuario",
+      "usernameHint": "Solo letras, números y guiones bajos. Entre 3 y 20 caracteres.",
+      "usernamePlaceholder": "ej. cristobal_g",
+      "displayNameLabel": "Nombre para mostrar",
+      "displayNameHint": "Cómo te verán otros miembros del foro.",
+      "displayNamePlaceholder": "ej. Cristóbal G.",
+      "submitButton": "Continuar",
+      "submittingButton": "Guardando…",
+      "errorUsernameTaken": "Ese nombre de usuario ya está en uso. Elige otro.",
+      "errorUsernameInvalid": "Solo letras, números y guiones bajos. Entre 3 y 20 caracteres.",
+      "errorGeneric": "No pudimos guardar tus datos. Intenta de nuevo."
     }
   },
   "realestate": {
