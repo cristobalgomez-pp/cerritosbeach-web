@@ -5,7 +5,7 @@ vi.mock('@/features/auth/lib/server', () => ({
   getCurrentUserState: vi.fn(),
 }));
 
-import { isAdmin, requireAdmin } from '../guard';
+import { isAdmin, requireAdmin, isStaff, requireStaff } from '../guard';
 import { getCurrentUserState } from '@/features/auth/lib/server';
 
 const mockedGetCurrentUserState = vi.mocked(getCurrentUserState);
@@ -90,5 +90,53 @@ describe('requireAdmin', () => {
   it('returns null when role is admin (action is allowed to proceed)', async () => {
     mockedGetCurrentUserState.mockResolvedValue(withRole('admin'));
     expect(await requireAdmin()).toBeNull();
+  });
+});
+
+// ─── isStaff (pure function) ───────────────────────────────────────────────
+
+describe('isStaff', () => {
+  it('returns false when unauthenticated (profile: null)', () => {
+    expect(isStaff(unauthenticated())).toBe(false);
+  });
+
+  it('returns false when role is member', () => {
+    expect(isStaff(withRole('member'))).toBe(false);
+  });
+
+  it('returns true when role is moderator', () => {
+    expect(isStaff(withRole('moderator'))).toBe(true);
+  });
+
+  it('returns true when role is admin', () => {
+    expect(isStaff(withRole('admin'))).toBe(true);
+  });
+});
+
+// ─── requireStaff (async) ─────────────────────────────────────────────────
+
+describe('requireStaff', () => {
+  beforeEach(() => {
+    mockedGetCurrentUserState.mockReset();
+  });
+
+  it('returns UNAUTHORIZED when unauthenticated', async () => {
+    mockedGetCurrentUserState.mockResolvedValue(unauthenticated());
+    expect(await requireStaff()).toEqual({ status: 'error', code: 'UNAUTHORIZED' });
+  });
+
+  it('returns UNAUTHORIZED when role is member', async () => {
+    mockedGetCurrentUserState.mockResolvedValue(withRole('member'));
+    expect(await requireStaff()).toEqual({ status: 'error', code: 'UNAUTHORIZED' });
+  });
+
+  it('returns null when role is moderator (action is allowed to proceed)', async () => {
+    mockedGetCurrentUserState.mockResolvedValue(withRole('moderator'));
+    expect(await requireStaff()).toBeNull();
+  });
+
+  it('returns null when role is admin (action is allowed to proceed)', async () => {
+    mockedGetCurrentUserState.mockResolvedValue(withRole('admin'));
+    expect(await requireStaff()).toBeNull();
   });
 });
