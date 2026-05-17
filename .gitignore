@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Image assets workspace (originales y optimizadas, no commiteadas)
+_assets-*/
