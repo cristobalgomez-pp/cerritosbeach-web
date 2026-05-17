@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { AccountSettingsForm } from "@/features/account/components/AccountSettingsForm";
+import { AvatarUpload } from "@/features/account/components/AvatarUpload";
 import { ChangePasswordForm } from "@/features/account/components/ChangePasswordForm";
 import { SignOutButton } from "@/features/auth/components/SignOutButton";
 
@@ -40,7 +41,7 @@ export default async function CuentaPage({
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("display_name, bio, locale")
+    .select("display_name, bio, locale, avatar_url")
     .eq("id", user.id)
     .single();
 
@@ -57,6 +58,14 @@ export default async function CuentaPage({
       <h1 className="font-display text-3xl font-medium text-ink tracking-tight">
         {t("title")}
       </h1>
+
+      <AvatarUpload
+        currentAvatarUrl={profile?.avatar_url ?? null}
+        displayName={profile?.display_name ?? null}
+        email={user.email!}
+      />
+
+      <hr className="border-border" />
 
       <AccountSettingsForm
         defaultDisplayName={profile?.display_name ?? ""}

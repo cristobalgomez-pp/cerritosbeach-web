@@ -45,7 +45,11 @@ export async function Navbar() {
             user={user ? { email: user.email } : null}
             profile={
               profile
-                ? { display_name: profile.display_name, username: profile.username }
+                ? {
+                    display_name: profile.display_name,
+                    username: profile.username,
+                    avatar_url: profile.avatar_url,
+                  }
                 : null
             }
             locale={locale}
