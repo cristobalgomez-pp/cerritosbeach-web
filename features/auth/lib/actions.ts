@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { magicLinkSchema, onboardingSchema, loginSchema, registerSchema } from './schemas';
+import { magicLinkSchema, onboardingSchema, loginSchema, registerSchema, resetRequestSchema, resetPasswordSchema } from './schemas';
 
 // ───────────────────────────────────────
 // Helpers
@@ -247,6 +247,85 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
   }
 
   revalidatePath('/comunidad', 'layout');
+  return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Password Reset — Request
+// ───────────────────────────────────────
+
+export type RequestPasswordResetResult =
+  | { status: 'success' }
+  | { status: 'error'; code: 'INVALID_INPUT' | 'SUPABASE_ERROR'; message?: string };
+
+export async function requestPasswordReset(formData: FormData): Promise<RequestPasswordResetResult> {
+  const parsed = resetRequestSchema.safeParse({
+    email: formData.get('email')?.toString().toLowerCase().trim(),
+    locale: formData.get('locale'),
+  });
+
+  if (!parsed.success) {
+    return { status: 'error', code: 'INVALID_INPUT' };
+  }
+
+  const supabase = await createClient();
+  const origin = await getOrigin();
+  const { email, locale } = parsed.data;
+  const localePrefix = locale === 'es' ? '' : `/${locale}`;
+  const next = encodeURIComponent(`${localePrefix}/cuenta/reset-password`);
+  const redirectTo = `${origin}${localePrefix}/auth/callback?next=${next}`;
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo,
+  });
+
+  if (error) {
+    return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
+  }
+
+  // Always return success to avoid user enumeration.
+  return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Password Reset — Update
+// ───────────────────────────────────────
+
+export type UpdatePasswordResult =
+  | { status: 'success' }
+  | {
+      status: 'error';
+      code: 'INVALID_INPUT' | 'PASSWORDS_MISMATCH' | 'NOT_AUTHENTICATED' | 'SUPABASE_ERROR';
+      message?: string;
+    };
+
+export async function updatePassword(formData: FormData): Promise<UpdatePasswordResult> {
+  const parsed = resetPasswordSchema.safeParse({
+    password: formData.get('password')?.toString(),
+    confirmPassword: formData.get('confirmPassword')?.toString(),
+  });
+
+  if (!parsed.success) {
+    const hasMismatch = parsed.error.issues.some((i) => i.path.includes('confirmPassword'));
+    if (hasMismatch) return { status: 'error', code: 'PASSWORDS_MISMATCH' };
+    return { status: 'error', code: 'INVALID_INPUT' };
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return { status: 'error', code: 'NOT_AUTHENTICATED' };
+  }
+
+  const { error } = await supabase.auth.updateUser({ password: parsed.data.password });
+
+  if (error) {
+    return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
+  }
+
   return { status: 'success' };
 }
 

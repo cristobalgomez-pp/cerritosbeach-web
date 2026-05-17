@@ -28,6 +28,25 @@ export const registerSchema = z
 
 export type RegisterInput = z.infer<typeof registerSchema>;
 
+export const resetRequestSchema = z.object({
+  email: z.string().email(),
+  locale: z.enum(['es', 'en']),
+});
+
+export type ResetRequestInput = z.infer<typeof resetRequestSchema>;
+
+export const resetPasswordSchema = z
+  .object({
+    password: z.string().min(8),
+    confirmPassword: z.string(),
+  })
+  .refine((d) => d.password === d.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Passwords do not match',
+  });
+
+export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
+
 export const onboardingSchema = z.object({
   username: z
     .string()
