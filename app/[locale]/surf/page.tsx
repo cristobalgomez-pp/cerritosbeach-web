@@ -1,10 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/layout/PageHero";
 import { SurfConditionsWidget } from "@/features/surf/components/SurfConditionsWidget";
-import { CURRENT_CONDITIONS, SURF_SHOPS } from "@/lib/mock/content";
-import { formatPrice } from "@/lib/utils";
+import { SurfShopCard } from "@/features/surf/components/SurfShopCard";
+import { getSurfShops } from "@/features/surf/lib/queries";
+import { CURRENT_CONDITIONS } from "@/lib/mock/content";
+
+export const revalidate = 3600;
 
 export default async function SurfPage({
   params,
@@ -15,6 +17,8 @@ export default async function SurfPage({
   setRequestLocale(l);
   const locale = l as "es" | "en";
   const t = await getTranslations("surf");
+  const shops = await getSurfShops();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
   return (
     <>
@@ -38,49 +42,13 @@ export default async function SurfPage({
           <p className="text-mist mb-8 max-w-2xl">{t("shops.subtitle")}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {SURF_SHOPS.map((shop) => (
-              <Card key={shop.id}>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-medium text-ink mb-2">
-                    {shop.name}
-                  </h3>
-                  <p className="text-sm text-ink-muted leading-relaxed mb-4">
-                    {shop.description[locale]}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {shop.services.map((service) => (
-                      <span
-                        key={service}
-                        className="text-[10px] uppercase tracking-wider text-ocean-dark bg-cream px-2.5 py-1 rounded-full border border-border"
-                      >
-                        {t(`services.${service}`)}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between border-t border-border pt-4">
-                    {shop.priceFrom > 0 ? (
-                      <p className="text-sm text-ink">
-                        <span className="text-mist text-xs">
-                          {locale === "es" ? "Desde" : "From"}{" "}
-                        </span>
-                        <span className="font-medium">
-                          {formatPrice(shop.priceFrom, "MXN", locale)}
-                        </span>
-                      </p>
-                    ) : (
-                      <span />
-                    )}
-                    {shop.phone ? (
-                      <a
-                        href={`tel:${shop.phone}`}
-                        className="text-sm text-ocean hover:underline"
-                      >
-                        {shop.phone}
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-              </Card>
+            {shops.map((shop) => (
+              <SurfShopCard
+                key={shop.id}
+                shop={shop}
+                locale={locale}
+                supabaseUrl={supabaseUrl}
+              />
             ))}
           </div>
         </Container>
