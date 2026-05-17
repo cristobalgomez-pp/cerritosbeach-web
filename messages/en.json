@@ -140,13 +140,6 @@
       "displayNameLabel": "Display name",
       "displayNameHint": "How other forum members will see you.",
       "displayNamePlaceholder": "e.g. Cristobal G.",
-      "memberTypeLabel": "Your relationship with Cerritos",
-      "memberTypeVisitor": "Visitor — I come on vacation",
-      "memberTypeResident": "Resident — I live here part of the year",
-      "memberTypeLocal": "Local — I live here year-round",
-      "localeLabel": "Preferred language",
-      "localeEs": "Español",
-      "localeEn": "English",
       "submitButton": "Continue",
       "submittingButton": "Saving…",
       "errorUsernameTaken": "That username is already taken. Choose another.",
@@ -300,6 +293,21 @@
       "errorPasswordMismatch": "Passwords do not match.",
       "errorNotAuthenticated": "The link has expired or was already used. Request a new one.",
       "errorSupabase": "We could not update your password. Please try again."
+    },
+    "onboarding": {
+      "title": "Complete your profile",
+      "subtitle": "Tell us what to call you before entering the community.",
+      "usernameLabel": "Username",
+      "usernameHint": "Lowercase letters, numbers and underscores only. Between 3 and 20 characters.",
+      "usernamePlaceholder": "e.g. cristobal_g",
+      "displayNameLabel": "Display name",
+      "displayNameHint": "How other forum members will see you.",
+      "displayNamePlaceholder": "e.g. Cristobal G.",
+      "submitButton": "Continue",
+      "submittingButton": "Saving…",
+      "errorUsernameTaken": "That username is already taken. Choose another.",
+      "errorUsernameInvalid": "Lowercase letters, numbers and underscores only. Between 3 and 20 characters.",
+      "errorGeneric": "We couldn't save your data. Try again."
     }
   },
   "realestate": {

@@ -16,6 +16,27 @@ export type CurrentUserState = {
 };
 
 /**
+ * Returns true when the current user is unauthenticated or their profile has no username set.
+ * Used by the auth callback to decide whether to redirect to /cuenta/onboarding.
+ */
+export async function needsOnboarding(): Promise<boolean> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) return true;
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('username')
+    .eq('id', user.id)
+    .single();
+
+  return !profile?.username;
+}
+
+/**
  * Returns the current user + profile state. Cached per-request via React cache(),
  * so multiple calls within a single render (e.g. Navbar + page) share one fetch.
  */
