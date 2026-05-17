@@ -338,7 +338,16 @@
       "errorPasswordInvalid": "Password must be at least 8 characters.",
       "googleProviderMessage": "You signed in with Google. To change your password, do it from your Google account.",
       "sessionSection": "Session",
-      "signOutButton": "Sign out"
+      "signOutButton": "Sign out",
+      "avatarSection": "Profile photo",
+      "avatarChangeButton": "Change photo",
+      "avatarUploadingButton": "Uploading…",
+      "avatarConfirmButton": "Confirm",
+      "avatarCancelButton": "Cancel",
+      "avatarErrorTooLarge": "File exceeds 2 MB.",
+      "avatarErrorInvalidType": "Only JPG, PNG, or WebP images are allowed.",
+      "avatarErrorSupabase": "We could not upload the image. Please try again.",
+      "avatarSuccess": "Profile photo updated."
     }
   },
   "realestate": {

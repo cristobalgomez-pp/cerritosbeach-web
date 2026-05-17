@@ -9,6 +9,7 @@ export type CurrentUserState = {
   profile: {
     username: string | null;
     display_name: string | null;
+    avatar_url: string | null;
     locale: Locale | null;
     role: UserRole;
     is_approved: boolean;
@@ -52,7 +53,7 @@ export const getCurrentUserState = cache(async (): Promise<CurrentUserState> => 
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('username, display_name, locale, role, is_approved')
+    .select('username, display_name, avatar_url, locale, role, is_approved')
     .eq('id', user.id)
     .single();
 
@@ -62,6 +63,7 @@ export const getCurrentUserState = cache(async (): Promise<CurrentUserState> => 
       ? {
           username: profile.username,
           display_name: profile.display_name,
+          avatar_url: profile.avatar_url ?? null,
           locale: profile.locale as Locale | null,
           role: (profile.role ?? 'member') as UserRole,
           is_approved: profile.is_approved ?? false,

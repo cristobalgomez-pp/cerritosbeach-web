@@ -9,7 +9,7 @@ type Locale = 'es' | 'en';
 
 type Props = {
   user: { email: string } | null;
-  profile: { display_name: string | null; username: string | null } | null;
+  profile: { display_name: string | null; username: string | null; avatar_url?: string | null } | null;
   locale: Locale;
 };
 
@@ -63,6 +63,7 @@ export function AuthIndicator({ user, profile, locale }: Props) {
 
   const displayName = profile?.display_name?.trim() || user.email;
   const initials = getInitials(profile?.display_name, user.email);
+  const avatarUrl = profile?.avatar_url ?? null;
 
   return (
     <div ref={containerRef} className="relative">
@@ -73,8 +74,12 @@ export function AuthIndicator({ user, profile, locale }: Props) {
         aria-haspopup="menu"
         aria-expanded={open}
       >
-        <span className="flex size-8 items-center justify-center rounded-full bg-ocean text-sm font-medium text-foam">
-          {initials}
+        <span className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-ocean text-sm font-medium text-foam">
+          {avatarUrl ? (
+            <img src={avatarUrl} alt="" className="size-full object-cover" />
+          ) : (
+            initials
+          )}
         </span>
         <span className="hidden text-sm text-ink transition-colors group-hover:text-ocean md:block">
           {displayName}
