@@ -1,20 +1,21 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import { PageHero } from "@/components/layout/PageHero";
-import { getRestaurants } from "@/lib/mock/restaurants";
+import { RestaurantCard } from "@/features/restaurants/components/RestaurantCard";
+import { getRestaurants } from "@/features/restaurants/lib/queries";
+
+export const revalidate = 3600;
 
 export default async function ComidaPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale: l } = await params;
-  setRequestLocale(l);
-  const locale = l as "es" | "en";
+  const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("food");
-  const restaurants = getRestaurants();
+  const restaurants = await getRestaurants();
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
   return (
     <>
@@ -27,38 +28,13 @@ export default async function ComidaPage({
       <section>
         <Container className="py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {restaurants.map((r) => (
-              <Card key={r.id} className="h-full flex flex-col">
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <p className="text-[10px] uppercase tracking-wider text-peach-dark mb-1">
-                        {r.cuisine[locale]}
-                      </p>
-                      <h3 className="font-display text-2xl font-medium text-ink leading-tight">
-                        {r.name}
-                      </h3>
-                    </div>
-                    <p className="font-display text-lg text-mist">{r.priceRange}</p>
-                  </div>
-                  <p className="text-xs text-mist mb-4">
-                    {r.location} · {r.hours}
-                  </p>
-                  <p className="text-sm text-ink-muted leading-relaxed mb-5 flex-1">
-                    {r.description[locale]}
-                  </p>
-                  <div className="flex flex-wrap gap-2 border-t border-border pt-4">
-                    {r.badges.map((b, idx) => (
-                      <Badge key={idx} variant={b.tone}>
-                        {b[locale]}
-                      </Badge>
-                    ))}
-                    <span className="ml-auto text-sm text-ink">
-                      ★ <span className="font-medium">{r.rating}</span>
-                    </span>
-                  </div>
-                </div>
-              </Card>
+            {restaurants.map((restaurant) => (
+              <RestaurantCard
+                key={restaurant.id}
+                restaurant={restaurant}
+                locale={locale as "es" | "en"}
+                supabaseUrl={supabaseUrl}
+              />
             ))}
           </div>
         </Container>
