@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/routing";
+import { useRouter } from "next/navigation";
 import { deleteHotel } from "@/features/hotels/lib/actions";
 
 export function DeleteButton({ id }: { id: string }) {
@@ -16,7 +16,7 @@ export function DeleteButton({ id }: { id: string }) {
     startTransition(async () => {
       const result = await deleteHotel(id);
       if (result.status === "success") {
-        router.push("/admin/hoteles");
+        router.push("/admin/hoteles?success=deleted");
         router.refresh();
       } else {
         setError(t("errorDelete"));

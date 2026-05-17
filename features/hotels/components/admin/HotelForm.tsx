@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/routing";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageUpload } from "@/components/ui/ImageUpload";
@@ -55,7 +55,7 @@ export function HotelForm({ hotel }: Props) {
         : await createHotel(data);
 
       if (result.status === "success") {
-        router.push("/admin/hoteles");
+        router.push(`/admin/hoteles?success=${isEdit ? "updated" : "created"}`);
         router.refresh();
       } else {
         setServerError(t("errorSave"));
