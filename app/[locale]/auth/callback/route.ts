@@ -12,7 +12,7 @@ export async function GET(
 
   if (!code) {
     return NextResponse.redirect(
-      `${origin}/${locale}/comunidad/login?error=missing_code`
+      `${origin}/${locale}/cuenta/login?error=missing_code`
     );
   }
 
@@ -21,7 +21,7 @@ export async function GET(
 
   if (error) {
     return NextResponse.redirect(
-      `${origin}/${locale}/comunidad/login?error=invalid_code`
+      `${origin}/${locale}/cuenta/login?error=invalid_code`
     );
   }
 

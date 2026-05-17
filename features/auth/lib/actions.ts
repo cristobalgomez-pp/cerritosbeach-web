@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { magicLinkSchema, onboardingSchema } from './schemas';
+import { magicLinkSchema, onboardingSchema, loginSchema } from './schemas';
 
 // ───────────────────────────────────────
 // Helpers
@@ -78,11 +78,69 @@ export async function signInWithGoogle(locale: 'es' | 'en' = 'es') {
   });
 
   if (error || !data?.url) {
-    redirect(`${localePrefix}/comunidad/login?error=oauth_error`);
+    redirect(`${localePrefix}/cuenta/login?error=oauth_error`);
   }
 
   // Redirige al consent screen de Google.
   redirect(data.url);
+}
+
+// ───────────────────────────────────────
+// Email + Password Login
+// ───────────────────────────────────────
+
+export type LoginWithEmailResult =
+  | { status: 'success' }
+  | {
+      status: 'error';
+      code:
+        | 'INVALID_INPUT'
+        | 'INVALID_CREDENTIALS'
+        | 'EMAIL_NOT_CONFIRMED'
+        | 'ACCOUNT_SUSPENDED'
+        | 'SUPABASE_ERROR';
+      message?: string;
+    };
+
+export async function loginWithEmail(formData: FormData): Promise<LoginWithEmailResult> {
+  const parsed = loginSchema.safeParse({
+    email: formData.get('email')?.toString().toLowerCase().trim(),
+    password: formData.get('password')?.toString(),
+  });
+
+  if (!parsed.success) {
+    return { status: 'error', code: 'INVALID_INPUT' };
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: parsed.data.email,
+    password: parsed.data.password,
+  });
+
+  if (error) {
+    const msg = error.message.toLowerCase();
+    if (msg.includes('email not confirmed')) {
+      return { status: 'error', code: 'EMAIL_NOT_CONFIRMED' };
+    }
+    if (msg.includes('invalid login credentials') || msg.includes('invalid credentials')) {
+      return { status: 'error', code: 'INVALID_CREDENTIALS' };
+    }
+    return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_banned')
+    .eq('id', data.user.id)
+    .single();
+
+  if (profile?.is_banned) {
+    await supabase.auth.signOut();
+    return { status: 'error', code: 'ACCOUNT_SUSPENDED' };
+  }
+
+  return { status: 'success' };
 }
 
 // ───────────────────────────────────────
