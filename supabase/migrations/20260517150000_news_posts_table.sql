@@ -15,21 +15,29 @@ create table public.news_posts (
   updated_at       timestamptz not null default now()
 );
 
-alter table public.news_posts enable row level security;
-
-create policy "Public can view published news posts"
-  on public.news_posts for select
-  using (is_published = true);
-
-create policy "Admin can manage news posts"
-  on public.news_posts for all
-  using (
-    exists (
-      select 1 from public.user_roles
-      where user_id = auth.uid()
-        and role = 'admin'
-    )
-  );
-
 create index news_posts_published_at_idx on public.news_posts (published_at desc)
   where is_published = true;
+
+alter table public.news_posts enable row level security;
+
+-- Anon: solo posts publicados
+create policy "news_posts_anon_select"
+  on public.news_posts for select to anon
+  using (is_published = true);
+
+-- Authenticated (admin): acceso completo
+create policy "news_posts_auth_select"
+  on public.news_posts for select to authenticated
+  using (true);
+
+create policy "news_posts_auth_insert"
+  on public.news_posts for insert to authenticated
+  with check (true);
+
+create policy "news_posts_auth_update"
+  on public.news_posts for update to authenticated
+  using (true) with check (true);
+
+create policy "news_posts_auth_delete"
+  on public.news_posts for delete to authenticated
+  using (true);
