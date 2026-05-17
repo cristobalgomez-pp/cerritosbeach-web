@@ -14,7 +14,6 @@ export const onboardingSchema = z.object({
     .max(20)
     .regex(/^[a-z0-9_]+$/),
   displayName: z.string().min(2).max(50),
-  memberType: z.enum(['visitor', 'resident', 'local']),
   locale: z.enum(['es', 'en']),
 });
 

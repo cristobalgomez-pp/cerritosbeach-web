@@ -40,7 +40,7 @@ export function HotelForm({ hotel }: Props) {
           website:          hotel.website ?? undefined,
           address:          hotel.address ?? undefined,
           cover_image_path: hotel.cover_image_path ?? undefined,
-          gallery_paths:    hotel.gallery_paths,
+          gallery_paths:    hotel.gallery_paths ?? [],
           is_published:     hotel.is_published,
           featured:         hotel.featured,
         }

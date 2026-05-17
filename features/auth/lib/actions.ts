@@ -101,7 +101,6 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
   const parsed = onboardingSchema.safeParse({
     username: formData.get('username')?.toString().toLowerCase().trim(),
     displayName: formData.get('displayName')?.toString().trim(),
-    memberType: formData.get('memberType'),
     locale: formData.get('locale'),
   });
 
@@ -134,7 +133,6 @@ export async function completeOnboarding(formData: FormData): Promise<Onboarding
     .update({
       username: parsed.data.username,
       display_name: parsed.data.displayName,
-      member_type: parsed.data.memberType,
       locale: parsed.data.locale,
     })
     .eq('id', user.id);

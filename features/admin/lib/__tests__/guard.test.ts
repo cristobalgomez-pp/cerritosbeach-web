@@ -20,7 +20,6 @@ function withRole(role: 'member' | 'moderator' | 'admin'): CurrentUserState {
     profile: {
       username: 'testuser',
       display_name: 'Test User',
-      member_type: 'local',
       locale: 'es',
       role,
       is_approved: true,

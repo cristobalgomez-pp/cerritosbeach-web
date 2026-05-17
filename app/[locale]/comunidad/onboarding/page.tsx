@@ -2,7 +2,6 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { OnboardingForm } from '@/features/auth/components/OnboardingForm';
 
-type MemberType = 'visitor' | 'resident' | 'local';
 type Locale = 'es' | 'en';
 
 function localePath(locale: Locale, path: string): string {
@@ -23,7 +22,7 @@ export default async function OnboardingPage({
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('username, display_name, member_type, locale')
+    .select('username, display_name, locale')
     .eq('id', user.id)
     .single();
 
@@ -34,7 +33,6 @@ export default async function OnboardingPage({
       <OnboardingForm
         locale={locale}
         defaultDisplayName={profile?.display_name ?? ''}
-        defaultMemberType={(profile?.member_type as MemberType | null) ?? 'visitor'}
         defaultLocale={(profile?.locale as Locale | null) ?? locale}
       />
     </div>

@@ -12,6 +12,31 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.5"
   }
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          extensions?: Json
+          operationName?: string
+          query?: string
+          variables?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       audit_log: {
@@ -52,242 +77,6 @@ export type Database = {
           },
         ]
       }
-      news_posts: {
-        Row: {
-          id: string
-          slug: string
-          title_es: string
-          title_en: string
-          excerpt_es: string | null
-          excerpt_en: string | null
-          body_es: string | null
-          body_en: string | null
-          cover_image_path: string | null
-          author_id: string | null
-          is_published: boolean
-          published_at: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          title_es: string
-          title_en: string
-          excerpt_es?: string | null
-          excerpt_en?: string | null
-          body_es?: string | null
-          body_en?: string | null
-          cover_image_path?: string | null
-          author_id?: string | null
-          is_published?: boolean
-          published_at?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          title_es?: string
-          title_en?: string
-          excerpt_es?: string | null
-          excerpt_en?: string | null
-          body_es?: string | null
-          body_en?: string | null
-          cover_image_path?: string | null
-          author_id?: string | null
-          is_published?: boolean
-          published_at?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "news_posts_author_id_fkey"
-            columns: ["author_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      hotels: {
-        Row: {
-          id: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es: string | null
-          description_en: string | null
-          category: string | null
-          phone: string | null
-          website: string | null
-          address: string | null
-          cover_image_path: string | null
-          gallery_paths: string[]
-          is_published: boolean
-          featured: boolean
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es?: string | null
-          description_en?: string | null
-          category?: string | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          gallery_paths?: string[]
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          name_es?: string
-          name_en?: string
-          description_es?: string | null
-          description_en?: string | null
-          category?: string | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          gallery_paths?: string[]
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      restaurants: {
-        Row: {
-          id: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es: string | null
-          description_en: string | null
-          cuisine_type: string | null
-          price_range: string | null
-          hours: string | null
-          phone: string | null
-          website: string | null
-          address: string | null
-          cover_image_path: string | null
-          gallery_paths: string[]
-          is_published: boolean
-          featured: boolean
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es?: string | null
-          description_en?: string | null
-          cuisine_type?: string | null
-          price_range?: string | null
-          hours?: string | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          gallery_paths?: string[]
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          name_es?: string
-          name_en?: string
-          description_es?: string | null
-          description_en?: string | null
-          cuisine_type?: string | null
-          price_range?: string | null
-          hours?: string | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          gallery_paths?: string[]
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      surf_shops: {
-        Row: {
-          id: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es: string | null
-          description_en: string | null
-          services: string[]
-          price_from: number | null
-          phone: string | null
-          website: string | null
-          address: string | null
-          cover_image_path: string | null
-          is_published: boolean
-          featured: boolean
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          slug: string
-          name_es: string
-          name_en: string
-          description_es?: string | null
-          description_en?: string | null
-          services?: string[]
-          price_from?: number | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          slug?: string
-          name_es?: string
-          name_en?: string
-          description_es?: string | null
-          description_en?: string | null
-          services?: string[]
-          price_from?: number | null
-          phone?: string | null
-          website?: string | null
-          address?: string | null
-          cover_image_path?: string | null
-          is_published?: boolean
-          featured?: boolean
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       channels: {
         Row: {
           created_at: string
@@ -321,6 +110,63 @@ export type Database = {
           name_es?: string
           slug?: string
           sort_order?: number
+        }
+        Relationships: []
+      }
+      hotels: {
+        Row: {
+          address: string | null
+          category: string | null
+          cover_image_path: string | null
+          created_at: string
+          description_en: string | null
+          description_es: string | null
+          featured: boolean
+          gallery_paths: string[] | null
+          id: string
+          is_published: boolean
+          name_en: string
+          name_es: string
+          phone: string | null
+          slug: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          category?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          gallery_paths?: string[] | null
+          id?: string
+          is_published?: boolean
+          name_en: string
+          name_es: string
+          phone?: string | null
+          slug: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          category?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          gallery_paths?: string[] | null
+          id?: string
+          is_published?: boolean
+          name_en?: string
+          name_es?: string
+          phone?: string | null
+          slug?: string
+          updated_at?: string
+          website?: string | null
         }
         Relationships: []
       }
@@ -371,6 +217,65 @@ export type Database = {
           user_agent?: string | null
         }
         Relationships: []
+      }
+      news_posts: {
+        Row: {
+          author_id: string | null
+          body_en: string | null
+          body_es: string | null
+          cover_image_path: string | null
+          created_at: string
+          excerpt_en: string | null
+          excerpt_es: string | null
+          id: string
+          is_published: boolean
+          published_at: string | null
+          slug: string
+          title_en: string
+          title_es: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          body_en?: string | null
+          body_es?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          excerpt_en?: string | null
+          excerpt_es?: string | null
+          id?: string
+          is_published?: boolean
+          published_at?: string | null
+          slug: string
+          title_en: string
+          title_es: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          body_en?: string | null
+          body_es?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          excerpt_en?: string | null
+          excerpt_es?: string | null
+          id?: string
+          is_published?: boolean
+          published_at?: string | null
+          slug?: string
+          title_en?: string
+          title_es?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "news_posts_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       posts: {
         Row: {
@@ -440,7 +345,6 @@ export type Database = {
           is_banned: boolean
           locale: string
           location: string | null
-          member_type: string | null
           role: string
           updated_at: string
           username: string | null
@@ -457,7 +361,6 @@ export type Database = {
           is_banned?: boolean
           locale?: string
           location?: string | null
-          member_type?: string | null
           role?: string
           updated_at?: string
           username?: string | null
@@ -474,10 +377,129 @@ export type Database = {
           is_banned?: boolean
           locale?: string
           location?: string | null
-          member_type?: string | null
           role?: string
           updated_at?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      restaurants: {
+        Row: {
+          address: string | null
+          cover_image_path: string | null
+          created_at: string
+          cuisine_type: string | null
+          description_en: string | null
+          description_es: string | null
+          featured: boolean
+          gallery_paths: string[] | null
+          hours: string | null
+          id: string
+          is_published: boolean
+          name_en: string
+          name_es: string
+          phone: string | null
+          price_range: string | null
+          slug: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          cuisine_type?: string | null
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          gallery_paths?: string[] | null
+          hours?: string | null
+          id?: string
+          is_published?: boolean
+          name_en: string
+          name_es: string
+          phone?: string | null
+          price_range?: string | null
+          slug: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          cuisine_type?: string | null
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          gallery_paths?: string[] | null
+          hours?: string | null
+          id?: string
+          is_published?: boolean
+          name_en?: string
+          name_es?: string
+          phone?: string | null
+          price_range?: string | null
+          slug?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
+      surf_shops: {
+        Row: {
+          address: string | null
+          cover_image_path: string | null
+          created_at: string
+          description_en: string | null
+          description_es: string | null
+          featured: boolean
+          id: string
+          is_published: boolean
+          name_en: string
+          name_es: string
+          phone: string | null
+          price_from: number | null
+          services: string[]
+          slug: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          id?: string
+          is_published?: boolean
+          name_en: string
+          name_es: string
+          phone?: string | null
+          price_from?: number | null
+          services?: string[]
+          slug: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          cover_image_path?: string | null
+          created_at?: string
+          description_en?: string | null
+          description_es?: string | null
+          featured?: boolean
+          id?: string
+          is_published?: boolean
+          name_en?: string
+          name_es?: string
+          phone?: string | null
+          price_from?: number | null
+          services?: string[]
+          slug?: string
+          updated_at?: string
+          website?: string | null
         }
         Relationships: []
       }
@@ -553,6 +575,7 @@ export type Database = {
     }
     Functions: {
       is_approved_user: { Args: never; Returns: boolean }
+      is_not_banned: { Args: never; Returns: boolean }
       is_staff: { Args: never; Returns: boolean }
     }
     Enums: {
@@ -682,6 +705,9 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
+  graphql_public: {
+    Enums: {},
+  },
   public: {
     Enums: {},
   },

@@ -10,7 +10,7 @@ export type Hotel = {
   website: string | null;
   address: string | null;
   cover_image_path: string | null;
-  gallery_paths: string[];
+  gallery_paths: string[] | null;
   is_published: boolean;
   featured: boolean;
   created_at: string;

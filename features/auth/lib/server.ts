@@ -2,7 +2,6 @@ import { cache } from 'react';
 import { createClient } from '@/lib/supabase/server';
 
 export type Locale = 'es' | 'en';
-export type MemberType = 'visitor' | 'resident' | 'local';
 export type UserRole = 'member' | 'moderator' | 'admin';
 
 export type CurrentUserState = {
@@ -10,7 +9,6 @@ export type CurrentUserState = {
   profile: {
     username: string | null;
     display_name: string | null;
-    member_type: MemberType | null;
     locale: Locale | null;
     role: UserRole;
     is_approved: boolean;
@@ -33,7 +31,7 @@ export const getCurrentUserState = cache(async (): Promise<CurrentUserState> => 
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('username, display_name, member_type, locale, role, is_approved')
+    .select('username, display_name, locale, role, is_approved')
     .eq('id', user.id)
     .single();
 
@@ -43,7 +41,6 @@ export const getCurrentUserState = cache(async (): Promise<CurrentUserState> => 
       ? {
           username: profile.username,
           display_name: profile.display_name,
-          member_type: profile.member_type as MemberType | null,
           locale: profile.locale as Locale | null,
           role: (profile.role ?? 'member') as UserRole,
           is_approved: profile.is_approved ?? false,

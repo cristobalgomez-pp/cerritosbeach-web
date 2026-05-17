@@ -5,13 +5,11 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { completeOnboarding } from '@/features/auth/lib/actions';
 
-type MemberType = 'visitor' | 'resident' | 'local';
 type Locale = 'es' | 'en';
 
 type Props = {
   locale: Locale;
   defaultDisplayName: string;
-  defaultMemberType: MemberType;
   defaultLocale: Locale;
 };
 
@@ -20,7 +18,6 @@ type ErrorKey = 'errorUsernameTaken' | 'errorUsernameInvalid' | 'errorGeneric';
 export function OnboardingForm({
   locale,
   defaultDisplayName,
-  defaultMemberType,
   defaultLocale,
 }: Props) {
   const t = useTranslations('community.onboarding');
@@ -50,12 +47,6 @@ export function OnboardingForm({
       }
     });
   }
-
-  const memberTypes: ReadonlyArray<{ value: MemberType; key: string }> = [
-    { value: 'visitor', key: 'memberTypeVisitor' },
-    { value: 'resident', key: 'memberTypeResident' },
-    { value: 'local', key: 'memberTypeLocal' },
-  ];
 
   return (
     <form action={handleAction} className="space-y-6">
@@ -101,26 +92,6 @@ export function OnboardingForm({
         />
         <p className="text-xs text-mist">{t('displayNameHint')}</p>
       </div>
-
-      <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-ink">{t('memberTypeLabel')}</legend>
-        {memberTypes.map(({ value, key }) => (
-          <label
-            key={value}
-            className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink/15 bg-cream px-4 py-3 hover:border-ocean/40 has-[:checked]:border-ocean has-[:checked]:bg-foam"
-          >
-            <input
-              type="radio"
-              name="memberType"
-              value={value}
-              defaultChecked={value === defaultMemberType}
-              required
-              className="mt-1 accent-ocean"
-            />
-            <span className="text-sm text-ink">{t(key)}</span>
-          </label>
-        ))}
-      </fieldset>
 
       <fieldset className="space-y-2">
         <legend className="text-sm font-medium text-ink">{t('localeLabel')}</legend>

@@ -45,7 +45,7 @@ export function RestaurantForm({ restaurant }: Props) {
           website:          restaurant.website ?? undefined,
           address:          restaurant.address ?? undefined,
           cover_image_path: restaurant.cover_image_path ?? undefined,
-          gallery_paths:    restaurant.gallery_paths,
+          gallery_paths:    restaurant.gallery_paths ?? [],
           is_published:     restaurant.is_published,
           featured:         restaurant.featured,
         }
