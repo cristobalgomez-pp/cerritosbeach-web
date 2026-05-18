@@ -51,6 +51,7 @@ export const routing = defineRouting({
     "/admin/surf-shops": "/admin/surf-shops",
     "/admin/novedades": "/admin/novedades",
     "/admin/contenido": "/admin/contenido",
+    "/admin/seo": "/admin/seo",
   },
 });
 

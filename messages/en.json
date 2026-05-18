@@ -430,7 +430,8 @@
       "restaurantes": "Restaurants",
       "surf_shops": "Surf Shops",
       "novedades": "News",
-      "contenido": "Content"
+      "contenido": "Content",
+      "seo": "SEO"
     },
     "dashboard": {
       "title": "Admin panel"

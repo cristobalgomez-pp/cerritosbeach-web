@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +8,20 @@ import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
 import { getPageBanner } from "@/features/content/lib/queries";
+import { getSeoForPage } from "@/features/seo/lib/queries";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const seo = await getSeoForPage("home").catch(() => null);
+  const title = (locale === "es" ? seo?.title_es : seo?.title_en) ?? "Cerritos Beach";
+  const description =
+    (locale === "es" ? seo?.description_es : seo?.description_en) ?? undefined;
+  return { title, description };
+}
 
 export default async function HomePage({
   params,
