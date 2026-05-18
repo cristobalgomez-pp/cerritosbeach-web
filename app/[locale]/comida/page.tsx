@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { RestaurantCard } from "@/features/restaurants/components/RestaurantCard";
 import { getRestaurants } from "@/features/restaurants/lib/queries";
+import { getPageBanner } from "@/features/content/lib/queries";
 
 export const revalidate = 3600;
 
@@ -14,15 +15,17 @@ export default async function ComidaPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("food");
-  const restaurants = await getRestaurants();
+  const [restaurants, banner] = await Promise.all([getRestaurants(), getPageBanner("comida")]);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const l = locale as "es" | "en";
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        imagePath={banner?.image_path}
+        eyebrow={(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(l === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(l === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
       />
 
       <section>

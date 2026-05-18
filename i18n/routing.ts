@@ -50,6 +50,7 @@ export const routing = defineRouting({
     "/admin/restaurantes": "/admin/restaurantes",
     "/admin/surf-shops": "/admin/surf-shops",
     "/admin/novedades": "/admin/novedades",
+    "/admin/contenido": "/admin/contenido",
   },
 });
 

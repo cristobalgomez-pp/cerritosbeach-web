@@ -11,6 +11,7 @@ export function AdminSidebar() {
     { href: '/admin/restaurantes' as const, label: t('restaurantes') },
     { href: '/admin/surf-shops' as const, label: t('surf_shops') },
     { href: '/admin/novedades' as const, label: t('novedades') },
+    { href: '/admin/contenido' as const, label: t('contenido') },
   ];
 
   return (

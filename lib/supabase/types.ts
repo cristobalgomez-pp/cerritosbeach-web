@@ -113,6 +113,45 @@ export type Database = {
         }
         Relationships: []
       }
+      page_banners: {
+        Row: {
+          page:        string
+          image_path:  string | null
+          eyebrow_es:  string | null
+          eyebrow_en:  string | null
+          title_es:    string | null
+          title_en:    string | null
+          subtitle_es: string | null
+          subtitle_en: string | null
+          created_at:  string
+          updated_at:  string
+        }
+        Insert: {
+          page:        string
+          image_path?: string | null
+          eyebrow_es?: string | null
+          eyebrow_en?: string | null
+          title_es?:   string | null
+          title_en?:   string | null
+          subtitle_es?: string | null
+          subtitle_en?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          page?:       string
+          image_path?: string | null
+          eyebrow_es?: string | null
+          eyebrow_en?: string | null
+          title_es?:   string | null
+          title_en?:   string | null
+          subtitle_es?: string | null
+          subtitle_en?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hotels: {
         Row: {
           address: string | null

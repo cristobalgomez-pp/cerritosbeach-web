@@ -1,17 +1,35 @@
 import { Container } from "@/components/ui/Container";
 
+const STORAGE_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
+  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/content-images`
+  : "";
+
 export function PageHero({
   eyebrow,
   title,
   subtitle,
+  imagePath,
 }: {
-  eyebrow?: string;
+  eyebrow?: string | null;
   title: string;
-  subtitle?: string;
+  subtitle?: string | null;
+  imagePath?: string | null;
 }) {
+  const imageUrl = imagePath ? `${STORAGE_BASE}/${imagePath}` : null;
+
   return (
-    <section className="bg-ocean text-foam">
-      <Container className="py-16 md:py-20">
+    <section className="relative bg-ocean text-foam overflow-hidden">
+      {imageUrl && (
+        <>
+          <img
+            src={imageUrl}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </>
+      )}
+      <Container className="relative py-16 md:py-20">
         {eyebrow ? (
           <p className="text-xs uppercase tracking-[0.08em] text-peach mb-4">
             {eyebrow}

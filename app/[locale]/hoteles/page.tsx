@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { HotelCard } from "@/features/hotels/components/HotelCard";
 import { getHotels } from "@/features/hotels/lib/queries";
+import { getPageBanner } from "@/features/content/lib/queries";
 
 export const revalidate = 3600;
 
@@ -14,15 +15,17 @@ export default async function HotelesPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("hotels");
-  const hotels = await getHotels();
+  const [hotels, banner] = await Promise.all([getHotels(), getPageBanner("hoteles")]);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const l = locale as "es" | "en";
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        imagePath={banner?.image_path}
+        eyebrow={(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(l === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(l === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
       />
 
       <section>

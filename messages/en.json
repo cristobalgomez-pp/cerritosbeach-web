@@ -429,7 +429,8 @@
       "hoteles": "Hotels",
       "restaurantes": "Restaurants",
       "surf_shops": "Surf Shops",
-      "novedades": "News"
+      "novedades": "News",
+      "contenido": "Content"
     },
     "dashboard": {
       "title": "Admin panel"
@@ -609,6 +610,31 @@
       "successDelete": "Restaurant deleted.",
       "imageUploadBtn": "Upload image",
       "imageUploading": "Uploading…"
+    },
+    "contenido": {
+      "title": "Page Banners",
+      "pages": {
+        "home": "Home",
+        "hoteles": "Hotels",
+        "surf": "Surf",
+        "comida": "Food",
+        "novedades": "News",
+        "comunidad": "Community",
+        "real-estate": "Real Estate"
+      },
+      "withImage": "Has image",
+      "withoutImage": "No image",
+      "imageLabel": "Background image",
+      "eyebrowEsLabel": "Eyebrow (ES)",
+      "eyebrowEnLabel": "Eyebrow (EN)",
+      "titleEsLabel": "Title (ES)",
+      "titleEnLabel": "Title (EN)",
+      "subtitleEsLabel": "Subtitle (ES)",
+      "subtitleEnLabel": "Subtitle (EN)",
+      "saveBtn": "Save",
+      "saving": "Saving…",
+      "saved": "Saved!",
+      "errorSave": "Error saving"
     }
   }
 }

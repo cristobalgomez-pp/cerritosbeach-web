@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
+import { getPageBanner } from "@/features/content/lib/queries";
 
 export default async function HomePage({
   params,
@@ -15,19 +16,35 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
+  const banner = await getPageBanner("home");
+  const l = locale as "es" | "en";
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const bannerImageUrl = banner?.image_path && supabaseUrl
+    ? `${supabaseUrl}/storage/v1/object/public/content-images/${banner.image_path}`
+    : null;
 
   return (
     <>
-      <section className="bg-ocean text-foam">
-        <Container className="py-20 md:py-28 lg:py-36">
+      <section className="relative bg-ocean text-foam overflow-hidden">
+        {bannerImageUrl && (
+          <>
+            <img
+              src={bannerImageUrl}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40" />
+          </>
+        )}
+        <Container className="relative py-20 md:py-28 lg:py-36">
           <p className="text-xs uppercase tracking-[0.08em] text-peach mb-6">
-            {t("hero.eyebrow")}
+            {(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("hero.eyebrow")}
           </p>
           <h1 className="font-display font-medium text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-4xl">
-            {t("hero.title")}
+            {(l === "es" ? banner?.title_es : banner?.title_en) || t("hero.title")}
           </h1>
           <p className="mt-6 text-lg md:text-xl text-foam/80 max-w-2xl leading-relaxed">
-            {t("hero.subtitle")}
+            {(l === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("hero.subtitle")}
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button variant="accent" size="lg" asChild>

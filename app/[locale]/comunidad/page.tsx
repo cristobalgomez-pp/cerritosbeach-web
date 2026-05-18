@@ -9,6 +9,9 @@ import { WhyJoinSection } from "@/features/community/components/WhyJoinSection";
 import { ForumPreviewGrid } from "@/features/community/components/ForumPreviewGrid";
 import { FinalCtaSection } from "@/features/community/components/FinalCtaSection";
 import { getSeededChannels } from "@/features/community/lib/getSeededChannels";
+import { getPageBanner } from "@/features/content/lib/queries";
+
+export const revalidate = 3600;
 
 export default async function ComunidadPage({
   params,
@@ -17,16 +20,21 @@ export default async function ComunidadPage({
 }) {
   const { locale: l } = await params;
   setRequestLocale(l);
+  const locale = l as "es" | "en";
   const t = await getTranslations("community");
-  const { user } = await getCurrentUserState();
-  const seededSlugs = await getSeededChannels();
+  const [{ user }, seededSlugs, banner] = await Promise.all([
+    getCurrentUserState(),
+    getSeededChannels(),
+    getPageBanner("comunidad"),
+  ]);
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        imagePath={banner?.image_path}
+        eyebrow={(locale === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(locale === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(locale === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
       />
 
       {!user && (

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { SurfConditionsWidget } from "@/features/surf/components/SurfConditionsWidget";
 import { SurfShopCard } from "@/features/surf/components/SurfShopCard";
 import { getSurfShops } from "@/features/surf/lib/queries";
+import { getPageBanner } from "@/features/content/lib/queries";
 import { CURRENT_CONDITIONS } from "@/lib/mock/content";
 
 export const revalidate = 3600;
@@ -17,15 +18,16 @@ export default async function SurfPage({
   setRequestLocale(l);
   const locale = l as "es" | "en";
   const t = await getTranslations("surf");
-  const shops = await getSurfShops();
+  const [shops, banner] = await Promise.all([getSurfShops(), getPageBanner("surf")]);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        imagePath={banner?.image_path}
+        eyebrow={(locale === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(locale === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(locale === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
       />
 
       <section>

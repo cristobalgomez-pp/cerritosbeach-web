@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/layout/PageHero";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { getNewsPosts } from "@/features/news/lib/queries";
+import { getPageBanner } from "@/features/content/lib/queries";
 import { formatDate } from "@/lib/utils";
 
 export const revalidate = 3600;
@@ -18,14 +19,15 @@ export default async function NovedadesPage({
   setRequestLocale(l);
   const locale = l as "es" | "en";
   const t = await getTranslations("news");
-  const posts = await getNewsPosts();
+  const [posts, banner] = await Promise.all([getNewsPosts(), getPageBanner("novedades")]);
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        imagePath={banner?.image_path}
+        eyebrow={(locale === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(locale === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(locale === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
       />
 
       <section>
