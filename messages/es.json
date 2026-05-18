@@ -257,7 +257,8 @@
       "resendingButton": "Reenviando…",
       "resendSuccess": "¡Correo reenviado! Revisa tu bandeja de entrada.",
       "resendError": "No pudimos reenviar el correo. Intenta de nuevo.",
-      "forgotPasswordLink": "¿Olvidaste tu contraseña?"
+      "forgotPasswordLink": "¿Olvidaste tu contraseña?",
+      "redirectBanner": "Para acceder a esta sección necesitas iniciar sesión."
     },
     "confirm": {
       "title": "Confirma tu cuenta",

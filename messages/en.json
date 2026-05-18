@@ -257,7 +257,8 @@
       "resendingButton": "Resending…",
       "resendSuccess": "Email resent! Check your inbox.",
       "resendError": "We couldn't resend the email. Please try again.",
-      "forgotPasswordLink": "Forgot your password?"
+      "forgotPasswordLink": "Forgot your password?",
+      "redirectBanner": "You need to sign in to access this section."
     },
     "confirm": {
       "title": "Confirm your account",

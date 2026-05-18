@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { registerWithEmail, resendConfirmationEmail, signInWithGoogle } from "@/features/auth/lib/actions";
+import { sanitizeRedirectTo } from "@/lib/utils";
 
 type ErrorKey =
   | "errorPasswordMismatch"
@@ -49,9 +50,10 @@ function GoogleIcon() {
   );
 }
 
-export function RegisterForm() {
+export function RegisterForm({ redirectTo }: { redirectTo?: string | null } = {}) {
   const t = useTranslations("cuenta.registro");
   const locale = useLocale() as "es" | "en";
+  const safeRedirectTo = sanitizeRedirectTo(redirectTo);
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [passwordMismatch, setPasswordMismatch] = useState(false);
   const [resendState, setResendState] = useState<ResendState>("idle");
@@ -147,6 +149,15 @@ export function RegisterForm() {
 
   return (
     <div className="space-y-6">
+      {safeRedirectTo ? (
+        <div
+          role="status"
+          className="rounded-xl border border-ocean/30 bg-ocean/5 px-4 py-3 text-sm text-ocean"
+        >
+          {t("redirectBanner")}
+        </div>
+      ) : null}
+
       <div className="space-y-2">
         <h1 className="font-display text-3xl font-medium text-ink tracking-tight">
           {t("title")}

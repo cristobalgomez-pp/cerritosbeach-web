@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { RegisterForm } from "@/features/auth/components/RegisterForm";
+import { sanitizeRedirectTo } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -15,11 +16,15 @@ export async function generateMetadata({
 
 export default async function CuentaRegistroPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ redirectTo?: string }>;
 }) {
   const { locale } = await params;
+  const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "cuenta.registro" });
+  const redirectTo = sanitizeRedirectTo(sp.redirectTo);
   const localePrefix = locale === "es" ? "" : `/${locale}`;
 
   return (
@@ -31,7 +36,7 @@ export default async function CuentaRegistroPage({
         {t("backToCommunity")}
       </Link>
       <div className="bg-foam border border-border rounded-2xl p-6 sm:p-8">
-        <RegisterForm />
+        <RegisterForm redirectTo={redirectTo} />
       </div>
     </div>
   );
