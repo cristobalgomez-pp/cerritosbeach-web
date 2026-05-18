@@ -164,9 +164,12 @@ export type Database = {
           gallery_paths: string[] | null
           id: string
           is_published: boolean
+          lat: number | null
+          lng: number | null
           name_en: string
           name_es: string
           phone: string | null
+          price_from: number | null
           slug: string
           updated_at: string
           website: string | null
@@ -182,9 +185,12 @@ export type Database = {
           gallery_paths?: string[] | null
           id?: string
           is_published?: boolean
+          lat?: number | null
+          lng?: number | null
           name_en: string
           name_es: string
           phone?: string | null
+          price_from?: number | null
           slug: string
           updated_at?: string
           website?: string | null
@@ -200,9 +206,12 @@ export type Database = {
           gallery_paths?: string[] | null
           id?: string
           is_published?: boolean
+          lat?: number | null
+          lng?: number | null
           name_en?: string
           name_es?: string
           phone?: string | null
+          price_from?: number | null
           slug?: string
           updated_at?: string
           website?: string | null
@@ -422,6 +431,36 @@ export type Database = {
         }
         Relationships: []
       }
+      page_seo: {
+        Row: {
+          description_en: string | null
+          description_es: string | null
+          og_image_path: string | null
+          page: string
+          title_en: string | null
+          title_es: string | null
+          updated_at: string
+        }
+        Insert: {
+          description_en?: string | null
+          description_es?: string | null
+          og_image_path?: string | null
+          page: string
+          title_en?: string | null
+          title_es?: string | null
+          updated_at?: string
+        }
+        Update: {
+          description_en?: string | null
+          description_es?: string | null
+          og_image_path?: string | null
+          page?: string
+          title_en?: string | null
+          title_es?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       restaurants: {
         Row: {
           address: string | null
@@ -435,6 +474,8 @@ export type Database = {
           hours: string | null
           id: string
           is_published: boolean
+          lat: number | null
+          lng: number | null
           name_en: string
           name_es: string
           phone: string | null
@@ -455,6 +496,8 @@ export type Database = {
           hours?: string | null
           id?: string
           is_published?: boolean
+          lat?: number | null
+          lng?: number | null
           name_en: string
           name_es: string
           phone?: string | null
@@ -475,6 +518,8 @@ export type Database = {
           hours?: string | null
           id?: string
           is_published?: boolean
+          lat?: number | null
+          lng?: number | null
           name_en?: string
           name_es?: string
           phone?: string | null

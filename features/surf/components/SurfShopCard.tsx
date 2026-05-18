@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -23,10 +24,12 @@ export function SurfShopCard({ shop, locale, supabaseUrl }: Props) {
     <Card className="h-full flex flex-col group hover:border-border-strong hover:shadow-soft transition-all duration-200">
       <div className="bg-ocean h-44 flex items-end p-4 relative overflow-hidden">
         {coverUrl ? (
-          <img
+          <Image
             src={coverUrl}
             alt={name}
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
           />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-tr from-ocean-dark/30 to-transparent" />

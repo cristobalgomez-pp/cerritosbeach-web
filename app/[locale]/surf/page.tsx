@@ -2,10 +2,13 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { SurfConditionsWidget } from "@/features/surf/components/SurfConditionsWidget";
+import { SurfForecastTable } from "@/features/surf/components/SurfForecastTable";
 import { SurfShopCard } from "@/features/surf/components/SurfShopCard";
 import { getSurfShops } from "@/features/surf/lib/queries";
+import { getStormglassForecast } from "@/features/surf/lib/stormglass";
 import { getPageBanner } from "@/features/content/lib/queries";
-import { CURRENT_CONDITIONS } from "@/lib/mock/content";
+import type { SurfConditions } from "@/lib/mock/content";
+import type { DailyForecast } from "@/features/surf/lib/stormglass";
 
 export const revalidate = 3600;
 
@@ -18,8 +21,19 @@ export default async function SurfPage({
   setRequestLocale(l);
   const locale = l as "es" | "en";
   const t = await getTranslations("surf");
+
   const [shops, banner] = await Promise.all([getSurfShops(), getPageBanner("surf")]);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+
+  let conditions: SurfConditions | null = null;
+  let forecast: DailyForecast[] = [];
+  try {
+    const data = await getStormglassForecast();
+    conditions = data.current;
+    forecast = data.forecast;
+  } catch {
+    // API unavailable — widget renders its error state
+  }
 
   return (
     <>
@@ -31,8 +45,11 @@ export default async function SurfPage({
       />
 
       <section>
-        <Container className="py-12 md:py-16">
-          <SurfConditionsWidget conditions={CURRENT_CONDITIONS} locale={locale} />
+        <Container className="py-12 md:py-16 space-y-8">
+          <SurfConditionsWidget conditions={conditions} locale={locale} />
+          {forecast.length > 0 && (
+            <SurfForecastTable forecast={forecast} locale={locale} />
+          )}
         </Container>
       </section>
 

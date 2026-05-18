@@ -1,4 +1,3 @@
-import { useLocale } from "next-intl";
 import { Card } from "@/components/ui/Card";
 import type { SurfConditions } from "@/lib/mock/content";
 
@@ -6,7 +5,7 @@ export function SurfConditionsWidget({
   conditions,
   locale,
 }: {
-  conditions: SurfConditions;
+  conditions: SurfConditions | null;
   locale: "es" | "en";
 }) {
   const labels =
@@ -25,6 +24,7 @@ export function SurfConditionsWidget({
             falling: "Bajando",
           },
           ratingScale: ["Pésimas", "Malas", "Aceptables", "Buenas", "Excelentes"],
+          error: "No se pudieron cargar las condiciones en este momento.",
         }
       : {
           waveHeight: "Wave height",
@@ -40,7 +40,18 @@ export function SurfConditionsWidget({
             falling: "Falling",
           },
           ratingScale: ["Poor", "Bad", "Fair", "Good", "Excellent"],
+          error: "Surf conditions are unavailable right now.",
         };
+
+  if (!conditions) {
+    return (
+      <Card>
+        <div className="p-6 md:p-8">
+          <p className="text-sm text-mist">{labels.error}</p>
+        </div>
+      </Card>
+    );
+  }
 
   return (
     <Card>

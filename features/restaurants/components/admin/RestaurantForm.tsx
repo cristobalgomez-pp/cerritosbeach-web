@@ -145,7 +145,10 @@ export function RestaurantForm({ restaurant }: Props) {
       </fieldset>
 
       <fieldset className="space-y-3">
-        <Field label={t("coverImageLabel")}>
+        <Field
+          label={t("coverImageLabel")}
+          hint="800×600 px · máx 200 KB · WebP"
+        >
           <ImageUpload
             bucket="content-images"
             path={uploadPath}
