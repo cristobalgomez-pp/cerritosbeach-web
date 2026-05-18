@@ -632,6 +632,7 @@
       "withImage": "Has image",
       "withoutImage": "No image",
       "imageLabel": "Background image",
+      "imageHint": "Recommended: 1440 × 600 px · JPG or WebP. Used as page banner and as thumbnail on the home page.",
       "eyebrowEsLabel": "Eyebrow (ES)",
       "eyebrowEnLabel": "Eyebrow (EN)",
       "titleEsLabel": "Title (ES)",

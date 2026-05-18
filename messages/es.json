@@ -632,6 +632,7 @@
       "withImage": "Con imagen",
       "withoutImage": "Sin imagen",
       "imageLabel": "Imagen de fondo",
+      "imageHint": "Recomendado: 1440 × 600 px · JPG o WebP. Se usa como banner en la página y como miniatura en el inicio.",
       "eyebrowEsLabel": "Eyebrow (ES)",
       "eyebrowEnLabel": "Eyebrow (EN)",
       "titleEsLabel": "Título (ES)",

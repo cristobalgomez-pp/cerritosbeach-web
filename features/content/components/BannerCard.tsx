@@ -70,6 +70,7 @@ export function BannerCard({ page, banner }: Props) {
 
       <div className="space-y-2">
         <p className="text-xs font-medium text-ink/60">{t("imageLabel")}</p>
+        <p className="text-xs text-ink/40">{t("imageHint")}</p>
         <ImageUpload
           bucket="content-images"
           path={`banners/${page}`}
