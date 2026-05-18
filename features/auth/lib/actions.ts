@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import { needsOnboarding } from './server';
 import { onboardingSchema, loginSchema, registerSchema, resetRequestSchema, resetPasswordSchema } from './schemas';
+import { sanitizeRedirectTo } from '@/lib/utils';
 
 // ───────────────────────────────────────
 // Helpers
@@ -18,11 +19,9 @@ async function getOrigin() {
   return headersList.get('origin') ?? (host ? `${proto}://${host}` : 'http://localhost:3000');
 }
 
-function buildRedirectTo(origin: string, locale: 'es' | 'en') {
+function buildConfirmUrl(origin: string, locale: 'es' | 'en') {
   const localePrefix = locale === 'es' ? '' : `/${locale}`;
-  const next = `${localePrefix}/comunidad`;
   return {
-    callbackUrl: `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(next)}`,
     confirmUrl: `${origin}${localePrefix}/auth/confirm`,
     localePrefix,
   };
@@ -32,10 +31,13 @@ function buildRedirectTo(origin: string, locale: 'es' | 'en') {
 // Google OAuth
 // ───────────────────────────────────────
 
-export async function signInWithGoogle(locale: 'es' | 'en' = 'es') {
+export async function signInWithGoogle(locale: 'es' | 'en' = 'es', redirectTo?: string) {
   const supabase = await createClient();
   const origin = await getOrigin();
-  const { callbackUrl, localePrefix } = buildRedirectTo(origin, locale);
+  const localePrefix = locale === 'es' ? '' : `/${locale}`;
+
+  const safeNext = sanitizeRedirectTo(redirectTo) ?? `${localePrefix}/cuenta`;
+  const callbackUrl = `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(safeNext)}`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -145,7 +147,7 @@ export async function registerWithEmail(formData: FormData): Promise<RegisterWit
 
   const supabase = await createClient();
   const origin = await getOrigin();
-  const { confirmUrl } = buildRedirectTo(origin, parsed.data.locale);
+  const { confirmUrl } = buildConfirmUrl(origin, parsed.data.locale);
 
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
@@ -175,7 +177,7 @@ export async function resendConfirmationEmail(
 ): Promise<ResendConfirmationResult> {
   const supabase = await createClient();
   const origin = await getOrigin();
-  const { confirmUrl } = buildRedirectTo(origin, locale);
+  const { confirmUrl } = buildConfirmUrl(origin, locale);
 
   const { error } = await supabase.auth.resend({
     type: 'signup',

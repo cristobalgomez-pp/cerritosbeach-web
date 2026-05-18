@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { loginWithEmail, signInWithGoogle } from "@/features/auth/lib/actions";
+import { sanitizeRedirectTo } from "@/lib/utils";
 
 type ErrorKey =
   | "errorInvalidInput"
@@ -52,8 +53,10 @@ function GoogleIcon() {
 
 export function EmailPasswordLoginForm({
   initialErrorKey,
+  redirectTo,
 }: {
   initialErrorKey?: ErrorKey | null;
+  redirectTo?: string | null;
 }) {
   const t = useTranslations("cuenta.login");
   const locale = useLocale() as "es" | "en";
@@ -65,6 +68,9 @@ export function EmailPasswordLoginForm({
   );
   const [, startTransition] = useTransition();
 
+  const localePrefix = locale === "es" ? "" : `/${locale}`;
+  const safeRedirectTo = sanitizeRedirectTo(redirectTo);
+
   async function handleSubmit(formData: FormData) {
     setStatus({ kind: "submitting" });
 
@@ -72,8 +78,7 @@ export function EmailPasswordLoginForm({
       const result = await loginWithEmail(formData);
 
       if (result.status === "success") {
-        const localePrefix = locale === "es" ? "" : `/${locale}`;
-        router.push(`${localePrefix}/comunidad`);
+        router.push(safeRedirectTo ?? `${localePrefix}/cuenta`);
         router.refresh();
         return;
       }
@@ -92,7 +97,7 @@ export function EmailPasswordLoginForm({
   function handleGoogleClick() {
     setStatus({ kind: "googleRedirecting" });
     startTransition(async () => {
-      await signInWithGoogle(locale);
+      await signInWithGoogle(locale, safeRedirectTo ?? undefined);
       setStatus({ kind: "error", messageKey: "errorOauth" });
     });
   }
@@ -104,6 +109,15 @@ export function EmailPasswordLoginForm({
 
   return (
     <div className="space-y-6">
+      {safeRedirectTo ? (
+        <div
+          role="status"
+          className="rounded-xl border border-ocean/30 bg-ocean/5 px-4 py-3 text-sm text-ocean"
+        >
+          {t("redirectBanner")}
+        </div>
+      ) : null}
+
       <div className="space-y-2">
         <h1 className="font-display text-3xl font-medium text-ink tracking-tight">
           {t("title")}
@@ -194,7 +208,7 @@ export function EmailPasswordLoginForm({
       <p className="text-center text-sm text-mist">
         {t("noAccount")}{" "}
         <a
-          href={`${locale === "es" ? "" : `/${locale}`}/cuenta/registro`}
+          href={`${localePrefix}/cuenta/registro${safeRedirectTo ? `?redirectTo=${encodeURIComponent(safeRedirectTo)}` : ""}`}
           className="font-medium text-ocean hover:text-ocean-dark transition-colors"
         >
           {t("registerLink")}

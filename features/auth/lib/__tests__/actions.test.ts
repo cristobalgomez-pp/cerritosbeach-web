@@ -8,9 +8,14 @@ vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }));
 
 vi.mock('next/navigation', () => ({ redirect: vi.fn() }));
 
+vi.mock('next/headers', () => ({
+  headers: vi.fn(),
+}));
+
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
-import { completeOnboarding, signOut } from '../actions';
+import { headers } from 'next/headers';
+import { completeOnboarding, signOut, signInWithGoogle } from '../actions';
 
 const mockedCreateClient = vi.mocked(createClient);
 
@@ -150,5 +155,67 @@ describe('signOut', () => {
     mockedCreateClient.mockResolvedValue(makeAuthClient());
     await signOut('en');
     expect(vi.mocked(redirect)).toHaveBeenCalledWith('/en');
+  });
+});
+
+// ─── signInWithGoogle ─────────────────────────────────────────────────────────
+
+describe('signInWithGoogle', () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+    vi.mocked(headers).mockResolvedValue({
+      get: (key: string) => (key === 'origin' ? 'http://localhost:3000' : null),
+    } as any);
+  });
+
+  function makeGoogleClient(url = 'https://accounts.google.com/oauth') {
+    return {
+      auth: {
+        signInWithOAuth: vi.fn().mockResolvedValue({ data: { url }, error: null }),
+      },
+    } as unknown as Awaited<ReturnType<typeof createClient>>;
+  }
+
+  function getNextParam(client: ReturnType<typeof makeGoogleClient>): string {
+    const call = (client.auth.signInWithOAuth as ReturnType<typeof vi.fn>).mock.calls[0]?.[0];
+    const callbackUrl: string = call?.options?.redirectTo ?? '';
+    const qs = callbackUrl.split('?')[1] ?? '';
+    return decodeURIComponent(new URLSearchParams(qs).get('next') ?? '');
+  }
+
+  it('uses /cuenta as next destination when no redirectTo', async () => {
+    const client = makeGoogleClient();
+    mockedCreateClient.mockResolvedValue(client);
+
+    await signInWithGoogle('es');
+
+    expect(getNextParam(client)).toBe('/cuenta');
+  });
+
+  it('uses a valid relative redirectTo as next destination', async () => {
+    const client = makeGoogleClient();
+    mockedCreateClient.mockResolvedValue(client);
+
+    await signInWithGoogle('es', '/comunidad');
+
+    expect(getNextParam(client)).toBe('/comunidad');
+  });
+
+  it('falls back to /cuenta when redirectTo is an absolute URL', async () => {
+    const client = makeGoogleClient();
+    mockedCreateClient.mockResolvedValue(client);
+
+    await signInWithGoogle('es', 'https://evil.com');
+
+    expect(getNextParam(client)).toBe('/cuenta');
+  });
+
+  it('uses /en/cuenta as next for en locale with no redirectTo', async () => {
+    const client = makeGoogleClient();
+    mockedCreateClient.mockResolvedValue(client);
+
+    await signInWithGoogle('en');
+
+    expect(getNextParam(client)).toBe('/en/cuenta');
   });
 });
