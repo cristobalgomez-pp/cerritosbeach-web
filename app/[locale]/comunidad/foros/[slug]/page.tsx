@@ -1,11 +1,12 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { Link } from "@/i18n/routing";
 import { getCurrentUserState } from "@/features/auth/lib/server";
 import { FORUMS } from "@/features/community/lib/forums";
 import { getSeededChannels } from "@/features/community/lib/getSeededChannels";
+import { NewThreadButton } from "@/features/community/components/NewThreadButton";
 
 export default async function ForoPage({
   params,
@@ -19,10 +20,7 @@ export default async function ForoPage({
   const forum = FORUMS.find((f) => f.slug === slug);
   if (!forum) notFound();
 
-  const { user } = await getCurrentUserState();
-  if (!user) {
-    redirect(`/cuenta/login?next=/comunidad/foros/${slug}`);
-  }
+  const { user, profile } = await getCurrentUserState();
 
   const seededSlugs = await getSeededChannels();
   if (!seededSlugs.has(slug)) notFound();
@@ -42,12 +40,18 @@ export default async function ForoPage({
             <p className="text-ink-muted leading-relaxed mb-8">
               {t("stubBody")}
             </p>
-            <Link
-              href="/comunidad"
-              className="text-xs text-ocean hover:text-ocean-dark transition-colors"
-            >
-              {t("backToCommunity")}
-            </Link>
+            <div className="flex flex-col items-center gap-6">
+              <NewThreadButton
+                isLoggedIn={!!user}
+                isApproved={profile?.is_approved ?? false}
+              />
+              <Link
+                href="/comunidad"
+                className="text-xs text-ocean hover:text-ocean-dark transition-colors"
+              >
+                {t("backToCommunity")}
+              </Link>
+            </div>
           </div>
         </Container>
       </section>

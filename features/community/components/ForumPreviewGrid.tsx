@@ -5,10 +5,10 @@ import { FORUMS } from "../lib/forums";
 
 interface Props {
   seededSlugs: Set<string>;
-  isLoggedIn: boolean;
+  isLoggedIn?: boolean;
 }
 
-export async function ForumPreviewGrid({ seededSlugs, isLoggedIn }: Props) {
+export async function ForumPreviewGrid({ seededSlugs }: Props) {
   const t = await getTranslations("community.forums");
 
   return (
@@ -27,9 +27,7 @@ export async function ForumPreviewGrid({ seededSlugs, isLoggedIn }: Props) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {FORUMS.map(({ key, slug, icon: Icon }) => {
             const isActive = seededSlugs.has(slug);
-            const href = isLoggedIn
-              ? `/comunidad/foros/${slug}`
-              : `/cuenta/login?next=/comunidad/foros/${slug}`;
+            const href = `/comunidad/foros/${slug}`;
 
             const cardClass = `block bg-foam border border-ink/10 rounded-3xl p-6 md:p-7 transition-shadow ${
               isActive ? "hover:shadow-md cursor-pointer" : ""
