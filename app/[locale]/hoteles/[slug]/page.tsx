@@ -7,6 +7,7 @@ import { getHotel, getHotels } from "@/features/hotels/lib/queries";
 import { HotelGallery } from "@/features/hotels/components/HotelGallery";
 import { HotelMap } from "@/features/hotels/components/HotelMap";
 import { HotelContact } from "@/features/hotels/components/HotelContact";
+import { hotelJsonLd } from "@/features/seo/lib/jsonld";
 
 export const revalidate = 3600;
 
@@ -69,7 +70,16 @@ export default async function HotelDetailPage({
     (p) => `${supabaseUrl}/storage/v1/object/public/content-images/${p}`,
   );
 
+  const jsonld = hotelJsonLd(hotel, l, supabaseUrl);
+
   return (
+    <>
+      {jsonld && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld) }}
+        />
+      )}
     <Container className="py-10 md:py-16">
       <Link
         href="/hoteles"
@@ -134,5 +144,6 @@ export default async function HotelDetailPage({
         </aside>
       </div>
     </Container>
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { PageHero } from "@/components/layout/PageHero";
 import { RestaurantCard } from "@/features/restaurants/components/RestaurantCard";
 import { getRestaurants } from "@/features/restaurants/lib/queries";
 import { getPageBanner } from "@/features/content/lib/queries";
+import { restaurantJsonLd } from "@/features/seo/lib/jsonld";
 
 export const revalidate = 3600;
 
@@ -21,6 +22,16 @@ export default async function ComidaPage({
 
   return (
     <>
+      {restaurants.map((r) => {
+        const ld = restaurantJsonLd(r, l, supabaseUrl);
+        return ld ? (
+          <script
+            key={r.id}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+          />
+        ) : null;
+      })}
       <PageHero
         imagePath={banner?.image_path}
         eyebrow={(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
