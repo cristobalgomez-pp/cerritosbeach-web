@@ -3,6 +3,12 @@ import { render } from "@testing-library/react";
 import { HotelCard } from "../HotelCard";
 import type { Hotel } from "@/features/hotels/types";
 
+vi.mock("@/i18n/routing", () => ({
+  Link: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { href: unknown }) => (
+    <a href={typeof href === "string" ? href : JSON.stringify(href)} {...props}>{children}</a>
+  ),
+}));
+
 vi.mock("next/image", () => ({
   default: (props: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; sizes?: string }) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text

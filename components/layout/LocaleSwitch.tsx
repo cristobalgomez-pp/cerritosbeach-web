@@ -10,7 +10,8 @@ export function LocaleSwitch() {
   const pathname = usePathname();
 
   const switchTo = (next: "es" | "en") => {
-    router.replace(pathname, { locale: next });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    router.replace(pathname as any, { locale: next });
   };
 
   return (

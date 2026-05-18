@@ -71,7 +71,13 @@
   "hotels": {
     "eyebrow": "Dónde dormir",
     "title": "Hoteles en Cerritos",
-    "subtitle": "Una selección curada de las mejores opciones para hospedarse, desde hostales hasta villas privadas."
+    "subtitle": "Una selección curada de las mejores opciones para hospedarse, desde hostales hasta villas privadas.",
+    "detail": {
+      "back": "Volver a hoteles",
+      "price_from": "Desde",
+      "contact": "Contacto",
+      "location": "Ubicación"
+    }
   },
   "surf": {
     "eyebrow": "Condiciones en vivo",

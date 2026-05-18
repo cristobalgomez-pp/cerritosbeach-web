@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import type { Hotel } from "@/features/hotels/types";
@@ -18,6 +19,7 @@ export function HotelCard({ hotel, locale, supabaseUrl }: Props) {
     : null;
 
   return (
+    <Link href={{ pathname: "/hoteles/[slug]", params: { slug: hotel.slug } }}>
     <Card className="h-full flex flex-col group hover:border-border-strong hover:shadow-soft transition-all duration-200">
       <div className="bg-ocean h-44 flex items-end justify-between p-4 relative overflow-hidden">
         {coverUrl ? (
@@ -72,5 +74,6 @@ export function HotelCard({ hotel, locale, supabaseUrl }: Props) {
         )}
       </div>
     </Card>
+    </Link>
   );
 }

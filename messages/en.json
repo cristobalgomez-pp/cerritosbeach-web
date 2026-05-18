@@ -71,7 +71,13 @@
   "hotels": {
     "eyebrow": "Where to stay",
     "title": "Hotels in Cerritos",
-    "subtitle": "A curated selection of the best places to stay, from hostels to private villas."
+    "subtitle": "A curated selection of the best places to stay, from hostels to private villas.",
+    "detail": {
+      "back": "Back to hotels",
+      "price_from": "From",
+      "contact": "Contact",
+      "location": "Location"
+    }
   },
   "surf": {
     "eyebrow": "Live conditions",
