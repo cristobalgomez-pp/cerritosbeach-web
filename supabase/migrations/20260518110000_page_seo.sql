@@ -1,7 +1,7 @@
 -- Editable SEO metadata per page (title, meta description, OG image).
 -- Same pattern as page_banners.
 
-CREATE TABLE page_seo (
+CREATE TABLE IF NOT EXISTS page_seo (
   page           text PRIMARY KEY,
   title_es       text,
   title_en       text,
@@ -13,14 +13,16 @@ CREATE TABLE page_seo (
 
 ALTER TABLE page_seo ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Public read" ON page_seo;
 CREATE POLICY "Public read" ON page_seo
   FOR SELECT TO anon USING (true);
 
+DROP POLICY IF EXISTS "Admin write" ON page_seo;
 CREATE POLICY "Admin write" ON page_seo
   FOR ALL TO authenticated
   USING (
     EXISTS (
-      SELECT 1 FROM user_roles WHERE user_id = auth.uid() AND role = 'admin'
+      SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin'
     )
   );
 
