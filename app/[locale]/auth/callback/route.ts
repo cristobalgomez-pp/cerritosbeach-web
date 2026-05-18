@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { needsOnboarding } from "@/features/auth/lib/server";
+import { sanitizeRedirectTo } from "@/lib/utils";
 
 export async function GET(
   request: NextRequest,
@@ -9,7 +10,7 @@ export async function GET(
   const { locale } = await params;
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? `/${locale}/comunidad`;
+  const next = sanitizeRedirectTo(searchParams.get("next")) ?? `/${locale}/cuenta`;
 
   if (!code) {
     return NextResponse.redirect(

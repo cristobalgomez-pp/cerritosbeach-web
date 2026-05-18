@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { EmailPasswordLoginForm } from '../EmailPasswordLoginForm';
+import { signInWithGoogle } from '@/features/auth/lib/actions';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (k: string) => k,
@@ -44,5 +45,23 @@ describe('EmailPasswordLoginForm', () => {
     render(<EmailPasswordLoginForm />);
     const link = screen.getByRole('link', { name: 'registerLink' });
     expect(link.getAttribute('href')).not.toContain('redirectTo=');
+  });
+
+  it('calls signInWithGoogle with locale and redirectTo when Google button is clicked', async () => {
+    render(<EmailPasswordLoginForm redirectTo="/comunidad" />);
+    fireEvent.click(screen.getByRole('button', { name: 'continueWithGoogle' }));
+
+    await waitFor(() => {
+      expect(signInWithGoogle).toHaveBeenCalledWith('es', '/comunidad');
+    });
+  });
+
+  it('calls signInWithGoogle without redirectTo when prop is absent', async () => {
+    render(<EmailPasswordLoginForm />);
+    fireEvent.click(screen.getByRole('button', { name: 'continueWithGoogle' }));
+
+    await waitFor(() => {
+      expect(signInWithGoogle).toHaveBeenCalledWith('es', undefined);
+    });
   });
 });
