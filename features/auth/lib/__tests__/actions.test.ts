@@ -140,15 +140,15 @@ describe('signOut', () => {
     } as unknown as Awaited<ReturnType<typeof createClient>>;
   }
 
-  it('redirects to /cuenta/login for es locale', async () => {
+  it('redirects to / (home) for es locale', async () => {
     mockedCreateClient.mockResolvedValue(makeAuthClient());
     await signOut('es');
-    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/cuenta/login');
+    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/');
   });
 
-  it('redirects to /en/cuenta/login for en locale', async () => {
+  it('redirects to /en (home) for en locale', async () => {
     mockedCreateClient.mockResolvedValue(makeAuthClient());
     await signOut('en');
-    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/en/cuenta/login');
+    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/en');
   });
 });

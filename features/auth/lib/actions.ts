@@ -360,7 +360,7 @@ export async function updatePassword(formData: FormData): Promise<UpdatePassword
 export async function signOut(locale: 'es' | 'en' = 'es') {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  revalidatePath('/cuenta/login', 'layout');
+  revalidatePath('/', 'layout');
   const prefix = locale === 'es' ? '' : `/${locale}`;
-  redirect(`${prefix}/cuenta/login`);
+  redirect(prefix || '/');
 }
