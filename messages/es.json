@@ -109,6 +109,7 @@
     },
     "auth": {
       "signIn": "Entrar",
+      "myAccount": "Mi cuenta",
       "signOut": "Cerrar sesión",
       "signingOut": "Saliendo…"
     },

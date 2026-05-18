@@ -95,6 +95,13 @@ export function AuthIndicator({ user, profile, locale }: Props) {
             <p className="truncate text-sm font-medium text-ink">{displayName}</p>
             <p className="truncate text-xs text-mist">{user.email}</p>
           </div>
+          <Link
+            href="/cuenta"
+            role="menuitem"
+            className="block w-full px-4 py-3 text-left text-sm text-ink transition-colors hover:bg-cream"
+          >
+            {t('myAccount')}
+          </Link>
           <button
             type="button"
             role="menuitem"

@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/routing";
 import { updatePassword } from "@/features/auth/lib/actions";
 
 type ErrorKey =
@@ -13,12 +14,11 @@ type ErrorKey =
 type Status =
   | { kind: "idle" }
   | { kind: "submitting" }
-  | { kind: "success" }
   | { kind: "error"; messageKey: ErrorKey };
 
 export function ResetPasswordForm() {
   const t = useTranslations("cuenta.resetPassword");
-  const locale = useLocale() as "es" | "en";
+  const router = useRouter();
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [, startTransition] = useTransition();
 
@@ -29,7 +29,7 @@ export function ResetPasswordForm() {
       const result = await updatePassword(formData);
 
       if (result.status === "success") {
-        setStatus({ kind: "success" });
+        router.push("/cuenta");
         return;
       }
 
@@ -43,25 +43,7 @@ export function ResetPasswordForm() {
     });
   }
 
-  const localePrefix = locale === "es" ? "" : `/${locale}`;
   const isBusy = status.kind === "submitting";
-
-  if (status.kind === "success") {
-    return (
-      <div className="space-y-4 text-center">
-        <h1 className="font-display text-3xl font-medium text-ink tracking-tight">
-          {t("successTitle")}
-        </h1>
-        <p className="text-base text-ink/80 leading-relaxed">{t("successBody")}</p>
-        <a
-          href={`${localePrefix}/cuenta/login`}
-          className="inline-block mt-2 rounded-full bg-ocean px-5 py-2.5 text-sm font-medium text-white transition hover:bg-ocean-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-foam"
-        >
-          {t("successButton")}
-        </a>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6">
@@ -74,7 +56,13 @@ export function ResetPasswordForm() {
         </p>
       </div>
 
-      <form action={handleSubmit} className="space-y-5">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(new FormData(e.currentTarget));
+        }}
+        className="space-y-5"
+      >
         <div className="space-y-2">
           <label htmlFor="password" className="block text-sm font-medium text-ink">
             {t("passwordLabel")}
