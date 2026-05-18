@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageUpload } from "@/components/ui/ImageUpload";
+import { GalleryUpload } from "@/components/ui/GalleryUpload";
 import { Button } from "@/components/ui/Button";
 import { z } from "zod";
 import { hotelSchema, type HotelInput } from "@/features/hotels/lib/schemas";
@@ -41,6 +42,9 @@ export function HotelForm({ hotel }: Props) {
           address:          hotel.address ?? undefined,
           cover_image_path: hotel.cover_image_path ?? undefined,
           gallery_paths:    hotel.gallery_paths ?? [],
+          lat:              hotel.lat ?? undefined,
+          lng:              hotel.lng ?? undefined,
+          price_from:       hotel.price_from ?? undefined,
           is_published:     hotel.is_published,
           featured:         hotel.featured,
         }
@@ -116,6 +120,38 @@ export function HotelForm({ hotel }: Props) {
         <Field label={t("addressLabel")}>
           <input {...register("address")} className={inputCls(false)} />
         </Field>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field label="Latitud" hint="ej. 23.304200">
+            <input
+              {...register("lat")}
+              type="number"
+              step="any"
+              placeholder="23.304200"
+              className={inputCls(false)}
+            />
+          </Field>
+          <Field label="Longitud" hint="ej. -110.064800">
+            <input
+              {...register("lng")}
+              type="number"
+              step="any"
+              placeholder="-110.064800"
+              className={inputCls(false)}
+            />
+          </Field>
+        </div>
+
+        <Field label="Precio desde (MXN)">
+          <input
+            {...register("price_from")}
+            type="number"
+            step="0.01"
+            min="0"
+            placeholder="0.00"
+            className={inputCls(false)}
+          />
+        </Field>
       </fieldset>
 
       <fieldset className="space-y-3">
@@ -134,6 +170,17 @@ export function HotelForm({ hotel }: Props) {
             onUploaded={(path) => setValue("cover_image_path", path)}
             label={t("imageUploadBtn")}
             uploadingLabel={t("imageUploading")}
+          />
+        </Field>
+
+        <Field label="Galería de fotos" hint="1200×900 px · máx 300 KB · WebP">
+          <GalleryUpload
+            bucket="content-images"
+            basePath={`${uploadPath}/gallery`}
+            paths={hotel?.gallery_paths ?? []}
+            onChanged={(paths) => setValue("gallery_paths", paths)}
+            addLabel="Agregar foto"
+            uploadingLabel="Subiendo…"
           />
         </Field>
       </fieldset>

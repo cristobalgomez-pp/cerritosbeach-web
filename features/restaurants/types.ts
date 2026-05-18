@@ -13,6 +13,8 @@ export type Restaurant = {
   address: string | null;
   cover_image_path: string | null;
   gallery_paths: string[] | null;
+  lat: number | null;
+  lng: number | null;
   is_published: boolean;
   featured: boolean;
   created_at: string;

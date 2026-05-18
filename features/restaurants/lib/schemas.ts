@@ -20,6 +20,8 @@ export const restaurantSchema = z.object({
   address: z.string().optional(),
   cover_image_path: z.string().optional(),
   gallery_paths: z.array(z.string()).default([]),
+  lat: z.coerce.number().optional(),
+  lng: z.coerce.number().optional(),
   is_published: z.boolean().default(false),
   featured:     z.boolean().default(false),
 });
