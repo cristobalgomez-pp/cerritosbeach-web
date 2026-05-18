@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
-import { getPageBanner } from "@/features/content/lib/queries";
+import { getPageBanner, getSectionBannerImages } from "@/features/content/lib/queries";
 import { getSeoForPage } from "@/features/seo/lib/queries";
 
 export async function generateMetadata({
@@ -31,12 +31,21 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
-  const banner = await getPageBanner("home");
+  const [banner, sectionBanners] = await Promise.all([
+    getPageBanner("home"),
+    getSectionBannerImages(),
+  ]);
   const l = locale as "es" | "en";
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const bannerImageUrl = banner?.image_path && supabaseUrl
     ? `${supabaseUrl}/storage/v1/object/public/content-images/${banner.image_path}`
     : null;
+  const sectionImageUrl = (page: string) => {
+    const path = sectionBanners[page];
+    return path && supabaseUrl
+      ? `${supabaseUrl}/storage/v1/object/public/content-images/${path}`
+      : null;
+  };
 
   return (
     <>
@@ -91,36 +100,42 @@ export default async function HomePage({
               badge={t("cards.hotels.badge")}
               title={t("cards.hotels.title")}
               description={t("cards.hotels.description")}
+              imagePath={sectionImageUrl("hoteles")}
             />
             <SectionCard
               href="/surf"
               badge={t("cards.surf.badge")}
               title={t("cards.surf.title")}
               description={t("cards.surf.description")}
+              imagePath={sectionImageUrl("surf")}
             />
             <SectionCard
               href="/comida"
               badge={t("cards.food.badge")}
               title={t("cards.food.title")}
               description={t("cards.food.description")}
+              imagePath={sectionImageUrl("comida")}
             />
             <SectionCard
               href="/novedades"
               badge={t("cards.news.badge")}
               title={t("cards.news.title")}
               description={t("cards.news.description")}
+              imagePath={sectionImageUrl("novedades")}
             />
             <SectionCard
               href="/comunidad"
               badge={t("cards.community.badge")}
               title={t("cards.community.title")}
               description={t("cards.community.description")}
+              imagePath={sectionImageUrl("comunidad")}
             />
             <SectionCard
               href="/real-estate"
               badge={t("cards.realestate.badge")}
               title={t("cards.realestate.title")}
               description={t("cards.realestate.description")}
+              imagePath={sectionImageUrl("real-estate")}
             />
           </div>
         </Container>
@@ -157,16 +172,25 @@ function SectionCard({
   badge,
   title,
   description,
+  imagePath,
 }: {
   href: string;
   badge: string;
   title: string;
   description: string;
+  imagePath?: string | null;
 }) {
   return (
     <Link href={href as never} className="group block">
       <Card className="h-full transition-all duration-200 group-hover:border-border-strong group-hover:shadow-soft">
         <div className="bg-ocean h-32 flex items-end p-4 relative overflow-hidden">
+          {imagePath && (
+            <img
+              src={imagePath}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-tr from-ocean-dark/30 to-transparent" />
           <Badge variant="peach" className="relative z-10">
             {badge}
