@@ -634,7 +634,8 @@
       "saveBtn": "Guardar",
       "saving": "Guardando…",
       "saved": "¡Guardado!",
-      "errorSave": "Error al guardar"
+      "errorSave": "Error al guardar",
+      "removeImage": "Quitar imagen"
     }
   }
 }

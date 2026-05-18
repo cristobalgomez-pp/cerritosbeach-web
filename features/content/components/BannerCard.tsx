@@ -68,7 +68,7 @@ export function BannerCard({ page, banner }: Props) {
         </span>
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2">
         <p className="text-xs font-medium text-ink/60">{t("imageLabel")}</p>
         <ImageUpload
           bucket="content-images"
@@ -78,6 +78,23 @@ export function BannerCard({ page, banner }: Props) {
           label="Subir imagen"
           uploadingLabel="Subiendo…"
         />
+        {fields.image_path && (
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={() => {
+              setFields((f) => ({ ...f, image_path: null }));
+              setFeedback(null);
+              startTransition(async () => {
+                const result = await upsertPageBanner(page, { image_path: null });
+                setFeedback(result.status === "success" ? "saved" : "error");
+              });
+            }}
+            className="text-xs text-red-500 hover:text-red-700 underline underline-offset-2 disabled:opacity-50"
+          >
+            {t("removeImage")}
+          </button>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

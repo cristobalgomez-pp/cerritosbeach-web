@@ -634,7 +634,8 @@
       "saveBtn": "Save",
       "saving": "Saving…",
       "saved": "Saved!",
-      "errorSave": "Error saving"
+      "errorSave": "Error saving",
+      "removeImage": "Remove image"
     }
   }
 }
