@@ -109,6 +109,7 @@
     },
     "auth": {
       "signIn": "Sign in",
+      "myAccount": "My account",
       "signOut": "Sign out",
       "signingOut": "Signing out…"
     },
