@@ -1,12 +1,5 @@
 import { z } from 'zod';
 
-export const magicLinkSchema = z.object({
-  email: z.string().email(),
-  locale: z.enum(['es', 'en']),
-});
-
-export type MagicLinkInput = z.infer<typeof magicLinkSchema>;
-
 export const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),

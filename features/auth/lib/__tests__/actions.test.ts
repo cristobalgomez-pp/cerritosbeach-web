@@ -6,8 +6,11 @@ vi.mock('@/lib/supabase/server', () => ({
 
 vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }));
 
+vi.mock('next/navigation', () => ({ redirect: vi.fn() }));
+
 import { createClient } from '@/lib/supabase/server';
-import { completeOnboarding } from '../actions';
+import { redirect } from 'next/navigation';
+import { completeOnboarding, signOut } from '../actions';
 
 const mockedCreateClient = vi.mocked(createClient);
 
@@ -123,5 +126,29 @@ describe('completeOnboarding', () => {
     const result = await completeOnboarding(makeFormData(VALID_FIELDS));
 
     expect(result).toMatchObject({ status: 'error', code: 'SUPABASE_ERROR' });
+  });
+});
+
+// ─── signOut ─────────────────────────────────────────────────────────────────
+
+describe('signOut', () => {
+  beforeEach(() => vi.resetAllMocks());
+
+  function makeAuthClient() {
+    return {
+      auth: { signOut: vi.fn().mockResolvedValue({}) },
+    } as unknown as Awaited<ReturnType<typeof createClient>>;
+  }
+
+  it('redirects to /cuenta/login for es locale', async () => {
+    mockedCreateClient.mockResolvedValue(makeAuthClient());
+    await signOut('es');
+    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/cuenta/login');
+  });
+
+  it('redirects to /en/cuenta/login for en locale', async () => {
+    mockedCreateClient.mockResolvedValue(makeAuthClient());
+    await signOut('en');
+    expect(vi.mocked(redirect)).toHaveBeenCalledWith('/en/cuenta/login');
   });
 });

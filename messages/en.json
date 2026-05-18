@@ -110,26 +110,7 @@
     "auth": {
       "signIn": "Sign in",
       "signOut": "Sign out",
-      "signingOut": "Signing out…",
-      "loginTitle": "Sign in to the community",
-      "loginSubtitle": "We'll send you a link by email to sign in. No passwords.",
-      "emailLabel": "Your email",
-      "sendButton": "Send me the link",
-      "backToCommunity": "← Back to community",
-      "emailPlaceholder": "your@email.com",
-      "errorTitle": "Something went wrong",
-      "errorSupabase": "We couldn't send the email. Please try again in a few seconds.",
-      "emailSentTitle": "Check your inbox",
-      "emailSentBody": "We sent a link to {email}. Click it to sign in.",
-      "emailSentTip": "If you do not see it, check spam or promotions. The link expires in 1 hour.",
-      "errorInvalidInput": "Please enter a valid email address.",
-      "errorMissingCode": "The link appears invalid or expired. Request a new one.",
-      "errorInvalidCode": "Invalid link. Request a new one.",
-      "sendingButton": "Sending…",
-      "continueWithGoogle": "Continue with Google",
-      "redirectingToGoogle": "Connecting to Google…",
-      "orWithEmail": "or sign in with email",
-      "errorOauth": "We could not connect with Google. Please try again."
+      "signingOut": "Signing out…"
     },
     "onboarding": {
       "title": "Complete your profile",
@@ -145,12 +126,6 @@
       "errorUsernameTaken": "That username is already taken. Choose another.",
       "errorUsernameInvalid": "Lowercase letters, numbers and underscores only. Between 3 and 20 characters.",
       "errorGeneric": "We couldn't save your data. Try again."
-    },
-    "pending": {
-      "title": "We're reviewing your profile",
-      "bodyP1": "To keep the community safe, each new profile is manually reviewed before getting access to the forum.",
-      "bodyP2": "We'll email you when approved. Usually takes less than 24 hours.",
-      "signOutButton": "Sign out"
     },
     "cta": {
       "eyebrow": "Join the community",

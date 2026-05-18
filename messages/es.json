@@ -110,26 +110,7 @@
     "auth": {
       "signIn": "Entrar",
       "signOut": "Cerrar sesión",
-      "signingOut": "Saliendo…",
-      "loginTitle": "Entra a la comunidad",
-      "loginSubtitle": "Te enviamos un link por correo para entrar. Sin contraseñas.",
-      "emailLabel": "Tu correo",
-      "sendButton": "Enviarme el link",
-      "backToCommunity": "← Volver a comunidad",
-      "emailPlaceholder": "tucorreo@ejemplo.com",
-      "errorTitle": "Algo salió mal",
-      "errorSupabase": "No pudimos enviar el correo. Intenta de nuevo en unos segundos.",
-      "emailSentTitle": "Revisa tu correo",
-      "emailSentBody": "Te enviamos un link a {email}. Haz click para entrar.",
-      "emailSentTip": "Si no lo ves, revisa spam o promociones. El link expira en 1 hora.",
-      "errorInvalidInput": "Necesitamos un correo válido.",
-      "errorMissingCode": "El link parece inválido o expiró. Pide uno nuevo.",
-      "errorInvalidCode": "El link no es válido. Pide uno nuevo.",
-      "sendingButton": "Enviando…",
-      "continueWithGoogle": "Continuar con Google",
-      "redirectingToGoogle": "Conectando con Google…",
-      "orWithEmail": "o entra con tu correo",
-      "errorOauth": "No pudimos conectarte con Google. Intenta de nuevo."
+      "signingOut": "Saliendo…"
     },
     "onboarding": {
       "title": "Completa tu perfil",
@@ -145,12 +126,6 @@
       "errorUsernameTaken": "Ese nombre de usuario ya está en uso. Elige otro.",
       "errorUsernameInvalid": "Solo letras, números y guiones bajos. Entre 3 y 20 caracteres.",
       "errorGeneric": "No pudimos guardar tus datos. Intenta de nuevo."
-    },
-    "pending": {
-      "title": "Estamos revisando tu perfil",
-      "bodyP1": "Para mantener una comunidad segura, cada perfil nuevo se revisa manualmente antes de tener acceso al foro.",
-      "bodyP2": "Te avisaremos por correo cuando estés aprobado. Generalmente toma menos de 24 horas.",
-      "signOutButton": "Cerrar sesión"
     },
     "cta": {
       "eyebrow": "Únete a la comunidad",

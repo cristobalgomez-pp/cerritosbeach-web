@@ -53,7 +53,7 @@ export function AuthIndicator({ user, profile, locale }: Props) {
   if (!user) {
     return (
       <Link
-        href="/comunidad/login"
+        href="/cuenta/login"
         className="text-sm text-ink/80 hover:text-ocean transition-colors"
       >
         {t('signIn')}
