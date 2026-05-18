@@ -21,7 +21,7 @@ export default async function ForoPage({
 
   const { user } = await getCurrentUserState();
   if (!user) {
-    redirect(`/comunidad/login?next=/comunidad/foros/${slug}`);
+    redirect(`/cuenta/login?next=/comunidad/foros/${slug}`);
   }
 
   const seededSlugs = await getSeededChannels();

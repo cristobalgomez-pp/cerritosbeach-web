@@ -5,7 +5,7 @@ import { routing } from '@/i18n/routing';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
-const PUBLIC_COMMUNITY_SUBPATHS = new Set<string>(['', '/login']);
+const PUBLIC_COMMUNITY_SUBPATHS = new Set<string>(['']);
 
 type Locale = 'es' | 'en';
 
@@ -51,17 +51,16 @@ export async function proxy(request: NextRequest) {
   if (PUBLIC_COMMUNITY_SUBPATHS.has(subpath)) return response;
 
   if (!user) {
-    return NextResponse.redirect(buildLocalizedUrl(locale, '/comunidad/login', request.url));
+    return NextResponse.redirect(buildLocalizedUrl(locale, '/cuenta/login', request.url));
   }
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('username, is_approved')
+    .select('username')
     .eq('id', user.id)
     .single();
 
   const incomplete = !profile?.username;
-  const notApproved = !profile?.is_approved;
 
   if (subpath === '/onboarding') {
     if (!incomplete) {
@@ -70,21 +69,8 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (subpath === '/pendiente') {
-    if (incomplete) {
-      return NextResponse.redirect(buildLocalizedUrl(locale, '/comunidad/onboarding', request.url));
-    }
-    if (!notApproved) {
-      return NextResponse.redirect(buildLocalizedUrl(locale, '/comunidad', request.url));
-    }
-    return response;
-  }
-
   if (incomplete) {
     return NextResponse.redirect(buildLocalizedUrl(locale, '/comunidad/onboarding', request.url));
-  }
-  if (notApproved) {
-    return NextResponse.redirect(buildLocalizedUrl(locale, '/comunidad/pendiente', request.url));
   }
 
   return response;

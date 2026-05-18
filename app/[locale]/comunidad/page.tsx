@@ -50,7 +50,7 @@ export default async function ComunidadPage({
                     </p>
                   </div>
                   <Link
-                    href="/comunidad/login"
+                    href="/cuenta/login"
                     className="inline-flex items-center justify-center rounded-full bg-peach px-7 py-3.5 text-sm font-medium text-ink hover:bg-peach-dark transition-colors whitespace-nowrap"
                   >
                     {t("cta.button")}

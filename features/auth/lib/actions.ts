@@ -4,7 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
-import { magicLinkSchema, onboardingSchema, loginSchema, registerSchema, resetRequestSchema, resetPasswordSchema } from './schemas';
+import { onboardingSchema, loginSchema, registerSchema, resetRequestSchema, resetPasswordSchema } from './schemas';
 
 // ───────────────────────────────────────
 // Helpers
@@ -24,41 +24,6 @@ function buildRedirectTo(origin: string, locale: 'es' | 'en') {
     callbackUrl: `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(next)}`,
     localePrefix,
   };
-}
-
-// ───────────────────────────────────────
-// Magic Link
-// ───────────────────────────────────────
-
-export type MagicLinkResult =
-  | { status: 'success' }
-  | { status: 'error'; code: 'INVALID_INPUT' | 'SUPABASE_ERROR'; message?: string };
-
-export async function sendMagicLink(formData: FormData): Promise<MagicLinkResult> {
-  const parsed = magicLinkSchema.safeParse({
-    email: formData.get('email')?.toString().toLowerCase().trim(),
-    locale: formData.get('locale'),
-  });
-
-  if (!parsed.success) {
-    return { status: 'error', code: 'INVALID_INPUT' };
-  }
-
-  const supabase = await createClient();
-  const origin = await getOrigin();
-  const { email, locale } = parsed.data;
-  const { callbackUrl } = buildRedirectTo(origin, locale);
-
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: callbackUrl },
-  });
-
-  if (error) {
-    return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
-  }
-
-  return { status: 'success' };
 }
 
 // ───────────────────────────────────────
@@ -334,7 +299,7 @@ export async function updatePassword(formData: FormData): Promise<UpdatePassword
 export async function signOut(locale: 'es' | 'en' = 'es') {
   const supabase = await createClient();
   await supabase.auth.signOut();
-  revalidatePath('/comunidad', 'layout');
+  revalidatePath('/cuenta/login', 'layout');
   const prefix = locale === 'es' ? '' : `/${locale}`;
-  redirect(`${prefix}/comunidad`);
+  redirect(`${prefix}/cuenta/login`);
 }

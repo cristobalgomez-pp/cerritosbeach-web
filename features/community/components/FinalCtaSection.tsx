@@ -18,7 +18,7 @@ export async function FinalCtaSection() {
               {t("subtitle")}
             </p>
             <Link
-              href="/comunidad/login"
+              href="/cuenta/login"
               className="mt-10 inline-flex items-center justify-center rounded-full bg-peach px-10 py-4 text-base font-medium text-ink hover:bg-peach-dark transition-colors"
             >
               {t("button")}

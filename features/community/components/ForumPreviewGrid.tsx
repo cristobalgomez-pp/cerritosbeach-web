@@ -29,7 +29,7 @@ export async function ForumPreviewGrid({ seededSlugs, isLoggedIn }: Props) {
             const isActive = seededSlugs.has(slug);
             const href = isLoggedIn
               ? `/comunidad/foros/${slug}`
-              : `/comunidad/login?next=/comunidad/foros/${slug}`;
+              : `/cuenta/login?next=/comunidad/foros/${slug}`;
 
             const cardClass = `block bg-foam border border-ink/10 rounded-3xl p-6 md:p-7 transition-shadow ${
               isActive ? "hover:shadow-md cursor-pointer" : ""
