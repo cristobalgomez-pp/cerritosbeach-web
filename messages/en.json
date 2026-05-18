@@ -158,6 +158,7 @@
       "subtitle": "We're starting with jobs. The rest will open as we grow.",
       "badgeActive": "Active",
       "badgeSoon": "Coming soon",
+      "newThread": "New post",
       "stubTitle": "Forum under construction",
       "stubBody": "You'll be able to post and connect with other members here soon. In the meantime, subscribe to the newsletter to know when it's ready.",
       "backToCommunity": "← Back to community",
@@ -185,6 +186,16 @@
       "title": "Create your account and enter the forums",
       "subtitle": "It's free and you only need your email. We approve quickly so you can start connecting.",
       "button": "Create account"
+    },
+    "authModal": {
+      "title": "Join to participate",
+      "subtitle": "Create an account or sign in to reply and post in the forums.",
+      "createAccount": "Create account",
+      "signIn": "Sign in"
+    },
+    "suspendedAlert": {
+      "title": "Account pending approval",
+      "body": "Your account has not been approved yet. We'll email you when you can start participating."
     }
   },
   "cuenta": {

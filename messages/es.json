@@ -158,6 +158,7 @@
       "subtitle": "Empezamos con trabajos. Los demás abren conforme vayamos creciendo.",
       "badgeActive": "Activo",
       "badgeSoon": "Próximamente",
+      "newThread": "Nueva publicación",
       "stubTitle": "Foro en desarrollo",
       "stubBody": "Pronto podrás postear y conectar con otros miembros aquí. Mientras tanto, suscríbete al newsletter para enterarte cuando esté listo.",
       "backToCommunity": "← Volver a comunidad",
@@ -185,6 +186,16 @@
       "title": "Crea tu cuenta y entra a los foros",
       "subtitle": "Es gratis y solo necesitas tu correo. Te aprobamos rápido para que empieces a conectar.",
       "button": "Crear cuenta"
+    },
+    "authModal": {
+      "title": "Únete para participar",
+      "subtitle": "Crea una cuenta o inicia sesión para responder y publicar en los foros.",
+      "createAccount": "Crear cuenta",
+      "signIn": "Iniciar sesión"
+    },
+    "suspendedAlert": {
+      "title": "Cuenta pendiente de aprobación",
+      "body": "Tu cuenta aún no ha sido aprobada. Te avisaremos por correo cuando puedas participar."
     }
   },
   "cuenta": {
