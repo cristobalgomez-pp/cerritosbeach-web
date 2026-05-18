@@ -38,6 +38,12 @@ export function formatRelative(date: Date | string, locale: "es" | "en" = "es") 
   return formatDistanceToNow(d, { addSuffix: true, locale: localeMap[locale] });
 }
 
+export function sanitizeRedirectTo(value: string | null | undefined): string | null {
+  if (!value) return null;
+  if (!value.startsWith('/') || value.startsWith('//') || value.includes('://')) return null;
+  return value;
+}
+
 export function formatPrice(
   amount: number,
   currency: "MXN" | "USD" = "MXN",

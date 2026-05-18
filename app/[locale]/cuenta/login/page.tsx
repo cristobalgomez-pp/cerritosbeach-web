@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { EmailPasswordLoginForm } from "@/features/auth/components/EmailPasswordLoginForm";
+import { sanitizeRedirectTo } from "@/lib/utils";
 
 type ErrorKey =
   | "errorInvalidInput"
@@ -35,12 +36,13 @@ export default async function CuentaLoginPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; redirectTo?: string }>;
 }) {
   const { locale } = await params;
   const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "cuenta.login" });
   const initialErrorKey = mapErrorParam(sp.error);
+  const redirectTo = sanitizeRedirectTo(sp.redirectTo);
   const localePrefix = locale === "es" ? "" : `/${locale}`;
 
   return (
@@ -52,7 +54,7 @@ export default async function CuentaLoginPage({
         {t("backToCommunity")}
       </Link>
       <div className="bg-foam border border-border rounded-2xl p-6 sm:p-8">
-        <EmailPasswordLoginForm initialErrorKey={initialErrorKey} />
+        <EmailPasswordLoginForm initialErrorKey={initialErrorKey} redirectTo={redirectTo} />
       </div>
     </div>
   );

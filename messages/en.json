@@ -224,7 +224,8 @@
       "errorSupabase": "We couldn't sign you in. Please try again in a few seconds.",
       "errorOauth": "We couldn't connect with Google. Please try again.",
       "errorMissingCode": "The link appears invalid or expired. Please try again.",
-      "errorInvalidCode": "Invalid link. Please try again."
+      "errorInvalidCode": "Invalid link. Please try again.",
+      "redirectBanner": "You need to sign in to access this section."
     },
     "registro": {
       "title": "Create account",
