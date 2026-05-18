@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { registerWithEmail, signInWithGoogle } from "@/features/auth/lib/actions";
+import { registerWithEmail, resendConfirmationEmail, signInWithGoogle } from "@/features/auth/lib/actions";
 
 type ErrorKey =
   | "errorPasswordMismatch"
@@ -10,6 +10,8 @@ type ErrorKey =
   | "errorEmailInUse"
   | "errorSupabase"
   | "errorOauth";
+
+type ResendState = "idle" | "sending" | "sent" | "error";
 
 type Status =
   | { kind: "idle" }
@@ -52,6 +54,7 @@ export function RegisterForm() {
   const locale = useLocale() as "es" | "en";
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const [passwordMismatch, setPasswordMismatch] = useState(false);
+  const [resendState, setResendState] = useState<ResendState>("idle");
   const [, startTransition] = useTransition();
 
   function checkPasswordMatch(password: string, confirm: string) {
@@ -98,6 +101,14 @@ export function RegisterForm() {
     });
   }
 
+  function handleResend(email: string) {
+    setResendState("sending");
+    startTransition(async () => {
+      const result = await resendConfirmationEmail(email, locale);
+      setResendState(result.status === "success" ? "sent" : "error");
+    });
+  }
+
   if (status.kind === "success") {
     return (
       <div className="space-y-4">
@@ -108,6 +119,22 @@ export function RegisterForm() {
           {t("confirmBody", { email: status.email })}
         </p>
         <p className="text-sm text-mist leading-relaxed">{t("confirmTip")}</p>
+        <div className="pt-2">
+          {resendState === "sent" ? (
+            <p className="text-sm text-ocean font-medium">{t("resendSuccess")}</p>
+          ) : resendState === "error" ? (
+            <p className="text-sm text-danger">{t("resendError")}</p>
+          ) : (
+            <button
+              type="button"
+              onClick={() => handleResend(status.email)}
+              disabled={resendState === "sending"}
+              className="text-sm text-ocean hover:text-ocean-dark font-medium transition-colors disabled:opacity-60"
+            >
+              {resendState === "sending" ? t("resendingButton") : t("resendButton")}
+            </button>
+          )}
+        </div>
       </div>
     );
   }
@@ -220,6 +247,23 @@ export function RegisterForm() {
           >
             <p className="font-medium">{t("errorTitle")}</p>
             <p className="mt-1 text-danger/90">{t(errorKey)}</p>
+            {errorKey === "errorEmailInUse" ? (
+              <div className="mt-2 flex gap-3 text-danger/80">
+                <a
+                  href={`${localePrefix}/cuenta/login`}
+                  className="underline hover:text-danger transition-colors"
+                >
+                  {t("loginLink")}
+                </a>
+                <span>·</span>
+                <a
+                  href={`${localePrefix}/cuenta/reset-password`}
+                  className="underline hover:text-danger transition-colors"
+                >
+                  {t("forgotPasswordLink")}
+                </a>
+              </div>
+            ) : null}
           </div>
         ) : null}
 

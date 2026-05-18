@@ -250,7 +250,23 @@
       "errorOauth": "We couldn't connect with Google. Please try again.",
       "confirmTitle": "Almost there! Check your email",
       "confirmBody": "We sent an email to {email}. Click the link to confirm your account.",
-      "confirmTip": "If you don't see the email, check your spam folder."
+      "confirmTip": "If you don't see the email, check your spam folder.",
+      "resendButton": "Resend confirmation email",
+      "resendingButton": "Resending…",
+      "resendSuccess": "Email resent! Check your inbox.",
+      "resendError": "We couldn't resend the email. Please try again.",
+      "forgotPasswordLink": "Forgot your password?"
+    },
+    "confirm": {
+      "title": "Confirm your account",
+      "subtitle": "Click the button below to activate your Cerritos Beach account.",
+      "confirmButton": "Confirm my account",
+      "confirmingButton": "Confirming…",
+      "errorTitle": "Something went wrong",
+      "errorBody": "We couldn't confirm your account. Please try again.",
+      "errorExpiredTitle": "Link expired",
+      "errorExpiredBody": "This confirmation link has already been used or has expired. Sign up again to receive a fresh link.",
+      "errorExpiredLink": "Back to sign up"
     },
     "resetPassword": {
       "title": "Reset your password",

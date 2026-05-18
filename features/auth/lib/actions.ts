@@ -4,6 +4,7 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
+import { needsOnboarding } from './server';
 import { onboardingSchema, loginSchema, registerSchema, resetRequestSchema, resetPasswordSchema } from './schemas';
 
 // ───────────────────────────────────────
@@ -22,6 +23,7 @@ function buildRedirectTo(origin: string, locale: 'es' | 'en') {
   const next = `${localePrefix}/comunidad`;
   return {
     callbackUrl: `${origin}${localePrefix}/auth/callback?next=${encodeURIComponent(next)}`,
+    confirmUrl: `${origin}${localePrefix}/auth/confirm`,
     localePrefix,
   };
 }
@@ -120,6 +122,13 @@ export type RegisterWithEmailResult =
       message?: string;
     };
 
+export type ResendConfirmationResult =
+  | { status: 'success' }
+  | { status: 'error' };
+
+export type ConfirmEmailResult =
+  | { status: 'error'; expired?: boolean };
+
 export async function registerWithEmail(formData: FormData): Promise<RegisterWithEmailResult> {
   const parsed = registerSchema.safeParse({
     email: formData.get('email')?.toString().toLowerCase().trim(),
@@ -136,23 +145,75 @@ export async function registerWithEmail(formData: FormData): Promise<RegisterWit
 
   const supabase = await createClient();
   const origin = await getOrigin();
-  const { callbackUrl } = buildRedirectTo(origin, parsed.data.locale);
+  const { confirmUrl } = buildRedirectTo(origin, parsed.data.locale);
 
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
-    options: { emailRedirectTo: callbackUrl },
+    options: { emailRedirectTo: confirmUrl },
   });
 
   if (error) {
-    const msg = error.message.toLowerCase();
-    if (msg.includes('user already registered') || msg.includes('already registered')) {
-      return { status: 'error', code: 'EMAIL_IN_USE' };
-    }
     return { status: 'error', code: 'SUPABASE_ERROR', message: error.message };
   }
 
+  // identities is empty when the email belongs to a confirmed account
+  if (data.user?.identities?.length === 0) {
+    return { status: 'error', code: 'EMAIL_IN_USE' };
+  }
+
   return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Resend Confirmation Email
+// ───────────────────────────────────────
+
+export async function resendConfirmationEmail(
+  email: string,
+  locale: 'es' | 'en',
+): Promise<ResendConfirmationResult> {
+  const supabase = await createClient();
+  const origin = await getOrigin();
+  const { confirmUrl } = buildRedirectTo(origin, locale);
+
+  const { error } = await supabase.auth.resend({
+    type: 'signup',
+    email,
+    options: { emailRedirectTo: confirmUrl },
+  });
+
+  if (error) return { status: 'error' };
+  return { status: 'success' };
+}
+
+// ───────────────────────────────────────
+// Confirm Email (token_hash flow — resiste email scanners)
+// ───────────────────────────────────────
+
+export async function confirmEmail(
+  tokenHash: string,
+  type: string,
+  locale: 'es' | 'en',
+): Promise<ConfirmEmailResult> {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.verifyOtp({
+    token_hash: tokenHash,
+    type: type as 'signup' | 'email_change' | 'recovery' | 'magiclink' | 'email',
+  });
+
+  if (error) {
+    const expired = error.message.toLowerCase().includes('expired') ||
+      error.message.toLowerCase().includes('invalid');
+    return { status: 'error', expired };
+  }
+
+  const localePrefix = locale === 'es' ? '' : `/${locale}`;
+  if (await needsOnboarding()) {
+    redirect(`${localePrefix}/cuenta/onboarding`);
+  }
+  redirect(`${localePrefix}/comunidad`);
 }
 
 // ───────────────────────────────────────
