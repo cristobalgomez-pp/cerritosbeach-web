@@ -3,6 +3,8 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/features/contact/components/ContactForm";
 
+export const revalidate = 86400;
+
 export default async function ContactoPage({
   params,
 }: {

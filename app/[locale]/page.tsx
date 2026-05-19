@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
 import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
 import { getPageBanner, getSectionBannerImages } from "@/features/content/lib/queries";
 import { getSeoForPage } from "@/features/seo/lib/queries";
+import { SectionCard } from "@/features/content/components/SectionCard";
+
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -52,10 +54,13 @@ export default async function HomePage({
       <section className="relative bg-ocean text-foam overflow-hidden">
         {bannerImageUrl && (
           <>
-            <img
+            <Image
               src={bannerImageUrl}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              sizes="100vw"
+              priority
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-black/40" />
           </>
@@ -164,45 +169,5 @@ export default async function HomePage({
         </Container>
       </section>
     </>
-  );
-}
-
-function SectionCard({
-  href,
-  badge,
-  title,
-  description,
-  imagePath,
-}: {
-  href: string;
-  badge: string;
-  title: string;
-  description: string;
-  imagePath?: string | null;
-}) {
-  return (
-    <Link href={href as never} className="group block">
-      <Card className="h-full transition-all duration-200 group-hover:border-border-strong group-hover:shadow-soft">
-        <div className="bg-ocean h-32 flex items-end p-4 relative overflow-hidden">
-          {imagePath && (
-            <img
-              src={imagePath}
-              alt=""
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-tr from-ocean-dark/30 to-transparent" />
-          <Badge variant="peach" className="relative z-10">
-            {badge}
-          </Badge>
-        </div>
-        <div className="p-5">
-          <h3 className="font-display text-2xl font-medium text-ink mb-2">
-            {title}
-          </h3>
-          <p className="text-sm text-mist leading-relaxed">{description}</p>
-        </div>
-      </Card>
-    </Link>
   );
 }

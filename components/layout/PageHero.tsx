@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 
 const STORAGE_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -21,10 +22,12 @@ export function PageHero({
     <section className="relative bg-ocean text-foam overflow-hidden">
       {imageUrl && (
         <>
-          <img
+          <Image
             src={imageUrl}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
         </>

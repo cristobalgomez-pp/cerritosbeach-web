@@ -1,6 +1,5 @@
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
 import { Container } from "@/components/ui/Container";
 import { getNewsPost } from "@/features/news/lib/queries";
 import { formatDate } from "@/lib/utils";
@@ -19,6 +18,8 @@ export default async function NewsPostPage({
   const post = await getNewsPost(slug);
 
   if (!post) notFound();
+
+  const ReactMarkdown = (await import("react-markdown")).default;
 
   const title = locale === "es" ? post.title_es : post.title_en;
   const body  = locale === "es" ? post.body_es  : post.body_en;

@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/layout/PageHero";
 import { EMERGENCY_CONTACTS } from "@/lib/mock/content";
 
+export const revalidate = 86400;
+
 export default async function EmergenciasPage({
   params,
 }: {
