@@ -19,7 +19,7 @@ describe("PageHero", () => {
   // Ciclo 2
   it("renders a dark overlay when imagePath is provided", () => {
     const { container } = render(<PageHero title="Surf en Cerritos" imagePath="banners/surf/hero.jpg" />);
-    expect(container.querySelector(".bg-black\\/40")).toBeInTheDocument();
+    expect(container.querySelector(".bg-gradient-to-b")).toBeInTheDocument();
   });
 
   // Ciclo 3

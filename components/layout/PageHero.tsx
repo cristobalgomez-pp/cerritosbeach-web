@@ -29,7 +29,7 @@ export function PageHero({
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/40 to-black/20" />
         </>
       )}
       <Container className="relative py-16 md:py-20">
@@ -38,7 +38,7 @@ export function PageHero({
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="font-display font-medium text-4xl md:text-5xl tracking-tight max-w-3xl leading-[1.05]">
+        <h1 className="font-display font-medium text-4xl md:text-5xl tracking-tight max-w-3xl leading-[1.05] [text-shadow:0_2px_8px_rgb(0_0_0/0.35)]">
           {title}
         </h1>
         {subtitle ? (
