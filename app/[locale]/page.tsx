@@ -87,7 +87,7 @@ export default async function HomePage({
       </section>
 
       <section>
-        <Container className="py-16 md:py-24">
+        <Container className="py-5 md:py-7">
           <div className="flex items-end justify-between gap-4 mb-10">
             <div>
               <p className="text-xs uppercase tracking-[0.08em] text-mist mb-3">
@@ -149,7 +149,7 @@ export default async function HomePage({
       <ComoLlegarSection />
 
       <section className="bg-surface-warm">
-        <Container className="py-16 md:py-24">
+        <Container className="py-5 md:py-7">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div>
               <p className="text-xs uppercase tracking-[0.08em] text-peach-dark mb-3">

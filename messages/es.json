@@ -426,9 +426,27 @@
     "subtitle": "Llamadas y servicios útiles para emergencias en Cerritos, Pescadero y Todos Santos."
   },
   "location": {
+    "eyebrow": "Acceso",
     "title": "Cómo llegar",
     "mapTitle": "Mapa de Playa Cerritos",
-    "directions": "Desde Todos Santos toma la carretera federal 19 hacia el sur por 12 km. Gira en el letrero de Playa Cerritos. Aproximadamente 15 minutos en auto."
+    "directions": "Desde Todos Santos toma la carretera federal 19 hacia el sur por 12 km. Gira en el letrero de Playa Cerritos. Aproximadamente 15 minutos en auto.",
+    "toCerritos": "Aeropuerto → Cerritos",
+    "fromCerritos": "Cerritos → Aeropuerto",
+    "fromCurrent": "Navegar desde mi ubicación actual",
+    "airports": {
+      "sjd": {
+        "name": "Aeropuerto Los Cabos",
+        "city": "San José del Cabo",
+        "time": "~1h 20min",
+        "distance": "~106 km"
+      },
+      "lap": {
+        "name": "Aeropuerto La Paz",
+        "city": "La Paz, BCS",
+        "time": "~1h 40min",
+        "distance": "~104 km"
+      }
+    }
   },
   "admin": {
     "nav": {
