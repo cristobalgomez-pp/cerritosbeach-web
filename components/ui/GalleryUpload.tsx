@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import { validateImageFile, compressImage } from "@/lib/image-compress";
-import { getStorageUrl } from "@/lib/image-url";
+import { getStorageUrl } from "@/lib/image-url"; // transform params require Supabase Pro
 
 interface GalleryUploadProps {
   bucket: string;
@@ -69,7 +69,7 @@ export function GalleryUpload({
           {paths.map((path) => (
             <div key={path} className="relative group">
               <img
-                src={getStorageUrl(bucket, path, { width: 200, quality: 75 })}
+                src={getStorageUrl(bucket, path)}
                 alt=""
                 className="w-full h-24 object-cover rounded-lg border border-border"
               />
