@@ -41,8 +41,27 @@ export async function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <AuthIndicator
-            user={user ? { email: user.email } : null}
+          <div className="hidden lg:block">
+            <AuthIndicator
+              user={user ? { email: user.email } : null}
+              profile={
+                profile
+                  ? {
+                      display_name: profile.display_name,
+                      username: profile.username,
+                      avatar_url: profile.avatar_url,
+                    }
+                  : null
+              }
+              locale={locale}
+            />
+          </div>
+          <div className="hidden lg:flex">
+            <LocaleSwitch />
+          </div>
+          <MobileMenu
+            links={links}
+            user={user ? { email: user.email! } : null}
             profile={
               profile
                 ? {
@@ -54,8 +73,6 @@ export async function Navbar() {
             }
             locale={locale}
           />
-          <LocaleSwitch />
-          <MobileMenu links={links} />
         </div>
       </Container>
     </header>
