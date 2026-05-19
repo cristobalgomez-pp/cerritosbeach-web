@@ -5,7 +5,9 @@ export type PageSlug =
   | "comida"
   | "novedades"
   | "comunidad"
-  | "real-estate";
+  | "real-estate"
+  | "contacto"
+  | "emergencias";
 
 export type PageBanner = {
   page: PageSlug;

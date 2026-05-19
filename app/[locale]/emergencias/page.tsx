@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/layout/PageHero";
 import { EMERGENCY_CONTACTS } from "@/lib/mock/content";
+import { getPageBanner } from "@/features/content/lib/queries";
 
 export const revalidate = 86400;
 
@@ -15,13 +16,15 @@ export default async function EmergenciasPage({
   setRequestLocale(l);
   const locale = l as "es" | "en";
   const t = await getTranslations("emergency");
+  const banner = await getPageBanner("emergencias");
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        eyebrow={(locale === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(locale === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(locale === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
+        imagePath={banner?.image_path}
       />
 
       <section>

@@ -13,6 +13,8 @@ const PAGE_SLUGS: PageSlug[] = [
   "novedades",
   "comunidad",
   "real-estate",
+  "contacto",
+  "emergencias",
 ];
 
 export default async function AdminContenidoPage({

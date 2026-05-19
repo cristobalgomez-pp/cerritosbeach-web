@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactForm } from "@/features/contact/components/ContactForm";
+import { getPageBanner } from "@/features/content/lib/queries";
 
 export const revalidate = 86400;
 
@@ -13,13 +14,16 @@ export default async function ContactoPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("contact");
+  const l = locale as "es" | "en";
+  const banner = await getPageBanner("contacto");
 
   return (
     <>
       <PageHero
-        eyebrow={t("eyebrow")}
-        title={t("title")}
-        subtitle={t("subtitle")}
+        eyebrow={(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("eyebrow")}
+        title={(l === "es" ? banner?.title_es : banner?.title_en) || t("title")}
+        subtitle={(l === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("subtitle")}
+        imagePath={banner?.image_path}
       />
 
       <section>

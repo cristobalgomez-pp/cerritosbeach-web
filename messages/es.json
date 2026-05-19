@@ -627,7 +627,9 @@
         "comida": "Comida",
         "novedades": "Novedades",
         "comunidad": "Comunidad",
-        "real-estate": "Real Estate"
+        "real-estate": "Real Estate",
+        "contacto": "Contacto",
+        "emergencias": "Emergencias"
       },
       "withImage": "Con imagen",
       "withoutImage": "Sin imagen",
