@@ -66,13 +66,13 @@ export default async function HomePage({
           </>
         )}
         <Container className="relative py-20 md:py-28 lg:py-36">
-          <p className="text-xs uppercase tracking-[0.08em] text-peach mb-6">
+          <p className="text-xs uppercase tracking-[0.08em] text-peach mb-6 [text-shadow:0_1px_8px_rgb(0_0_0/0.5)]">
             {(l === "es" ? banner?.eyebrow_es : banner?.eyebrow_en) || t("hero.eyebrow")}
           </p>
           <h1 className="font-display font-medium text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight max-w-4xl text-white [text-shadow:0_2px_20px_rgb(0_0_0/0.65)]">
             {(l === "es" ? banner?.title_es : banner?.title_en) || t("hero.title")}
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-foam/80 max-w-2xl leading-relaxed">
+          <p className="mt-6 text-lg md:text-xl text-foam/80 max-w-2xl leading-relaxed [text-shadow:0_1px_8px_rgb(0_0_0/0.5)]">
             {(l === "es" ? banner?.subtitle_es : banner?.subtitle_en) || t("hero.subtitle")}
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
