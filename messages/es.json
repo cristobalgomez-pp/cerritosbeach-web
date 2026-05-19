@@ -433,6 +433,43 @@
     "toCerritos": "Aeropuerto → Cerritos",
     "fromCerritos": "Cerritos → Aeropuerto",
     "fromCurrent": "Navegar desde mi ubicación actual",
+    "sections": {
+      "transport": "Opciones de transporte",
+      "transportSubtitle": "Elige cómo moverte desde el aeropuerto hasta Cerritos.",
+      "directions": "Cómo llegar en auto"
+    },
+    "transport": {
+      "recommended": "Recomendado",
+      "requiresReservation": "Reservación requerida",
+      "modes": {
+        "rental": {
+          "name": "Renta de auto",
+          "description": "La opción más flexible. Recoge el auto en el aeropuerto y maneja directo a Cerritos por la carretera federal 19.",
+          "time": "~1h 20min desde SJD",
+          "cost": "—",
+          "cta": "Ver rentas disponibles"
+        },
+        "shuttle": {
+          "name": "Shuttle privado",
+          "description": "Servicio puerta a puerta desde el aeropuerto hasta Cerritos. Reserva con anticipación.",
+          "time": "—",
+          "cost": "—",
+          "cta": "Contactar shuttle"
+        },
+        "taxi": {
+          "name": "Taxi",
+          "description": "Sitios de taxi fijos en la salida de SJD y LAP. Negocia la tarifa antes de salir.",
+          "time": "—",
+          "cost": "—"
+        },
+        "bus": {
+          "name": "Transporte público",
+          "description": "Opción más económica. Autobús a Todos Santos y de ahí taxi local hasta Cerritos. Requiere más tiempo.",
+          "time": "—",
+          "cost": "—"
+        }
+      }
+    },
     "airports": {
       "sjd": {
         "name": "Aeropuerto Los Cabos",
@@ -455,6 +492,7 @@
       "surf_shops": "Surf Shops",
       "novedades": "Novedades",
       "contenido": "Contenido",
+      "location": "Cómo llegar",
       "seo": "SEO"
     },
     "dashboard": {
@@ -635,6 +673,26 @@
       "successDelete": "Restaurante eliminado.",
       "imageUploadBtn": "Subir imagen",
       "imageUploading": "Subiendo…"
+    },
+    "location": {
+      "title": "Fotos · Cómo llegar",
+      "sectionTransport": "Opciones de transporte",
+      "sectionAirports": "Aeropuertos",
+      "imageHint": "Recomendado: 800 × 500 px · JPG o WebP.",
+      "uploadBtn": "Subir foto",
+      "uploading": "Subiendo…",
+      "removeImage": "Quitar imagen",
+      "withImage": "Con imagen",
+      "withoutImage": "Sin imagen",
+      "errorSave": "Error al guardar",
+      "keys": {
+        "transport_rental": "Renta de auto",
+        "transport_shuttle": "Shuttle privado",
+        "transport_taxi": "Taxi",
+        "transport_bus": "Transporte público",
+        "airport_sjd": "SJD · Los Cabos",
+        "airport_lap": "LAP · La Paz"
+      }
     },
     "contenido": {
       "title": "Banners de páginas",

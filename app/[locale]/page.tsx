@@ -7,6 +7,7 @@ import { Link } from "@/i18n/routing";
 import { NewsletterSignup } from "@/features/newsletter/components/NewsletterSignup";
 import { ComoLlegarSection } from "@/features/location/components/ComoLlegarSection";
 import { getPageBanner, getSectionBannerImages } from "@/features/content/lib/queries";
+import { getLocationImages } from "@/features/location/lib/queries";
 import { getSeoForPage } from "@/features/seo/lib/queries";
 import { SectionCard } from "@/features/content/components/SectionCard";
 
@@ -33,9 +34,10 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("home");
-  const [banner, sectionBanners] = await Promise.all([
+  const [banner, sectionBanners, locationImages] = await Promise.all([
     getPageBanner("home"),
     getSectionBannerImages(),
+    getLocationImages(),
   ]);
   const l = locale as "es" | "en";
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -146,7 +148,7 @@ export default async function HomePage({
         </Container>
       </section>
 
-      <ComoLlegarSection />
+      <ComoLlegarSection images={locationImages} />
 
       <section className="bg-surface-warm">
         <Container className="py-5 md:py-7">

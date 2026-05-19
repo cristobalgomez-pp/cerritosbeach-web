@@ -113,6 +113,24 @@ export type Database = {
         }
         Relationships: []
       }
+      location_images: {
+        Row: {
+          key:        string
+          image_path: string | null
+          updated_at: string
+        }
+        Insert: {
+          key:         string
+          image_path?: string | null
+          updated_at?: string
+        }
+        Update: {
+          key?:        string
+          image_path?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       page_banners: {
         Row: {
           page:        string

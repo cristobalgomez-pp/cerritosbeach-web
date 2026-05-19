@@ -433,6 +433,43 @@
     "toCerritos": "Airport → Cerritos",
     "fromCerritos": "Cerritos → Airport",
     "fromCurrent": "Navigate from my current location",
+    "sections": {
+      "transport": "Transport options",
+      "transportSubtitle": "Choose how to get from the airport to Cerritos.",
+      "directions": "Driving directions"
+    },
+    "transport": {
+      "recommended": "Recommended",
+      "requiresReservation": "Reservation required",
+      "modes": {
+        "rental": {
+          "name": "Car rental",
+          "description": "The most flexible option. Pick up your car at the airport and drive straight to Cerritos on federal highway 19.",
+          "time": "~1h 20min from SJD",
+          "cost": "—",
+          "cta": "See available rentals"
+        },
+        "shuttle": {
+          "name": "Private shuttle",
+          "description": "Door-to-door service from the airport to Cerritos. Book in advance.",
+          "time": "—",
+          "cost": "—",
+          "cta": "Contact shuttle"
+        },
+        "taxi": {
+          "name": "Taxi",
+          "description": "Fixed taxi stands at the exit of both SJD and LAP airports. Agree on the fare before you leave.",
+          "time": "—",
+          "cost": "—"
+        },
+        "bus": {
+          "name": "Public transport",
+          "description": "Most affordable option. Take the bus to Todos Santos, then a local taxi to Cerritos. Requires more time.",
+          "time": "—",
+          "cost": "—"
+        }
+      }
+    },
     "airports": {
       "sjd": {
         "name": "Los Cabos Airport",
@@ -455,6 +492,7 @@
       "surf_shops": "Surf Shops",
       "novedades": "News",
       "contenido": "Content",
+      "location": "How to Get There",
       "seo": "SEO"
     },
     "dashboard": {
@@ -635,6 +673,26 @@
       "successDelete": "Restaurant deleted.",
       "imageUploadBtn": "Upload image",
       "imageUploading": "Uploading…"
+    },
+    "location": {
+      "title": "Photos · How to Get There",
+      "sectionTransport": "Transport options",
+      "sectionAirports": "Airports",
+      "imageHint": "Recommended: 800 × 500 px · JPG or WebP.",
+      "uploadBtn": "Upload photo",
+      "uploading": "Uploading…",
+      "removeImage": "Remove image",
+      "withImage": "Has image",
+      "withoutImage": "No image",
+      "errorSave": "Error saving",
+      "keys": {
+        "transport_rental": "Car rental",
+        "transport_shuttle": "Private shuttle",
+        "transport_taxi": "Taxi",
+        "transport_bus": "Public transport",
+        "airport_sjd": "SJD · Los Cabos",
+        "airport_lap": "LAP · La Paz"
+      }
     },
     "contenido": {
       "title": "Page Banners",
