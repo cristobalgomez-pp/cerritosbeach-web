@@ -3,10 +3,8 @@
 import { useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-
-const STORAGE_BASE = process.env.NEXT_PUBLIC_SUPABASE_URL
-  ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public`
-  : "";
+import { validateImageFile, compressImage } from "@/lib/image-compress";
+import { getStorageUrl } from "@/lib/image-url";
 
 interface GalleryUploadProps {
   bucket: string;
@@ -27,28 +25,41 @@ export function GalleryUpload({
 }: GalleryUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function handleDelete(path: string) {
     onChanged(paths.filter((p) => p !== path));
   }
 
   async function handleFile(file: File) {
-    const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+    setError(null);
+
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setUploading(true);
+
+    const compressed = await compressImage(file);
+    const ext = compressed.type === "image/webp" ? "webp" : (file.name.split(".").pop()?.toLowerCase() ?? "jpg");
     const filename = `${Date.now()}.${ext}`;
     const fullPath = `${basePath}/${filename}`;
 
-    setUploading(true);
     const supabase = createClient();
-
-    const { error } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from(bucket)
-      .upload(fullPath, file, { upsert: true });
+      .upload(fullPath, compressed, { upsert: true, contentType: compressed.type });
 
     setUploading(false);
 
-    if (!error) {
-      onChanged([...paths, fullPath]);
+    if (uploadError) {
+      setError(uploadError.message);
+      return;
     }
+
+    onChanged([...paths, fullPath]);
   }
 
   return (
@@ -58,7 +69,7 @@ export function GalleryUpload({
           {paths.map((path) => (
             <div key={path} className="relative group">
               <img
-                src={`${STORAGE_BASE}/${bucket}/${path}`}
+                src={getStorageUrl(bucket, path, { width: 200, quality: 75 })}
                 alt=""
                 className="w-full h-24 object-cover rounded-lg border border-border"
               />
@@ -79,6 +90,8 @@ export function GalleryUpload({
         </div>
       )}
 
+      {error && <p className="text-xs text-red-600">{error}</p>}
+
       <button
         type="button"
         disabled={uploading}
@@ -95,11 +108,12 @@ export function GalleryUpload({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp,image/gif"
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) handleFile(file);
+          e.target.value = "";
         }}
       />
     </div>

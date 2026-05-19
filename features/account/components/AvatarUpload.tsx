@@ -4,6 +4,7 @@ import { useRef, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { compressImage } from '@/lib/image-compress';
 import { uploadAvatar } from '../lib/actions';
 
 const MAX_BYTES = 2 * 1024 * 1024;
@@ -70,10 +71,12 @@ export function AvatarUpload({ currentAvatarUrl, displayName, email }: Props) {
   function handleConfirm() {
     if (!pendingFile) return;
 
-    const fd = new FormData();
-    fd.append('file', pendingFile);
-
     startTransition(async () => {
+      const compressed = await compressImage(pendingFile, { maxSizeMB: 0.3, maxWidthOrHeight: 400 });
+
+      const fd = new FormData();
+      fd.append('file', compressed, compressed.type === 'image/webp' ? 'avatar.webp' : pendingFile.name);
+
       const result = await uploadAvatar(fd);
 
       if (result.status === 'error') {

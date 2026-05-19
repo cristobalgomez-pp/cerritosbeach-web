@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import { validateImageFile, compressImage } from "@/lib/image-compress";
 
 interface ImageUploadProps {
   bucket: string;
@@ -29,16 +30,24 @@ export function ImageUpload({
   const [preview, setPreview] = useState<string | null>(currentUrl ?? null);
 
   async function handleFile(file: File) {
-    setUploading(true);
     setError(null);
 
-    const ext = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
+    const validationError = validateImageFile(file);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setUploading(true);
+
+    const compressed = await compressImage(file);
+    const ext = compressed.type === "image/webp" ? "webp" : (file.name.split(".").pop()?.toLowerCase() ?? "jpg");
     const fullPath = `${path}/cover.${ext}`;
     const supabase = createClient();
 
     const { error: uploadError } = await supabase.storage
       .from(bucket)
-      .upload(fullPath, file, { upsert: true });
+      .upload(fullPath, compressed, { upsert: true, contentType: compressed.type });
 
     if (uploadError) {
       setError(uploadError.message);
@@ -77,11 +86,12 @@ export function ImageUpload({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp,image/gif"
         className="hidden"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) handleFile(file);
+          e.target.value = "";
         }}
       />
     </div>
