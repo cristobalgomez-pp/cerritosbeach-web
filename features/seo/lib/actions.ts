@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/features/admin/lib/guard";
 import type { AdminGuardError } from "@/features/admin/lib/guard";
@@ -28,5 +29,6 @@ export async function upsertPageSeo(
     .upsert({ page, ...parsed.data }, { onConflict: "page" });
 
   if (error) return { status: "error", code: "DB_ERROR", message: error.message };
+  revalidatePath("/", "layout");
   return { status: "success" };
 }

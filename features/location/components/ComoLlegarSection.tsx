@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 
@@ -56,8 +54,8 @@ interface Props {
   images?: Record<string, string | null>;
 }
 
-export function ComoLlegarSection({ images = {} }: Props) {
-  const t = useTranslations("location");
+export async function ComoLlegarSection({ images = {} }: Props) {
+  const t = await getTranslations("location");
 
   function resolveImage(key: string): string | null {
     const path = images[key];
