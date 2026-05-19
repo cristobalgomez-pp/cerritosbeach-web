@@ -38,7 +38,7 @@ export function PageHero({
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="font-display font-medium text-4xl md:text-5xl tracking-tight max-w-3xl leading-[1.05] [text-shadow:0_2px_8px_rgb(0_0_0/0.35)]">
+        <h1 className="font-display font-medium text-4xl md:text-5xl tracking-tight max-w-3xl leading-[1.05] text-white [text-shadow:0_2px_20px_rgb(0_0_0/0.65)]">
           {title}
         </h1>
         {subtitle ? (
