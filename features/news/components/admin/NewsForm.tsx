@@ -75,7 +75,7 @@ export function NewsForm({ post }: Props) {
         : await createNewsPost(data);
 
       if (result.status === "success") {
-        router.push(`/admin/novedades?success=${isEdit ? "updated" : "created"}`);
+        router.push(`/admin/contenido?tab=novedades&success=${isEdit ? "updated" : "created"}`);
         router.refresh();
       } else {
         setServerError(t("errorSave"));

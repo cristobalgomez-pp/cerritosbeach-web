@@ -63,7 +63,7 @@ export function RestaurantForm({ restaurant }: Props) {
         : await createRestaurant(data);
 
       if (result.status === "success") {
-        router.push(`/admin/restaurantes?success=${isEdit ? "updated" : "created"}`);
+        router.push(`/admin/contenido?tab=restaurantes&success=${isEdit ? "updated" : "created"}`);
         router.refresh();
       } else {
         setServerError(t("errorSave"));

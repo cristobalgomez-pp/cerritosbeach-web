@@ -7,10 +7,6 @@ export function AdminSidebar() {
   const t = useTranslations('admin.nav');
 
   const links = [
-    { href: '/admin/hoteles' as const, label: t('hoteles') },
-    { href: '/admin/restaurantes' as const, label: t('restaurantes') },
-    { href: '/admin/surf-shops' as const, label: t('surf_shops') },
-    { href: '/admin/novedades' as const, label: t('novedades') },
     { href: '/admin/contenido' as const, label: t('contenido') },
     { href: '/admin/location'  as const, label: t('location') },
     { href: '/admin/seo'       as const, label: t('seo') },

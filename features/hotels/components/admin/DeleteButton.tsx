@@ -16,7 +16,7 @@ export function DeleteButton({ id }: { id: string }) {
     startTransition(async () => {
       const result = await deleteHotel(id);
       if (result.status === "success") {
-        router.push("/admin/hoteles?success=deleted");
+        router.push("/admin/contenido?tab=hoteles&success=deleted");
         router.refresh();
       } else {
         setError(t("errorDelete"));

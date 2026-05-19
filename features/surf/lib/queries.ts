@@ -23,6 +23,18 @@ export async function getAdminSurfShops(): Promise<SurfShop[]> {
   return data ?? [];
 }
 
+export async function getSurfShopBySlug(slug: string): Promise<SurfShop | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("surf_shops")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 export async function getAdminSurfShop(id: string): Promise<SurfShop | null> {
   const supabase = await createClient();
   const { data, error } = await supabase

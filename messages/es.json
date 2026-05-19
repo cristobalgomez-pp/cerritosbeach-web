@@ -92,12 +92,24 @@
       "lessons": "Clases",
       "repairs": "Reparación",
       "shop": "Tienda"
+    },
+    "detail": {
+      "back": "Volver a surf",
+      "contact": "Contacto",
+      "services": "Servicios",
+      "price_from": "Desde"
     }
   },
   "food": {
     "eyebrow": "Dónde comer",
     "title": "Comida en Cerritos",
-    "subtitle": "De tacos de pescado a la orilla del camino hasta cocina de autor con vista al mar."
+    "subtitle": "De tacos de pescado a la orilla del camino hasta cocina de autor con vista al mar.",
+    "detail": {
+      "back": "Volver a restaurantes",
+      "contact": "Contacto",
+      "location": "Ubicación",
+      "hours": "Horario"
+    }
   },
   "news": {
     "eyebrow": "Novedades",

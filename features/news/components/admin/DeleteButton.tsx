@@ -16,7 +16,7 @@ export function DeleteButton({ id }: { id: string }) {
     startTransition(async () => {
       const result = await deleteNewsPost(id);
       if (result.status === "success") {
-        router.push("/admin/novedades?success=deleted");
+        router.push("/admin/contenido?tab=novedades&success=deleted");
         router.refresh();
       } else {
         setError(t("errorDelete"));

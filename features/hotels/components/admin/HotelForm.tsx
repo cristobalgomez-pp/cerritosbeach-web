@@ -59,7 +59,7 @@ export function HotelForm({ hotel }: Props) {
         : await createHotel(data);
 
       if (result.status === "success") {
-        router.push(`/admin/hoteles?success=${isEdit ? "updated" : "created"}`);
+        router.push(`/admin/contenido?tab=hoteles&success=${isEdit ? "updated" : "created"}`);
         router.refresh();
       } else {
         setServerError(t("errorSave"));

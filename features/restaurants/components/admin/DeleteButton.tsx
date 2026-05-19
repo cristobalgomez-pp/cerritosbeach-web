@@ -16,7 +16,7 @@ export function DeleteButton({ id }: { id: string }) {
     startTransition(async () => {
       const result = await deleteRestaurant(id);
       if (result.status === "success") {
-        router.push("/admin/restaurantes?success=deleted");
+        router.push("/admin/contenido?tab=restaurantes&success=deleted");
         router.refresh();
       } else {
         setError(t("errorDelete"));

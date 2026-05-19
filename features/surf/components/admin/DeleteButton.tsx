@@ -16,7 +16,7 @@ export function DeleteButton({ id }: { id: string }) {
     startTransition(async () => {
       const result = await deleteSurfShop(id);
       if (result.status === "success") {
-        router.push("/admin/surf-shops?success=deleted");
+        router.push("/admin/contenido?tab=surf&success=deleted");
         router.refresh();
       } else {
         setError(t("errorDelete"));

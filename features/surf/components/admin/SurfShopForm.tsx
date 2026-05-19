@@ -68,7 +68,7 @@ export function SurfShopForm({ shop }: Props) {
         : await createSurfShop(data);
 
       if (result.status === "success") {
-        router.push(`/admin/surf-shops?success=${isEdit ? "updated" : "created"}`);
+        router.push(`/admin/contenido?tab=surf&success=${isEdit ? "updated" : "created"}`);
         router.refresh();
       } else {
         setServerError(t("errorSave"));

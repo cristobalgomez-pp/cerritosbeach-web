@@ -20,6 +20,11 @@ export const routing = defineRouting({
       es: "/comida",
       en: "/food",
     },
+    "/comida/[slug]": {
+      es: "/comida/[slug]",
+      en: "/food/[slug]",
+    },
+    "/surf/[slug]": "/surf/[slug]",
     "/novedades": {
       es: "/novedades",
       en: "/news",

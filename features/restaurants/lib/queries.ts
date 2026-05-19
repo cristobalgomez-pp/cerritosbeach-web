@@ -23,6 +23,18 @@ export async function getAdminRestaurants(): Promise<Restaurant[]> {
   return data ?? [];
 }
 
+export async function getRestaurantBySlug(slug: string): Promise<Restaurant | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("restaurants")
+    .select("*")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
 export async function getAdminRestaurant(id: string): Promise<Restaurant | null> {
   const supabase = await createClient();
   const { data, error } = await supabase

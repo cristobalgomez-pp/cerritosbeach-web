@@ -92,12 +92,24 @@
       "lessons": "Lessons",
       "repairs": "Repairs",
       "shop": "Shop"
+    },
+    "detail": {
+      "back": "Back to surf",
+      "contact": "Contact",
+      "services": "Services",
+      "price_from": "From"
     }
   },
   "food": {
     "eyebrow": "Where to eat",
     "title": "Food in Cerritos",
-    "subtitle": "From roadside fish tacos to chef-driven cuisine with ocean views."
+    "subtitle": "From roadside fish tacos to chef-driven cuisine with ocean views.",
+    "detail": {
+      "back": "Back to restaurants",
+      "contact": "Contact",
+      "location": "Location",
+      "hours": "Hours"
+    }
   },
   "news": {
     "eyebrow": "News",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { formatPrice } from "@/lib/utils";
@@ -21,6 +22,7 @@ export function SurfShopCard({ shop, locale, supabaseUrl }: Props) {
     : null;
 
   return (
+    <Link href={{ pathname: "/surf/[slug]", params: { slug: shop.slug } }}>
     <Card className="h-full flex flex-col group hover:border-border-strong hover:shadow-soft transition-all duration-200">
       <div className="bg-ocean h-44 flex items-end p-4 relative overflow-hidden">
         {coverUrl ? (
@@ -77,5 +79,6 @@ export function SurfShopCard({ shop, locale, supabaseUrl }: Props) {
         </div>
       </div>
     </Card>
+    </Link>
   );
 }
