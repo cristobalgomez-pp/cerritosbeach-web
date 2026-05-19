@@ -21,7 +21,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] uppercase tracking-[0.08em] text-cream/40 mb-4">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-cream/70 mb-4">
               {t("exploreHeading")}
             </p>
             <ul className="space-y-2 text-sm">
@@ -35,7 +35,7 @@ export async function Footer() {
           </div>
 
           <div>
-            <p className="text-[10px] uppercase tracking-[0.08em] text-cream/40 mb-4">
+            <p className="text-[10px] uppercase tracking-[0.08em] text-cream/70 mb-4">
               {t("contactHeading")}
             </p>
             <ul className="space-y-2 text-sm">
@@ -47,8 +47,8 @@ export async function Footer() {
         </div>
 
         <div className="border-t border-cream/10 mt-12 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <p className="text-xs text-cream/50">{t("copyright", { year })}</p>
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-cream/50">
+          <p className="text-xs text-cream/70">{t("copyright", { year })}</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-cream/70">
             <Link href="/privacidad" className="hover:text-peach transition-colors">{t("privacy")}</Link>
             <Link href="/terminos" className="hover:text-peach transition-colors">{t("terms")}</Link>
             <span>Baja California Sur · México</span>

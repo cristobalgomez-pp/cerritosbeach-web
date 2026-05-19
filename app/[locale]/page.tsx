@@ -154,7 +154,7 @@ export default async function HomePage({
         <Container className="py-5 md:py-7">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div>
-              <p className="text-xs uppercase tracking-[0.08em] text-peach-dark mb-3">
+              <p className="text-xs uppercase tracking-[0.08em] text-ocean mb-3">
                 {t("newsletter.eyebrow")}
               </p>
               <h2 className="font-display text-3xl md:text-4xl font-medium tracking-tight text-ink mb-3">
